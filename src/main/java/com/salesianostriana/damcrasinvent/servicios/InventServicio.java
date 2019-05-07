@@ -46,5 +46,10 @@ public class InventServicio {
 	public Invent findById(long id) {
 		return inventrepository.findById(id).orElse(null);
 	}
+	
+	public Invent findByName(String name) {
+		return inventrepository.findByName(name);
+		
+	}
 
 }

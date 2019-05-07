@@ -1,13 +1,13 @@
-insert into Invent (id, nombre) values (1, 'Asoka');
-insert into Invent (id, nombre) values (2, 'Fixflex');
-insert into Invent (id, nombre) values (3, 'Sonsing');
-insert into Invent (id, nombre) values (4, 'Pannier');
-insert into Invent (id, nombre) values (5, 'Stringtough');
-insert into Invent (id, nombre) values (6, 'Cardify');
-insert into Invent (id, nombre) values (7, 'Keylex');
-insert into Invent (id, nombre) values (8, 'Home Ing');
-insert into Invent (id, nombre) values (9, 'Flowdesk');
-insert into Invent (id, nombre) values (10, 'Redhold');
+insert into Invent (id, nombre, id_usuario) values (11111, 'Asoka', 1);
+insert into Invent (id, nombre, id_usuario) values (11112, 'Fixflex', 1);
+insert into Invent (id, nombre, id_usuario) values (11113, 'Sonsing', 1);
+insert into Invent (id, nombre, id_usuario) values (11114, 'Pannier', 1);
+insert into Invent (id, nombre, id_usuario) values (11115, 'Stringtough', 1);
+insert into Invent (id, nombre, id_usuario) values (11116, 'Cardify', 1);
+insert into Invent (id, nombre, id_usuario) values (11117, 'Keylex', 1);
+insert into Invent (id, nombre, id_usuario) values (11118, 'Home Ing', 1);
+insert into Invent (id, nombre, id_usuario) values (11119, 'Flowdesk', 1);
+insert into Invent (id, nombre, id_usuario) values (111110, 'Redhold', 1);
 
 insert into Conceptos (id, nombre, id_inv) values (1, 'Grand Cherokee', 1);
 insert into Conceptos (id, nombre, id_inv) values (2, '9000', 1);

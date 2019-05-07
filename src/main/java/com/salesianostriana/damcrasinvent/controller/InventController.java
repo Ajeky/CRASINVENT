@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.damcrasinvent.model.Invent;
@@ -29,7 +30,7 @@ public class InventController {
 		this.inventservicio = servicio;
 	}
 	
-	@GetMapping({"/inventList"})
+	@GetMapping({"/", "/inventList"})
 	public String listarTodo(Model model) {
 		model.addAttribute("lista",inventservicio.findAll());
 		return "listaInvent";
@@ -37,7 +38,7 @@ public class InventController {
 	
 	@GetMapping("/newInvent")
 	public String mostrarFormulario(Model model) {
-		model.addAttribute("alumno", new Invent());
+		model.addAttribute("invent", new Invent());
 		return "crearInvent";
 	}
 	
@@ -47,5 +48,29 @@ public class InventController {
 		return"redirect:/";
 	}
 	
+	@GetMapping("/editInvent/{nombre}")
+	public String editarPorNombre(@PathVariable("nombre") String nombre, Model model) {
+		
+		Invent invEdit = inventservicio.findByName(nombre);
+		
+		if(invEdit != null) {
+			model.addAttribute("invent", invEdit);
+			return "crearInventario";
+		}
+		else {
+			return "redirect:/";
+		}
+	}
+	
+	@PostMapping("/editInvent/submit")
+	public String procesarEdicion(@ModelAttribute("invent") Invent i) {
+		inventservicio.edit(i);
+		return "redirect:/";
+	}
+	
+	@GetMapping("/borrar/{nombre}")
+	public String borrar(@PathVariable("nombre") String nombre) {
+		inventservicio.delete();
+	}
 
 }

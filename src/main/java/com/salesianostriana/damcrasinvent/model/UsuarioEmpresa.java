@@ -6,13 +6,14 @@ package com.salesianostriana.damcrasinvent.model;
 import javax.persistence.Entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author amarquez
  *
  */
 
-@Data
+@Data @NoArgsConstructor
 @Entity
 public class UsuarioEmpresa extends Usuario {
 	
@@ -23,11 +24,5 @@ public class UsuarioEmpresa extends Usuario {
 	private String metodoPago;
 	private String direccionFacturacion;
 
-	/**
-	 * 
-	 */
-	public UsuarioEmpresa() {
-		// TODO Auto-generated constructor stub
-	}
 
 }
