@@ -7,10 +7,14 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 
+import lombok.Data;
+
 /**
  * @author amarquez
  *
  */
+
+@Data
 @Entity
 public class Tarjeta extends MetodosPago {
 	

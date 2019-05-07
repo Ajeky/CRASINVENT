@@ -6,11 +6,15 @@ package com.salesianostriana.damcrasinvent.model;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @author amarquez
  *
  */
 
+@Data @NoArgsConstructor
 @Entity
 public class ValoresCampos {
 	

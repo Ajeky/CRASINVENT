@@ -8,11 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @author amarquez
  *
  */
 
+@Data @NoArgsConstructor
 @Entity
 public class Usuario {
 	
@@ -43,13 +47,6 @@ public class Usuario {
 		this.nickname = nickname;
 		this.password = password;
 		this.telefono = telefono;
-	}
-
-	/**
-	 * 
-	 */
-	public Usuario() {
-		super();
 	}
 	
 	
