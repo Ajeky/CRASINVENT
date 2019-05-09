@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div id="menu">
-			<a th:href="@{/inventList}">Inicio</a> | <a href="@{/newInvet}">Nuevo inventario</a>
+			<a th:href="@{/inventList}">Inicio</a> | <a th:href="@{/newInvent}">Nuevo inventario</a>
 		</div>
 		
 		<br /><br />
@@ -19,12 +19,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="Invent : ${lista}">
-					<td th:text="${Invent.id}">ID</td>
-					<td th:text="${Invent.nombre}">Nombre</td>
+				<tr th:each="invent : ${lista}">
+					<td th:text="${invent.id}">ID</td>
+					<td th:text="${invent.nombre}">Nombre</td>
 					<td>
-						<a href="#" th:href="@{/editInvent/{nombre}(nombre=${invent.nombre})}">Editar</a>
-						<a href="#" th:href="@{"
+						<a href="#" th:href="@{/editInvent/{id}(id=${invent.id})}">Editar</a>
+						<a href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}">Borrar</a>
 					</td> 
 				</tr>
 			</tbody>

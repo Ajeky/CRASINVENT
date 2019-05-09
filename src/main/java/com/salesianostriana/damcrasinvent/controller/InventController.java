@@ -48,14 +48,14 @@ public class InventController {
 		return"redirect:/";
 	}
 	
-	@GetMapping("/editInvent/{nombre}")
-	public String editarPorNombre(@PathVariable("nombre") String nombre, Model model) {
+	@GetMapping("/editInvent/{id}")
+	public String editarPorNombre(@PathVariable("id") long id, Model model) {
 		
-		Invent invEdit = inventservicio.findByName(nombre);
+		Invent invEdit = inventservicio.findById(id);
 		
 		if(invEdit != null) {
 			model.addAttribute("invent", invEdit);
-			return "crearInventario";
+			return "crearInvent";
 		}
 		else {
 			return "redirect:/";
@@ -68,9 +68,10 @@ public class InventController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/borrar/{nombre}")
-	public String borrar(@PathVariable("nombre") String nombre) {
-		inventservicio.delete();
+	@GetMapping("/deleteInvent/{id}")
+	public String borrar(@PathVariable("id") long id) {
+		inventservicio.deleteById(id);
+		return "redirect:/";
 	}
 
 }

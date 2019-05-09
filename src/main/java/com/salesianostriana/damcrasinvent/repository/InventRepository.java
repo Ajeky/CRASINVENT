@@ -13,6 +13,5 @@ import com.salesianostriana.damcrasinvent.model.Invent;
  */
 public interface InventRepository extends JpaRepository<Invent, Long> {
 	
-	public Invent findByName(String name);
 
 }

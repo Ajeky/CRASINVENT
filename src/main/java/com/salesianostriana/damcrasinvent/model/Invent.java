@@ -3,7 +3,6 @@
  */
 package com.salesianostriana.damcrasinvent.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +24,16 @@ public class Invent {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column(unique = true)
 	private String nombre;
 	private long id_usuario;
+	
+	
+	public Invent(long id, String nombre, long id_usuario) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.id_usuario = id_usuario;
+	}
 	
 	
 	

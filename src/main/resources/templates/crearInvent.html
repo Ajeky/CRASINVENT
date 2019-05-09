@@ -25,7 +25,7 @@
 			<a th:href="@{/inventList}">Inicio</a> | <a th:href="@{/newInvent}">Nuevo inventario</a>
 		</div>
 		<div id="formulario">
-			<form th:action="${Invent.id != 0} ? @{/editInvent/submit} : @{/newInvent/submit}" th:object="${invent}" method="post">
+			<form th:action="${invent.id != 0} ? @{/editInvent/submit} : @{/newInvent/submit}" th:object="${invent}" method="post">
 				<input th:if="${invent.id != 0}" type="hidden" name="id" th:field="*{id}" />
 				<input type="text" name="nombre" th:field="*{nombre}" placeholder="Nombre" />
 				<input type="submit" name="enviar" value="Enviar" />
