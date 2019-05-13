@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,17 +26,22 @@ public class Invent {
 	private long id;
 	
 	private String nombre;
-	private long id_usuario;
+	
+	@ManyToOne
+	private Usuario usuario;
 	
 	
-	public Invent(long id, String nombre, long id_usuario) {
+	public Invent(long id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.id_usuario = id_usuario;
 	}
 	
-	
-	
+	public Invent(long id, String nombre, Usuario usuario) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.usuario = usuario;
+	}	
 
 }
