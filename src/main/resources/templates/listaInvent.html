@@ -1,34 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8"></meta>
-		<title>Lista Inventarios</title>
-	</head>
-	<body>
-		<div id="menu">
-			<a th:href="@{/inventList}">Inicio</a> | <a th:href="@{/newInvent}">Nuevo inventario</a>
-		</div>
-		
-		<br /><br />
-		
-		<table border=1>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="invent : ${lista}">
-					<td th:text="${invent.id}">ID</td>
-					<td th:text="${invent.nombre}">Nombre</td>
-					<td>
-						<a href="#" th:href="@{/editInvent/{id}(id=${invent.id})}">Editar</a>
-						<a href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}">Borrar</a>
-					</td> 
-				</tr>
-			</tbody>
-		</table>
-	
-	</body>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Lista Inventarios</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel='stylesheet' type='text/css' media='screen' href='../static/css/main.css' th:href='@{/css/styles.css}'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <header>
+        <div id="menu">
+            <ul class="nav nav-pills">
+                <li class="nav-item mr-1">
+                    <a class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
+                </li>
+                <li class="nav-item mr-1">
+                    <a class="btn btn-success active" th:href="@{/inventList}" role="button">Lista Inventarios</a>
+                </li>
+                <li class="nav-item mr-1">
+                    <a class="btn btn-secondary text-white" th:href="@{/newInvent}" role="button">Nuevo Inventario</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="invent : ${lista}">
+                    <th scope="row"></th>
+                    <td th:text="${invent.id}">ID</td>
+                    <td th:text="${invent.nombre}">Nombre</td>
+                    <td>
+                        <a href="#" th:href="@{/editInvent/{id}(id=${invent.id})}">Editar</a>
+                        <a href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}">Borrar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</body>
+
 </html>

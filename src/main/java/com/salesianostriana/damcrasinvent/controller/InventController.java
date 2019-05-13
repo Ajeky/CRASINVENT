@@ -49,7 +49,7 @@ public class InventController {
 	}
 	
 	@GetMapping("/editInvent/{id}")
-	public String editarPorNombre(@PathVariable("id") long id, Model model) {
+	public String editarPorID(@PathVariable("id") long id, Model model) {
 		
 		Invent invEdit = inventservicio.findById(id);
 		
