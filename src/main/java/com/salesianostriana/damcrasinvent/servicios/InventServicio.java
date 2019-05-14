@@ -3,8 +3,6 @@
  */
 package com.salesianostriana.damcrasinvent.servicios;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.damcrasinvent.model.Invent;

@@ -5,15 +5,21 @@ package com.salesianostriana.damcrasinvent.model;
 
 import javax.persistence.Entity;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author amarquez
  *
  */
 
-@Data @NoArgsConstructor
+@Getter @Setter
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@NoArgsConstructor
 @Entity
 public class UsuarioEmpresa extends Usuario {
 	
