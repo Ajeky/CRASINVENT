@@ -33,13 +33,13 @@ public class InventController {
 	@GetMapping({"/", "/inventList"})
 	public String listarTodo(Model model) {
 		model.addAttribute("lista",inventservicio.findAll());
-		return "listaInvent";
+		return "listas/listaInvent";
 	}
 	
 	@GetMapping("/newInvent")
 	public String mostrarFormulario(Model model) {
 		model.addAttribute("invent", new Invent());
-		return "crearInvent";
+		return "forms/crearInvent";
 	}
 	
 	@PostMapping("/newInvent/submit")
@@ -55,7 +55,7 @@ public class InventController {
 		
 		if(invEdit != null) {
 			model.addAttribute("invent", invEdit);
-			return "crearInvent";
+			return "forms/crearInvent";
 		}
 		else {
 			return "redirect:/";

@@ -1,0 +1,30 @@
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+header {
+    margin-bottom: 10px;
+    height: 110%;
+}
+
+.menu {
+    background: rgb(238, 232, 177);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #C6FFDD, rgb(238, 232, 177));
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #C6FFDD, rgb(238, 232, 177));
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 10px 0;
+}
+
+.botones {
+    margin-left: 10px;
+}
+
+.botonActivo {
+    background-color: rgb(241, 200, 122)
+}
+
+td {
+    background-color: rgb(214, 238, 177);
+}
