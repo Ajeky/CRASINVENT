@@ -30,7 +30,7 @@ public class InventController {
 		this.inventservicio = servicio;
 	}
 	
-	@GetMapping({"/", "/inventList"})
+	@GetMapping({"/inventList"})
 	public String listarTodo(Model model) {
 		model.addAttribute("lista",inventservicio.findAll());
 		return "listas/listaInvent";
@@ -45,7 +45,7 @@ public class InventController {
 	@PostMapping("/newInvent/submit")
 	public String procesarFormulario(@ModelAttribute("invent") Invent i) {
 		inventservicio.add(i);
-		return"redirect:/";
+		return"redirect:/inventList";
 	}
 	
 	@GetMapping("/editInvent/{id}")
@@ -58,20 +58,20 @@ public class InventController {
 			return "forms/crearInvent";
 		}
 		else {
-			return "redirect:/";
+			return "redirect:/inventList";
 		}
 	}
 	
 	@PostMapping("/editInvent/submit")
 	public String procesarEdicion(@ModelAttribute("invent") Invent i) {
 		inventservicio.edit(i);
-		return "redirect:/";
+		return "redirect:/inventList";
 	}
 	
 	@GetMapping("/deleteInvent/{id}")
 	public String borrar(@PathVariable("id") long id) {
 		inventservicio.deleteById(id);
-		return "redirect:/";
+		return "redirect:/inventList";
 	}
 
 }

@@ -4,17 +4,24 @@
 package com.salesianostriana.damcrasinvent.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author amarquez
  *
  */
 
-@Data
+@Getter @Setter @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Entity
 public class Tarjeta extends MetodosPago {
 	
@@ -22,13 +29,21 @@ public class Tarjeta extends MetodosPago {
 	private LocalDate fechaCad;
 	private String titular;
 	private String CVV;
-
 	
 	/**
-	 * 
+	 * @param usuarios
+	 * @param numero
+	 * @param fechaCad
+	 * @param titular
+	 * @param cVV
 	 */
-	public Tarjeta() {
-		// TODO Auto-generated constructor stub
+	public Tarjeta(List<UsuarioEmpresa> usuarios, String numero, LocalDate fechaCad, String titular, String cVV) {
+		super(usuarios);
+		this.numero = numero;
+		this.fechaCad = fechaCad;
+		this.titular = titular;
+		CVV = cVV;
 	}
+
 
 }

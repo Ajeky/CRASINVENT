@@ -3,7 +3,13 @@
  */
 package com.salesianostriana.damcrasinvent.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,8 +33,24 @@ public class UsuarioEmpresa extends Usuario {
 	private String nombreEmpresa;
 	private String telefonoEmpresa;
 	private String campoEmpresa;
-	private String metodoPago;
 	private String direccionFacturacion;
-
+	
+	@ManyToMany
+	@JoinTable(
+			joinColumns = @JoinColumn(name="usuario_id"),
+			inverseJoinColumns = @JoinColumn(name="metPago_id")
+		)
+	private List<MetodosPago> metodosPago = new ArrayList<>();
+	
+	public void addMetodoPago(MetodosPago m) {
+		metodosPago.add(m);
+		m.getUsuarios().add(this);
+	}
+	
+	public void deleteMetodoPago(MetodosPago m) {
+		metodosPago.remove(m);
+		m.getUsuarios().remove(this);
+	}
+	
 
 }
