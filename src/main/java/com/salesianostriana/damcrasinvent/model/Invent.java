@@ -3,11 +3,14 @@
  */
 package com.salesianostriana.damcrasinvent.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +32,20 @@ public class Invent {
 	
 	@ManyToOne
 	private Usuario usuario;
+	
+	@OneToMany(mappedBy="invent")
+	private List<Conceptos> conceptos;
+	
+	//Métodos Helper
+	
+	public void addConcepto(Conceptos c) {
+		this.conceptos.add(c);
+	}
+	
+	public void removeConcepto(Conceptos c) {
+		this.conceptos.remove(c);
+		c.setInvent(null);
+	}
 	
 	
 	public Invent(long id, String nombre) {

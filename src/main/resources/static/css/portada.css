@@ -20,6 +20,7 @@ header {
     height: 100vh;
     background: url(https://cdn.pixabay.com/photo/2015/10/29/14/38/web-1012467_960_720.jpg) no-repeat 50% 50%;
     background-size: cover;
+    min-height: 500px;
 }
 
 .titulo {
@@ -27,6 +28,14 @@ header {
     color: #fff;
     padding: 15vh 15px 0 15px;
     margin: 0 auto;
+    margin-bottom: 10vh;
+}
+
+.descripcion {
+    color: #fff;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 .content {

@@ -5,6 +5,7 @@ package com.salesianostriana.damcrasinvent.model;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,12 @@ public class ValoresCampos {
 	private ValoresCamposPK pk;
 	
 	private String valor;
+	
+	@ManyToOne
+	Campos campo;
+	
+	@ManyToOne
+	ValoresConceptos valorConcepto;
+	
 
 }
