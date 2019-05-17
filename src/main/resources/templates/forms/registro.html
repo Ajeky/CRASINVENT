@@ -1,116 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Registro de usuario</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+        <title>Registro de usuario</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
 
-    <!-- Bootstrap y Cloudflare JavaScript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Bootstrap Propio -->
-    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/registro.css' th:href='@{/css/registro.css}'>
-</head>
+        <!-- Bootstrap CSS -->
+        <link
+        crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
 
-<body>
-    <div class="container register">
-        <div class="row">
-            <div class="col-md-3 register-left">
-                <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-                <h3>BIENVENIDO</h3>
-                <p>¡Estas muy cerca de utilizar el mejor gestor de Inventarios de todo Internet!</p>
-                <input type="submit" name="login" value="Login" /><br/>
+        <!-- Bootstrap Propio -->
+        <link href='../../static/css/registro.css' media='screen' rel='stylesheet' th:href='@{/css/registro.css}' type='text/css'>
+        <link href="../../static/css/main.css" media="screen" rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+    </head>
+    <body>
+
+        <form class="formulario">
+            <h3 class="text">Registrarse</h3>
+            <input class="input" name="nombre" placeholder="Nombre" th:field="*{nombre}" type="text"/>
+            <div class="line-box">
+                <div class="line"></div>
             </div>
-            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <h3 class="register-heading">Datos obligatorios</h3>
-                    <div class="row register-form">
-                        <form th:action="@{/newUser/submit}" th:object="${usuario}" method="post">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="nombre" th:field="*{nombre}" placeholder="Nombre" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="apellidos" th:field="*{apellidos}" placeholder="Apellidos" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" name="email" th:field="*{email}" placeholder="Correo electrónico" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="nickname" th:field="*{nickname}" placeholder="Nickname" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" name="password" th:field="*{password}" placeholder="Contraseña" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" class="form-control" name="telefono" th:field="*{telefono}" placeholder="Teléfono contacto" />
-                                </div>
-                                <input type="submit" class="btnRegister" name="enviar" value="Registrarse" />
-                            </div>
-                        </form>
-
-
-                    </div>
-                </div>
-                <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <h3>Registrarse como empresa</h3>
-                    <div class="row register-form">
-                        <form th:action="@{/newUser/submit}" th:object="${usuario}" method="post">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="nombre" th:field="*{nombre}" placeholder="Nombre" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="apellidos" th:field="*{apellidos}" placeholder="Apellidos" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" name="email" th:field="*{email}" placeholder="Correo electrónico" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="nickname" th:field="*{nickname}" placeholder="Nickname" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" name="password" th:field="*{password}" placeholder="Contraseña" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" class="form-control" name="telefono" th:field="*{telefono}" placeholder="Teléfono contacto" />
-                                </div>
-                                <input type="submit" class="btnRegister" name="enviar" value="Registrarse" />
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            <input class="input" name="apellidos" placeholder="Apellidos" th:field="*{apellidos}" type="text"/>
+            <div class="line-box">
+                <div class="line"></div>
             </div>
-        </div>
-        <div id="formulario">
-            <form th:action="@{/newUser/submit}" th:object="${usuario}" method="post">
-                <input type="text" name="nombre" th:field="*{nombre}" placeholder="Nombre" />
-                <input type="text" name="apellidos" th:field="*{apellidos}" placeholder="Apellidos" />
-                <input type="email" name="email" th:field="*{email}" placeholder="Correo electrónico" />
-                <input type="text" name="nickname" th:field="*{nickname}" placeholder="Nickname" />
-                <input type="password" name="password" th:field="*{password}" placeholder="Contraseña" />
-                <input type="number" name="telefono" th:field="*{telefono}" placeholder="Teléfono contacto" />
-                <input type="submit" name="enviar" value="Enviar" />
-            </form>
-        </div>
+            <input class="input" name="email" placeholder="Correo electrónico" th:field="*{email}" type="email"/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+            <input class="input" name="nickname" placeholder="Nickname" th:field="*{nickname}" type="text"/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+            <input class="input" name="password" placeholder="Contraseña" th:field="*{password}" type="password"/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+            <input class="input" name="telefono" placeholder="Teléfono contacto" th:field="*{telefono}" type="number"/>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+            <input class="input button" name="enviar" type="submit" value="Enviar"/>
+        </form>
 
-</body>
 
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </body>
 </html>
+

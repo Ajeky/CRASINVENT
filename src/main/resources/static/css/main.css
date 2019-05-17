@@ -1,3 +1,20 @@
+html,
+body {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    font-family: 'Kodchasan', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Baloo Bhai', cursive;
+}
+
 html {
     height: 100%;
 }
