@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -37,7 +37,7 @@
                             <li><a href="#">Inicio</a></li>
                             <li><a href="#">Conócenos</a></li>
                             <li><a href="#">Contacta</a></li>
-                            <li><a href="#">Registro</a></li>
+                            <li><a href="forms/registro.html" th:href="@{/newUser}">Registro</a></li>
                             <li><a href="#">Login</a></li>
                         </ul>
                     </div>

@@ -6,9 +6,12 @@ package com.salesianostriana.damcrasinvent.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
 
@@ -23,8 +26,9 @@ import lombok.ToString;
  */
 
 @Data @NoArgsConstructor
-@MappedSuperclass
-public abstract class MetodosPago {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class MetodosPago {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -35,11 +39,6 @@ public abstract class MetodosPago {
 	@ManyToMany(mappedBy="metodosPago")
 	private List<UsuarioEmpresa> usuarios = new ArrayList<>();
 
-	
-	public MetodosPago(List<UsuarioEmpresa> usuarios) {
-		super();
-		this.usuarios = usuarios;
-	}
 	
 	
 	

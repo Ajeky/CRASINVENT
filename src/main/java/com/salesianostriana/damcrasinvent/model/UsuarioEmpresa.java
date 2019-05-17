@@ -35,12 +35,16 @@ public class UsuarioEmpresa extends Usuario {
 	private String campoEmpresa;
 	private String direccionFacturacion;
 	
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@ManyToMany
 	@JoinTable(
 			joinColumns = @JoinColumn(name="usuario_id"),
 			inverseJoinColumns = @JoinColumn(name="metPago_id")
 		)
 	private List<MetodosPago> metodosPago = new ArrayList<>();
+	
+	
 	
 	public void addMetodoPago(MetodosPago m) {
 		metodosPago.add(m);
@@ -50,6 +54,30 @@ public class UsuarioEmpresa extends Usuario {
 	public void deleteMetodoPago(MetodosPago m) {
 		metodosPago.remove(m);
 		m.getUsuarios().remove(this);
+	}
+
+	/**
+	 * @param nombre
+	 * @param apellidos
+	 * @param email
+	 * @param nickname
+	 * @param password
+	 * @param telefono
+	 * @param cIF
+	 * @param nombreEmpresa
+	 * @param telefonoEmpresa
+	 * @param campoEmpresa
+	 * @param direccionFacturacion
+	 */
+	public UsuarioEmpresa(String nombre, String apellidos, String email, String nickname, String password,
+			String telefono, String cIF, String nombreEmpresa, String telefonoEmpresa, String campoEmpresa,
+			String direccionFacturacion) {
+		super(nombre, apellidos, email, nickname, password, telefono);
+		CIF = cIF;
+		this.nombreEmpresa = nombreEmpresa;
+		this.telefonoEmpresa = telefonoEmpresa;
+		this.campoEmpresa = campoEmpresa;
+		this.direccionFacturacion = direccionFacturacion;
 	}
 	
 

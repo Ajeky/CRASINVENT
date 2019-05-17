@@ -30,10 +30,11 @@ public class PayPal extends MetodosPago {
 	 * @param usuarios
 	 * @param correo
 	 */
-	public PayPal(List<UsuarioEmpresa> usuarios, String correo) {
-		super(usuarios);
+	public PayPal(String correo) {
 		this.correo = correo;
 	}
+	
+	
 
 	
 }

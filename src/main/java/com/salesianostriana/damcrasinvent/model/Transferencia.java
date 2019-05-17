@@ -31,8 +31,7 @@ public class Transferencia extends MetodosPago {
 	 * @param iBAN
 	 * @param titular
 	 */
-	public Transferencia(List<UsuarioEmpresa> usuarios, String iBAN, String titular) {
-		super(usuarios);
+	public Transferencia(String iBAN, String titular) {
 		IBAN = iBAN;
 		this.titular = titular;
 	}

@@ -37,8 +37,7 @@ public class Tarjeta extends MetodosPago {
 	 * @param titular
 	 * @param cVV
 	 */
-	public Tarjeta(List<UsuarioEmpresa> usuarios, String numero, LocalDate fechaCad, String titular, String cVV) {
-		super(usuarios);
+	public Tarjeta(String numero, LocalDate fechaCad, String titular, String cVV) {
 		this.numero = numero;
 		this.fechaCad = fechaCad;
 		this.titular = titular;
