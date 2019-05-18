@@ -29,5 +29,9 @@ body {
     margin: 0 auto;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
 /*HE QUITADO LA CLASE CONTAINER (margin: 10px 10px;)*/

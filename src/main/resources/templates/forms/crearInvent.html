@@ -3,30 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Registro nuevo formulario</title>
-    <style type="text/css">
-        #formulario {
-            width: 500px;
-            padding-top: 20px;
-        }
-        
-        #formulario input {
-            margin-top: 10px;
-            display: block;
-        }
-        
-        input {
-            width: 100%;
-        }
-    </style>
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+        <title>Registro de usuario</title>
+
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
+
+
+        <!-- Bootstrap CSS -->
+        <link
+        crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+
+        <!-- Bootstrap Propio -->
+        <link href='../../static/css/registro.css' media='screen' rel='stylesheet' th:href="@{/css/registro.css}" type='text/css'>
+        <link href="../../static/css/main.css" media="screen" rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
 </head>
 
 <body>
     <div id="menu">
-        <a th:href="@{/inventList}">Inicio</a> | <a th:href="@{/newInvent}">Nuevo inventario</a>
+        <a href="../portada.html" th:href="@{/inventList}">Inicio</a> | <a th:href="@{/newInvent}">Nuevo inventario</a>
     </div>
     <div id="formulario">
         <form th:action="${invent.id != 0} ? @{/editInvent/submit} : @{/newInvent/submit}" th:object="${invent}" method="post">
+            <h3 class="text">Nuevo Inventario</h3>
             <input th:if="${invent.id != 0}" type="hidden" name="id" th:field="*{id}" />
             <input type="text" name="nombre" th:field="*{nombre}" placeholder="Nombre" />
             <input type="submit" name="enviar" value="Enviar" />
