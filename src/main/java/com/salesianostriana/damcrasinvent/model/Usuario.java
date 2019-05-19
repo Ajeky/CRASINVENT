@@ -3,8 +3,11 @@
  */
 package com.salesianostriana.damcrasinvent.model;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,18 +33,29 @@ import lombok.ToString;
 @Data @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
-public class Usuario {
-	
+public class Usuario implements UserDetails {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5112392424025862905L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	private String nombre;
 	private String apellidos;
+	@Column(unique = true)
 	private String email;
+	@Column(unique = true)
 	private String nickname;
 	private String password;
 	private String telefono;
+	
+	private boolean cuentaCaducada;
+	private boolean cuentaBloqueada;
+	private boolean credencialesCaducadas;
 	
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
@@ -85,12 +103,40 @@ public class Usuario {
 		this.invents = invents;
 	}
 	
-	
-	
-	
-	
-	
-	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+	}
+
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return !cuentaCaducada;
+	}
+
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return !cuentaBloqueada;
+	}
+
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return !credencialesCaducadas;
+	}
+
+
+	@Override
+	public boolean isEnabled() {
+		return !cuentaBloqueada;
+}	
 	
 	
 

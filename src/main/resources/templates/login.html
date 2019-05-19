@@ -24,15 +24,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- CSS propio -->
-    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/main.css' th:href='@{/css/main.css}'>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/login.css" th:href="@{/css/login.css}">
+    <link rel='stylesheet' type='text/css' media='screen' href='../static/css/main.css' th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/login.css" th:href="@{/css/login.css}">
 </head>
 
 <body>
     <div class="login">
         <h1>Login</h1>
         <form method="post" action="#" th:action="@{/login}">
-            <input type="email" id="email" name="email" placeholder="Correo electrónico" required autofocus />
+            <input type="email" id="email" name="username" placeholder="Correo electrónico" required autofocus />
             <input type="password" id="password" name="password" placeholder="Contraseña" required />
             <button type="submit" name="enviar" value="enviar" class="btn btn-primary btn-block btn-large">Logeame</button>
         </form>

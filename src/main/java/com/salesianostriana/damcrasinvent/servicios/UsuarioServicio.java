@@ -17,4 +17,8 @@ import com.salesianostriana.damcrasinvent.servicios.base.BaseService;
 @Service
 public class UsuarioServicio extends BaseService<Usuario, Long, UsuarioRepository> {
 
+	public Usuario buscarPorEmail(String email) {
+		return repositorio.findFirstByEmail(email);
+	}
+
 }

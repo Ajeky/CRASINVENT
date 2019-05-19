@@ -4,12 +4,17 @@
 package com.salesianostriana.damcrasinvent.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -80,5 +85,9 @@ public class UsuarioEmpresa extends Usuario {
 		this.direccionFacturacion = direccionFacturacion;
 	}
 	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_PREMIUMUSER"));
+}
 
 }

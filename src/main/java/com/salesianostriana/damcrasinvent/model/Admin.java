@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor
 @Entity
-public class Admin {
+public class Admin{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
