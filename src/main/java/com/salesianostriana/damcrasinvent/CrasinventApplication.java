@@ -26,8 +26,19 @@ public class CrasinventApplication {
 			diego.setNombre("Diego");
 			diego.setPassword(passwordEncoder.encode("1234"));
 			diego.setTelefono("666666666");
+			diego.setAdmin(false);
+			
+			Usuario alvaro = new Usuario();
+			alvaro.setApellidos("Marquez Mata");
+			alvaro.setEmail("alvaro@alvaro.com");
+			alvaro.setNickname("Ajeky");
+			alvaro.setNombre("Alvaro");
+			alvaro.setPassword(passwordEncoder.encode("1234"));
+			alvaro.setTelefono("123412341");
+			alvaro.setAdmin(true);
 			
 			servicio.add(diego);
+			servicio.add(alvaro);
 		};
 	}
 

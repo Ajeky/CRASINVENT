@@ -52,6 +52,7 @@ public class Usuario implements UserDetails {
 	private String nickname;
 	private String password;
 	private String telefono;
+	private boolean isAdmin;
 	
 	private boolean cuentaCaducada;
 	private boolean cuentaBloqueada;
@@ -80,7 +81,7 @@ public class Usuario implements UserDetails {
 	 * @param password
 	 * @param telefono
 	 */
-	public Usuario(String nombre, String apellidos, String email, String nickname, String password, String telefono) {
+	public Usuario(String nombre, String apellidos, String email, String nickname, String password, String telefono, boolean isAdmin) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -88,6 +89,7 @@ public class Usuario implements UserDetails {
 		this.nickname = nickname;
 		this.password = password;
 		this.telefono = telefono;
+		this.isAdmin = isAdmin;
 	}
 
 	public Usuario(long id, String nombre, String apellidos, String email, String nickname, String password,

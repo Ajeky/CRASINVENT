@@ -18,4 +18,9 @@ public class PortadaController {
 	public String mostrarPortada() {
 		return "portada";
 	}
+	
+	@GetMapping("/portadaUser")
+	public String mostrarPortadaUsuario() {
+		return "/usuario/portada";
+	}
 }

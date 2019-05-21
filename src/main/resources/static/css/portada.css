@@ -61,7 +61,7 @@ nav ul {
 }
 
 nav.black ul {
-    background: #000;
+    background: linear-gradient(to bottom, black 60px, transparent 238px);
 }
 
 nav ul li {

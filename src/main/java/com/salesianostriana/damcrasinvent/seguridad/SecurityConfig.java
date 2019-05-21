@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/css/**","/js/**","/webjars/**", "/h2-console/**", "/").permitAll()
+				.antMatchers("/css/**","/js/**","/webjars/**", "/h2-console/**", "/", "/newUser").permitAll()
 						.antMatchers("/admin/**").hasAnyRole("ADMIN")
 						.anyRequest().authenticated()
 						.and()
@@ -52,10 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						.loginPage("/login")
 						.permitAll()
 						.successHandler(customSuccessHandler)
+						.defaultSuccessUrl("/portadaUser")
 						.and()
 				.logout()
 						.logoutUrl("/logout")
 						.permitAll()
+						.logoutSuccessUrl("/")
 						.and()
 				.exceptionHandling()
 						.accessDeniedPage("/acceso-denegado");

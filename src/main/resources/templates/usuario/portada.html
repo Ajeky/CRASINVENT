@@ -1,78 +1,106 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
-    <title>Bienvenido</title>
+        <title>Bienvenido</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link
+        crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <!-- Font Awesome -->
+        <link
+        crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" rel="stylesheet">
 
-    <!-- CSS Propio -->
-    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/main.css' th:href='@{/css/main.css}'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/portada.css' th:href='@{/css/portada.css}'>
-</head>
+        <!-- CSS Propio -->
+        <link href='../../static/css/main.css' media='screen' rel='stylesheet' th:href='@{/css/main.css}' type='text/css'>
+        <link href='../../static/css/portada.css' media='screen' rel='stylesheet' th:href='@{/css/portada.css}' type='text/css'>
+    </head>
 
-<body>
+    <body>
 
-    <div class="wrapper">
-        <header>
-            <div>
-                <nav>
-                    <div class="menu-icon">
-                        <i class="fa fa-bars fa-2x"></i>
-                    </div>
-                    <div class="logo">
-                        CRASINVENT
-                    </div>
-                    <div class="menu">
-                        <ul>
-                            <li><a href="#">Crear Inventario</a></li>
-                            <li><a href="#">Contacta</a></li>
-                            <li><a href="../forms/registro.html" th:href="@{/newUser}">Registro</a></li>
-                            <li><a href="#">Login</a></li>
-                            <li>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary-outline" data-toggle="dropdown"><span sec:authentication="name">Usuario  </span><i class="fas fa-user"></i></button>
-                                    <div class="dropdown-menu frente">
-                                        <button type="button" class="btn btn-primary"><a class="dropdown-item" href="#">Configuración <i class="fas fa-tools"></i></a></button>
-                                        <button type="button" class="btn btn-primary"><a class="dropdown-item" href="#">Editar mis datos <i class="fas fa-address-card"></i></a></button>
-                                        <button type="button" class="btn btn-primary"><a class="dropdown-item" href="#">Mis inventarios <i class="fas fa-box-open"></i></a></button>
-                                        <button type="button" class="btn btn-primary"><a class="dropdown-item" href="#">Salir <i class="fas fa-door-open"></i></a>
-                                        </div>
-                                    </div>
+        <div class="wrapper">
+            <header>
+                <div>
+                    <nav>
+                        <div class="menu-icon">
+                            <i class="fa fa-bars fa-2x"></i>
+                        </div>
+                        <div class="logo">
+                            CRASINVENT
+                        </div>
+                        <div class="menu">
+                            <ul>
+                                <li>
+                                    <a href="#">Inicio</a>
                                 </li>
-                        </ul>
+
+                                <li>
+                                    <a href="#">Contacta</a>
+                                </li>
+                                <li>
+                                    <a href="#">Crear Inventario</a>
+                                </li>
+                                <li>
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary-outline" data-toggle="dropdown" type="button">
+                                            <span sec:authentication="name">Usuario
+                                            </span>
+                                            <i class="fas fa-user"></i>
+                                        </button>
+                                        <div class="dropdown-menu frente">
+                                            <button class="btn btn-primary" type="button">
+                                                <a class="dropdown-item" href="#">Configuración
+                                                    <i class="fas fa-tools"></i>
+                                                </a>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                <a class="dropdown-item" href="#">Editar mis datos
+                                                    <i class="fas fa-address-card"></i>
+                                                </a>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                <a class="dropdown-item" href="#">Mis inventarios
+                                                    <i class="fas fa-box-open"></i>
+                                                </a>
+                                            </button>
+                                            <button class="btn btn-primary" type="button">
+                                                <a class="dropdown-item" href="../portada.html" th:href="@{/logout}">Salir
+                                                    <i class="fas fa-door-open"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
                     </div>
-                </nav>
+                    <div class="titulo col-lg-8 col-sm-12 text-center">
+                        <h1>Creador y Gestor de Inventarios para facilitar la vida tanto a empresas como a particulares</h1>
+                    </div>
+
+                    <div class="descripcion col-lg-8 col-sm-12 text-center">
+                        <p>Diferentes planes de pago para adaptarse a sus necesidades en cualquier situación. Llevar el recuento de stock e inventario de su empresa nunca fue tan fácil. Después de probar CRASINVENT, no volverás a pisar el sucio y feo almacén de
+                                                la parte de atrás de su oficina nunca más.
+                        </p>
+                    </div>
+
+                </header>
             </div>
-            <div class="titulo col-lg-8 col-sm-12 text-center">
-                <h1>Creador y Gestor de Inventarios para facilitar la vida tanto a empresas como a particulares</h1>
-            </div>
 
-            <div class="descripcion col-lg-8 col-sm-12 text-center">
-                <p>Diferentes planes de pago para adaptarse a sus necesidades en cualquier situación. Llevar el recuento de stock e inventario de su empresa nunca fue tan fácil. Después de probar CRASINVENT, no volverás a pisar el sucio y feo almacén de
-                    la parte de atrás de su oficina nunca más.
-                </p>
-            </div>
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        </body>
 
-        </header>
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-
-</html>
+    </html>

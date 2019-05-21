@@ -75,9 +75,9 @@ public class UsuarioEmpresa extends Usuario {
 	 * @param direccionFacturacion
 	 */
 	public UsuarioEmpresa(String nombre, String apellidos, String email, String nickname, String password,
-			String telefono, String cIF, String nombreEmpresa, String telefonoEmpresa, String campoEmpresa,
+			String telefono, boolean isAdmin, String cIF, String nombreEmpresa, String telefonoEmpresa, String campoEmpresa,
 			String direccionFacturacion) {
-		super(nombre, apellidos, email, nickname, password, telefono);
+		super(nombre, apellidos, email, nickname, password, telefono, isAdmin);
 		CIF = cIF;
 		this.nombreEmpresa = nombreEmpresa;
 		this.telefonoEmpresa = telefonoEmpresa;
