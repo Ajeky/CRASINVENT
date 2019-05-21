@@ -34,4 +34,9 @@ a {
     color: inherit;
 }
 
+.frente {
+    z-index: 2;
+}
+
+
 /*HE QUITADO LA CLASE CONTAINER (margin: 10px 10px;)*/

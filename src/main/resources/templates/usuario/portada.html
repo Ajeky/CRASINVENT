@@ -1,13 +1,12 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>CRASINVENT</title>
+    <title>Bienvenido</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
@@ -15,13 +14,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- CSS Propio -->
-    <link rel='stylesheet' type='text/css' media='screen' href='../static/css/main.css' th:href='@{/css/main.css}'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../static/css/portada.css' th:href='@{/css/portada.css}'>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
+    <!-- CSS Propio -->
+    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/main.css' th:href='@{/css/main.css}'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/portada.css' th:href='@{/css/portada.css}'>
 </head>
 
-<body class="text-center">
+<body>
 
     <div class="wrapper">
         <header>
@@ -35,11 +36,21 @@
                     </div>
                     <div class="menu">
                         <ul>
-                            <li><a href="#">Inicio</a></li>
-                            <li><a href="#">Conócenos</a></li>
+                            <li><a href="#">Crear Inventario</a></li>
                             <li><a href="#">Contacta</a></li>
-                            <li><a href="forms/registro.html" th:href="@{/newUser}">Registro</a></li>
+                            <li><a href="../forms/registro.html" th:href="@{/newUser}">Registro</a></li>
                             <li><a href="#">Login</a></li>
+                            <li>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary-outline" data-toggle="dropdown"><span sec:authentication="name">Usuario  </span><i class="fas fa-user"></i></button>
+                                    <div class="dropdown-menu frente">
+                                        <button type="button" class="btn btn-primary"><a class="dropdown-item" href="#">Configuración <i class="fas fa-tools"></i></a></button>
+                                        <button type="button" class="btn btn-primary"><a class="dropdown-item" href="#">Editar mis datos <i class="fas fa-address-card"></i></a></button>
+                                        <button type="button" class="btn btn-primary"><a class="dropdown-item" href="#">Mis inventarios <i class="fas fa-box-open"></i></a></button>
+                                        <button type="button" class="btn btn-primary"><a class="dropdown-item" href="#">Salir <i class="fas fa-door-open"></i></a>
+                                        </div>
+                                    </div>
+                                </li>
                         </ul>
                     </div>
                 </nav>
@@ -55,12 +66,6 @@
             </div>
 
         </header>
-
-        <div class="content col-lg-10 col-sm-12 text-center">
-            <h1>PLANES DE PAGO</h1>
-            <p>Esto es una prueba puta madre</p>
-        </div>
-
     </div>
 
     <!-- Optional JavaScript -->
@@ -68,7 +73,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="../static/js/pruebaMenu.js" th:src="@{js/pruebaMenu.js}"></script>
 </body>
 
 </html>
