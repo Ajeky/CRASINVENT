@@ -27,10 +27,10 @@
             <div id="menu" class="menu">
                 <ul class="nav nav-pills botones">
                     <li class="nav-item mr-1">
-                        <a class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
+                        <a class="btn btn-secondary text-white" th:href="@{/portadaUser}" role="button">Inicio</a>
                     </li>
                     <li class="nav-item mr-1">
-                        <a class="btn active botonActivo" th:href="@{/inventList}" role="button">Lista Inventarios</a>
+                        <a class="btn active botonActivo" th:href="@{/user/inventList}" role="button">Lista Inventarios</a>
                     </li>
                     <li class="nav-item mr-1">
                         <a class="btn btn-secondary text-white" th:href="@{/newInvent}" role="button">Nuevo Inventario</a>
@@ -60,6 +60,13 @@
                     </tr>
                 </tbody>
             </table>
+            
+             <form action="#" th:action="@{search}" th:object="${searchForm}" method="POST">
+		<input type="text" name="nombre" placeholder="Buscar Por Nombre" th:field="*{search}" style="margin-left: 5%; padding: 4px;" />
+		<button class="btn- btn-danger" type="submit"  style="padding: 4px;">
+			<span class="glyphicon glyphicon-search"></span>
+		</button>
+		</form>
         </section>
 
     </div>

@@ -22,7 +22,7 @@
 
 <body>
     <div id="menu">
-        <a href="../portada.html" th:href="@{/inventList}">Inicio</a> | <a th:href="@{/newInvent}">Nuevo inventario</a>
+        <a href="../usuario/portada.html" th:href="@{/portadaUser}">Inicio</a> | <a th:href="@{/newInvent}">Nuevo inventario</a>
     </div>
     <div id="formulario">
         <form th:action="${invent.id != 0} ? @{/editInvent/submit} : @{/newInvent/submit}" th:object="${invent}" method="post">

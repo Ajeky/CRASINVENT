@@ -1,78 +1,75 @@
 <!doctype html>
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
-        <title>Bienvenido</title>
+    <title>Bienvenido</title>
 
-        <!-- Google Fonts -->
-        <link
-        href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
 
-        <!-- Bootstrap CSS -->
-        <link
-        crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
 
-        <!-- Font Awesome -->
-        <link
-        crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" rel="stylesheet">
 
-        <!-- CSS Propio -->
-        <link href='../../static/css/main.css' media='screen' rel='stylesheet' th:href='@{/css/main.css}' type='text/css'>
-        <link href='../../static/css/portada.css' media='screen' rel='stylesheet' th:href='@{/css/portada.css}' type='text/css'>
-    </head>
+    <!-- CSS Propio -->
+    <link href='../../static/css/main.css' media='screen' rel='stylesheet' th:href='@{/css/main.css}' type='text/css'>
+    <link href='../../static/css/portada.css' media='screen' rel='stylesheet' th:href='@{/css/portada.css}' type='text/css'>
+</head>
 
-    <body>
+<body>
 
-        <div class="wrapper">
-            <header>
-                <div>
-                    <nav>
-                        <div class="menu-icon">
-                            <i class="fa fa-bars fa-2x"></i>
-                        </div>
-                        <div class="logo">
-                            CRASINVENT
-                        </div>
-                        <div class="menu">
-                            <ul>
-                                <li>
-                                    <a href="#">Inicio</a>
-                                </li>
+    <div class="wrapper">
+        <header>
+            <div>
+                <nav>
+                    <div class="menu-icon">
+                        <i class="fa fa-bars fa-2x"></i>
+                    </div>
+                    <div class="logo">
+                        CRASINVENT
+                    </div>
+                    <div class="menu">
+                        <ul>
+                            <li>
+                                <a href="#" th:href="@{/}">Inicio</a>
+                            </li>
 
-                                <li>
-                                    <a href="#">Contacta</a>
-                                </li>
-                                <li>
-                                    <a href="#">Crear Inventario</a>
-                                </li>
-                                <li>
-                                    <div class="btn-group">
-                                        <button class="btn btn-primary-outline" data-toggle="dropdown" type="button">
+                            <li>
+                                <a href="#">Contacta</a>
+                            </li>
+                            <li>
+                                <a href="../forms/crearInvent.html" th:href="@{/newInvent}">Crear Inventario</a>
+                            </li>
+                            <li>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary-outline" data-toggle="dropdown" type="button">
                                             <span sec:authentication="name">Usuario
                                             </span>
                                             <i class="fas fa-user"></i>
                                         </button>
-                                        <div class="dropdown-menu frente">
-                                            <button class="btn btn-primary" type="button">
-                                                <a class="dropdown-item" href="#">Configuración
+                                    <div class="dropdown-menu frente">
+                                        <button class="btn btn-primary" type="button">
+                                                <a class="dropdown-item" href="#" th:href="@{user/configuracion}">Configuración
                                                     <i class="fas fa-tools"></i>
                                                 </a>
                                             </button>
-                                            <button class="btn btn-primary" type="button">
-                                                <a class="dropdown-item" href="#">Editar mis datos
+                                        <button class="btn btn-primary" type="button">
+                                                <a class="dropdown-item" href="../forms/modificarDatos.html" th:href="@{user/modificarDatos}"></i>Editar mis datos
                                                     <i class="fas fa-address-card"></i>
                                                 </a>
                                             </button>
-                                            <button class="btn btn-primary" type="button">
-                                                <a class="dropdown-item" href="#">Mis inventarios
+                                        <button class="btn btn-primary" type="button">
+                                                <a class="dropdown-item" href="../listas/listaInvent.html" th:href="@{/user/inventList}">Mis inventarios
                                                     <i class="fas fa-box-open"></i>
                                                 </a>
                                             </button>
-                                            <button class="btn btn-primary" type="button">
+                                        <button class="btn btn-primary" type="button">
                                                 <a class="dropdown-item" href="../portada.html" th:href="@{/logout}">Salir
                                                     <i class="fas fa-door-open"></i>
                                                 </a>
@@ -94,6 +91,26 @@
                     </div>
 
                 </header>
+
+                <div class="content col-lg-10 col-sm-12 text-center">
+                    <h1>PLANES DE PAGO</h1>
+                    <p>Esto es una prueba puta madre</p>
+                </div>
+
+                <div class="content col-lg-10 col-sm-12 text-center">
+                    <h1>PLANES DE PAGO</h1>
+                    <p>Esto es una prueba puta madre</p>
+                </div>
+
+                <div class="content col-lg-10 col-sm-12 text-center">
+                    <h1>PLANES DE PAGO</h1>
+                    <p>Esto es una prueba puta madre</p>
+                </div>
+
+                <div class="content col-lg-10 col-sm-12 text-center">
+                    <h1>PLANES DE PAGO</h1>
+                    <p>Esto es una prueba puta madre</p>
+                </div>
             </div>
 
             <!-- Optional JavaScript -->
