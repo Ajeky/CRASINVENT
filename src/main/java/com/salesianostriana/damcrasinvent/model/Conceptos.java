@@ -45,16 +45,16 @@ public class Conceptos {
 	}
 	
 	@OneToMany(mappedBy="concepto")
-	private List<ValoresConceptos> valoresConceptos;
+	private List<ValoresCampos> valoresCampos;
 	
 	//Métodos Helper
 	
-	public void addValorConcepto(ValoresConceptos v) {
-		this.valoresConceptos.add(v);
+	public void addValorCampo(ValoresCampos v) {
+		this.valoresCampos.add(v);
 	}
 	
-	public void removeValorConcepto(ValoresConceptos v) {
-		this.valoresConceptos.remove(v);
+	public void removeValorCampo(ValoresCampos v) {
+		this.valoresCampos.remove(v);
 		v.setConcepto(null);
 	}
 	

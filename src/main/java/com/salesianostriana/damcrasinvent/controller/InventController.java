@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.damcrasinvent.formbeans.SearchBean;
+import com.salesianostriana.damcrasinvent.model.Conceptos;
 import com.salesianostriana.damcrasinvent.model.Invent;
 import com.salesianostriana.damcrasinvent.servicios.InventServicio;
 import com.salesianostriana.damcrasinvent.servicios.UsuarioServicio;
@@ -64,6 +65,20 @@ public class InventController {
 		if (invEdit != null) {
 			model.addAttribute("invent", invEdit);
 			return "forms/crearInvent";
+		} else {
+			return "redirect:/user/inventList";
+		}
+	}
+	
+	@GetMapping("/detalleInvent/{id}")
+	public String detalleInventario(@PathVariable("id") long id, Model model) {
+		Invent i = inventservicio.findById(id);
+		List<Conceptos> c = i.getConceptos();
+		
+		if (i != null) {
+			model.addAttribute("invent", i);
+			model.addAttribute("conceptos", c);
+			return "listas/inventarioDetalle";
 		} else {
 			return "redirect:/user/inventList";
 		}

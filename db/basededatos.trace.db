@@ -706,3 +706,7 @@ insert into Usuario (id, nombre, apellidos, email, nickname, password, telefono,
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
 	at com.salesianostriana.damcrasinvent.CrasinventApplication.main(CrasinventApplication.java:16)
+2019-05-23 10:52:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "VALORESCAMPOS" no encontrada
+Table "VALORESCAMPOS" not found; SQL statement:
+insert into ValoresCampos (id, valor, concepto_id, campo_id) values (11111, 'Valor 1', 11111, 11111) [42102-199]

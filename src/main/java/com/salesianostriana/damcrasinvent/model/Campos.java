@@ -30,7 +30,6 @@ public class Campos {
 	
 	private String nombre;
 	private String tipo;
-	private long id_concepto;
 	
 	@ManyToOne
 	private Conceptos concepto;

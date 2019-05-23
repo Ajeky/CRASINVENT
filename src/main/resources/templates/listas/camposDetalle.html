@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Detalle Inventario</title>
+    <title>Detalle Concepto</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- Google Fonts -->
@@ -30,35 +30,40 @@
                         <a class="btn btn-secondary text-white" th:href="@{/portadaUser}" role="button">Inicio</a>
                     </li>
                     <li class="nav-item mr-1">
-                        <a class="btn active botonActivo" th:href="@{/user/inventList}" role="button">Lista Inventarios</a>
+                        <a class="btn active botonActivo" th:href="@{/detalleConcepto/{id}(id=${campo.concepto.id})}" role="button">Lista Campos</a>
                     </li>
                     <li class="nav-item mr-1">
-                        <a class="btn btn-secondary text-white" th:href="@{/newConcepto}" role="button">Nueva Tabla</a>
+                        <a class="btn btn-secondary text-white" th:href="@{/newValorCampo}" role="button">Nuevo Valor</a>
                     </li>
                 </ul>
             </div>
         </header>
-        
-        <h1 th:text="${invent.nombre}">Nombre Inventario</h1>
 
+		<h1>Base de datos:</h1>
+		<h1 th:text="${campo.concepto.invent.nombre}"></h1>
+		<br /><br />
+		
+		<h2>Tabla:</h2>
+		<h2 th:text="${campo.concepto.nombre}"></h2>
+		<br /><br />
+		
+		<h3>Columna:</h3>
+		<h3 th:text="${campo.nombre}"></h3>
 
         <section>
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
+                        <th scope="col">Valor</th>
                         <th scope="col">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="conceptos : ${conceptos}">
-                        <td th:text="${conceptos.id}">ID</td>
-                        <td th:text="${conceptos.nombre}">Nombre</td>
+                    <tr th:each="campos : ${campos}">
+                        <td th:text="${campos.valor}">Valor</td>
                         <td>
-                            <a href="#" th:href="@{/editConcepto/{id}(id=${conceptos.id})}">Editar</a>
-                            <a href="#" th:href="@{/deleteConcepto/{id}(id=${conceptos.id})}">Borrar</a>
-                            <a href="#" th:href="@{/detalleConcepto/{id}(id=${conceptos.id})}">Detalles</a>
+                            <a href="#" th:href="@{/editValorCampo/{id}(id=${campos.id})}">Editar</a>
+                            <a href="#" th:href="@{/deleteValorCampo/{id}(id=${campos.id})}">Borrar</a>
                         </td>
                     </tr>
                 </tbody>
@@ -73,5 +78,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
-
-</html>

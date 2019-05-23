@@ -1,5 +1,7 @@
 package com.salesianostriana.damcrasinvent;
 
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +26,7 @@ public class CrasinventApplication {
 			diego.setEmail("diego@diego.com");
 			diego.setNickname("SoulBeats");
 			diego.setNombre("Diego");
-			diego.setPassword(passwordEncoder.encode("1234"));
+			diego.setPassword("1234");
 			diego.setTelefono("666666666");
 			diego.setAdmin(false);
 			
@@ -33,12 +35,19 @@ public class CrasinventApplication {
 			alvaro.setEmail("alvaro@alvaro.com");
 			alvaro.setNickname("Ajeky");
 			alvaro.setNombre("Alvaro");
-			alvaro.setPassword(passwordEncoder.encode("1234"));
+			alvaro.setPassword("1234");
 			alvaro.setTelefono("123412341");
 			alvaro.setAdmin(true);
 			
 			servicio.add(diego);
 			servicio.add(alvaro);
+			
+			List<Usuario> usuarios = servicio.findAll();
+			
+			for (Usuario u : usuarios) {
+				u.setPassword(passwordEncoder.encode(u.getPassword()));
+				servicio.add(u);
+			}
 		};
 	}
 
