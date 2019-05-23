@@ -59,11 +59,11 @@ public class ConceptosController {
 		return "forms/crearConcepto";
 	}
 	
-	@PostMapping("/newConcepto/submit")
-	public String procesarFormulario(@ModelAttribute("concepto") Conceptos c) {
+	@PostMapping("/newConcepto/submit/{id}")
+	public String procesarFormulario(@ModelAttribute("concepto") Conceptos c, @PathVariable("id") long id) {
+		c.setInvent(inventservi.findById(id));
 		concepservi.add(c);
-		long inventID = c.getInvent().getId();
-		return "redirect:/detalleInvent/" + inventID;
+		return "redirect:/detalleInvent/" + id;
 	}
 	
 	@GetMapping("/editConcepto/{id}")
@@ -79,10 +79,11 @@ public class ConceptosController {
 		}
 	}
 	
-	@PostMapping("/editConcepto/submit")
-	public String editarConcepto(@ModelAttribute("concepto") Conceptos c) {
+	@PostMapping("/editConcepto/submit/{id}")
+	public String editarConcepto(@ModelAttribute("concepto") Conceptos c, @PathVariable("id") long id) {
+		c.setInvent(inventservi.findById(id));
 		concepservi.edit(c);
-		return "redirect:/detalleInvent/" + c.getInvent().getId();
+		return "redirect:/detalleInvent/" + id;
 	}
 	
 	@GetMapping("/deleteConcepto/{id}")
