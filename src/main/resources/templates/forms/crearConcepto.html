@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+        <title>Creación y edición de conceptos</title>
+
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
+
+
+        <!-- Bootstrap CSS -->
+        <link
+        crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+
+        <!-- Bootstrap Propio -->
+        <link href='../../static/css/registro.css' media='screen' rel='stylesheet' th:href="@{/css/registro.css}" type='text/css'>
+        <link href="../../static/css/main.css" media="screen" rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+</head>
+
+<body>
+    <div id="menu">
+        <a href="../usuario/portada.html" th:href="@{/portadaUser}">Inicio</a> | <a th:href="@{/detalleInvent/{id}(id=${invent.id})}">Volver atrás</a>
+    </div>
+    <div id="formulario">
+        <form th:action="${concepto.id != 0} ? @{/editConcepto/submit} : @{/newConcepto/submit}" th:object="${concepto}" method="post">
+            <h3 class="text">Nuevo Inventario</h3>
+            <input th:if="${concepto.id != 0}" type="hidden" name="id" th:field="*{id}" />
+            <input type="text" name="nombre" th:field="concepto.nombre" placeholder="Nombre" />
+            <input type="number" name="invent_id" th:field="invent.id" />
+            <input type="submit" name="enviar" value="Enviar" />
+        </form>
+    </div>
+</body>
+
+</html>
