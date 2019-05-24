@@ -48,13 +48,58 @@ public class CamposController {
 		if (c != null) {
 			model.addAttribute("campo", c);
 			model.addAttribute("campos", ca);
-			return "listas/camposDetalle";
+			return "listas/campoDetalle";
 		} else {
 			return "redirect:/user/inventList";
 		}
 	}
 	
 	@GetMapping("/newCampo/{id}")
+	public String nuevoCampo (Model model, @PathVariable("id") long id) {
+		model.addAttribute("campo", new Campos());
+		model.addAttribute("concepto", concepservi.findById(id));
+		return "forms/crearCampo";
+		
+	}
 	
+	@PostMapping("/newCampo/submit/{id}")
+	public String procesarNuevoCampo(@ModelAttribute("campo") Campos c, @PathVariable("id") long id) {
+		c.setConcepto(concepservi.findById(id));
+		camposservicio.add(c);
+		return "redirect:/detalleConcepto/" + id;
+	}
 	
+	@GetMapping("/editCampo/{id}")
+	public String editarCampo(@PathVariable("id") long id, Model model) {
+		Campos c = camposservicio.findById(id);
+		
+		if (c != null) {
+			model.addAttribute("campo", c);
+			model.addAttribute("concepto", c.getConcepto());
+			return "forms/crearCampo";
+		} else {
+			return "redirect:/";
+		}
+	}
+	
+	@PostMapping("/editCampo/submit/{id}")
+	public String procesarEdicionCampo(@ModelAttribute("campo") Campos c, @PathVariable("id") long id) {
+		c.setConcepto(concepservi.findById(id));
+		camposservicio.edit(c);
+		return "redirect:/detalleConcepto/" + id;
+	}
+	
+	@GetMapping("/deleteCampo/{id}")
+	public String borrarCampo(@PathVariable("id") long id) {
+		Campos campo = camposservicio.findById(id);
+		long concepID = campo.getConcepto().getId();
+		
+		for (ValoresCampos valor : campo.getValoresCampos()) {
+			valorservicio.delete(valor);
+		}
+		
+		camposservicio.delete(campo);
+		
+		return "redirect:/detalleConcepto/" + concepID;
+	}
 }

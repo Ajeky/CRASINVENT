@@ -33,22 +33,15 @@
                         <a class="btn active botonActivo" th:href="@{/detalleConcepto/{id}(id=${campo.concepto.id})}" role="button">Lista Campos</a>
                     </li>
                     <li class="nav-item mr-1">
-                        <a class="btn btn-secondary text-white" th:href="@{/newValorCampo}" role="button">Nuevo Valor</a>
+                        <a class="btn btn-secondary text-white" th:href="@{/newValor/{id}(id=${campo.id})}" role="button">Nuevo Valor</a>
                     </li>
                 </ul>
             </div>
         </header>
 
-		<h1>Base de datos:</h1>
-		<h1 th:text="${campo.concepto.invent.nombre}"></h1>
-		<br /><br />
-		
-		<h2>Tabla:</h2>
-		<h2 th:text="${campo.concepto.nombre}"></h2>
-		<br /><br />
-		
-		<h3>Columna:</h3>
-		<h3 th:text="${campo.nombre}"></h3>
+		<h1>Valores de la columna "<span th:text="${campo.nombre}">[NOMBRE DE LA COLUMNA]</span>", perteneciente a la tabla
+		"<span th:text="${campo.concepto.nombre}">[NOMBRE DE LA BASE DE DATOS]</span>" de la base de datos 
+		"<span th:text="${campo.concepto.invent.nombre}">[NOMBRE DE LA BASE DE DATOS]</span>"</h1>
 
         <section>
             <table class="table">
@@ -62,8 +55,8 @@
                     <tr th:each="campos : ${campos}">
                         <td th:text="${campos.valor}">Valor</td>
                         <td>
-                            <a href="#" th:href="@{/editValorCampo/{id}(id=${campos.id})}">Editar</a>
-                            <a href="#" th:href="@{/deleteValorCampo/{id}(id=${campos.id})}">Borrar</a>
+                            <a href="#" th:href="@{/editValor/{id}(id=${campos.id})}">Editar</a>
+                            <a href="#" th:href="@{/deleteValor/{id}(id=${campos.id})}">Borrar</a>
                         </td>
                     </tr>
                 </tbody>

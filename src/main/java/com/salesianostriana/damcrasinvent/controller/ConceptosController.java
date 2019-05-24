@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.salesianostriana.damcrasinvent.model.Campos;
 import com.salesianostriana.damcrasinvent.model.Conceptos;
 import com.salesianostriana.damcrasinvent.model.Invent;
+import com.salesianostriana.damcrasinvent.model.ValoresCampos;
 import com.salesianostriana.damcrasinvent.servicios.CamposServicio;
 import com.salesianostriana.damcrasinvent.servicios.ConceptosServicio;
 import com.salesianostriana.damcrasinvent.servicios.InventServicio;
+import com.salesianostriana.damcrasinvent.servicios.ValoresCamposServicio;
 
 /**
  * @author amarquez
@@ -31,11 +33,13 @@ public class ConceptosController {
 	ConceptosServicio concepservi;
 	CamposServicio campservi;
 	InventServicio inventservi;
+	ValoresCamposServicio valorservi;
 	
-	public ConceptosController(ConceptosServicio concepservi, CamposServicio campservi, InventServicio inventservi) {
+	public ConceptosController(ConceptosServicio concepservi, CamposServicio campservi, InventServicio inventservi, ValoresCamposServicio valorservi) {
 		this.concepservi = concepservi;
 		this.campservi = campservi;
 		this.inventservi = inventservi;
+		this.valorservi = valorservi;
 	}
 	
 	@GetMapping("/detalleConcepto/{id}")
@@ -88,8 +92,19 @@ public class ConceptosController {
 	
 	@GetMapping("/deleteConcepto/{id}")
 	public String borrarConcepto(@PathVariable("id") long id) {
-		long inventID = concepservi.findById(id).getInvent().getId();
-		concepservi.deleteById(id);
+		Conceptos concepto = concepservi.findById(id);
+		long inventID = concepto.getInvent().getId();
+
+		for (Campos campo : concepto.getCampos()) {
+			for (ValoresCampos valor : campo.getValoresCampos()) {
+				valorservi.delete(valor);
+			}
+			campservi.delete(campo);
+			
+		}
+		concepservi.delete(concepto);
+		
+		
 		return "redirect:/detalleInvent/" + inventID;
 	}
 
