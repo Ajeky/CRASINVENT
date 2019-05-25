@@ -24,7 +24,7 @@ public class UsuarioServicio extends BaseService<Usuario, Long, UsuarioRepositor
 		return repositorio.findFirstByEmail(email);
 	}
 	
-	public Usuario trabajadorLogeado(Model model, Principal principal) {
+	public Usuario usuarioLogeado(Model model, Principal principal) {
 		if (principal != null) {
 			String email = principal.getName();
 			Usuario u = buscarPorEmail(email);

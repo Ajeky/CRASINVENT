@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
@@ -34,6 +35,7 @@ import lombok.ToString;
 @Entity
 public class UsuarioEmpresa extends Usuario {
 	
+	@Column(nullable = false)
 	private String CIF;
 	private String nombreEmpresa;
 	private String telefonoEmpresa;

@@ -30,7 +30,8 @@ import lombok.ToString;
  *
  */
 
-@Data @NoArgsConstructor
+@Data
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 public class Usuario implements UserDetails {
@@ -41,9 +42,9 @@ public class Usuario implements UserDetails {
 	private static final long serialVersionUID = -5112392424025862905L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	private String nombre;
 	private String apellidos;
 	@Column(unique = true)
@@ -53,26 +54,26 @@ public class Usuario implements UserDetails {
 	private String password;
 	private String telefono;
 	private boolean isAdmin;
-	
+
 	private boolean cuentaCaducada;
 	private boolean cuentaBloqueada;
 	private boolean credencialesCaducadas;
-	
+
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy = "usuario")
 	private List<Invent> invents;
-	
+
 	public void addInvent(Invent i) {
 		this.invents.add(i);
 		i.setUsuario(this);
 	}
-	
+
 	public void removeInvent(Invent i) {
 		this.invents.remove(i);
 		i.setUsuario(null);
 	}
-	
+
 	/**
 	 * @param nombre
 	 * @param apellidos
@@ -81,7 +82,8 @@ public class Usuario implements UserDetails {
 	 * @param password
 	 * @param telefono
 	 */
-	public Usuario(String nombre, String apellidos, String email, String nickname, String password, String telefono, boolean isAdmin) {
+	public Usuario(String nombre, String apellidos, String email, String nickname, String password, String telefono,
+			boolean isAdmin) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -104,42 +106,39 @@ public class Usuario implements UserDetails {
 		this.telefono = telefono;
 		this.invents = invents;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+		if (isAdmin) {
+			return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		} else {
+			return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+		}
 	}
-
 
 	@Override
 	public String getUsername() {
 		return email;
 	}
 
-
 	@Override
 	public boolean isAccountNonExpired() {
 		return !cuentaCaducada;
 	}
-
 
 	@Override
 	public boolean isAccountNonLocked() {
 		return !cuentaBloqueada;
 	}
 
-
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return !credencialesCaducadas;
 	}
 
-
 	@Override
 	public boolean isEnabled() {
 		return !cuentaBloqueada;
-}	
-	
-	
+	}
 
 }

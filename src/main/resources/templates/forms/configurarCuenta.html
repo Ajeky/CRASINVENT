@@ -23,6 +23,7 @@
         <!-- CSS Propio -->
         <link href='../../static/css/main.css' media='screen' rel='stylesheet' th:href='@{/css/main.css}' type='text/css'>
         <link href='../../static/css/portada.css' media='screen' rel='stylesheet' th:href='@{/css/portada.css}' type='text/css'>
+        <link href='../../static/css/configuracionCuenta.css' media="screen" rel="stylesheet" th:href="@{/css/configuracionCuenta.css}" type="text/css">
     </head>
     <body>
         <div class="wrapper">
@@ -47,8 +48,20 @@
 
             </header>
 
-            <div class="content col-lg-10 col-sm-12 text-center">
-                
+
+            <div class="content col-lg-8 col-md-10 col-sm-12 text-center">
+                <h1>CONFIGURACIÓN CUENTA</h1>
+                <h3 sec:authentication="name">Usuario</h3>
+                <span class="text-left">
+                    <form></form>
+                    <a class="btn btn-primary col-sm-12 col-md-5 col-lg-5" href="#" role="button" th:href="@{/borrarCuenta}">Borrar Cuenta</a>
+                </span>
+                <span class="text-right">
+                    <a class="btn btn-primary col-sm-12 col-md-5 col-lg-5" href="#" role="button">Cambiar Contraseña</a>
+                </span>
+                <span class="text-center">
+                        <a th:if="${usuario.CIF != 0}" class="btn btn-primary col-sm-12 col-md-5 col-lg-5" href="#" role="button" th:href="">Cambiar método de pago</a>
+                </span>
             </div>
 
         </div>

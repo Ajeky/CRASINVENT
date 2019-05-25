@@ -1,0 +1,17 @@
+header {
+    height: 100px;
+    min-height: auto;
+}
+
+.btn-primary {
+    color: purple;
+}
+
+.content {
+    background: rgb(238, 232, 177);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #C6FFDD, rgb(238, 232, 177));
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #C6FFDD, rgb(238, 232, 177));
+    padding: 20px;
+}
