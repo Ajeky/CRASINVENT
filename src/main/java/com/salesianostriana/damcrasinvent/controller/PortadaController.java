@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -27,13 +28,17 @@ public class PortadaController {
 	}
 
 	@GetMapping({ "/" })
-	public String mostrarPortada(HttpSession session, HttpServletRequest request,  ModelMap modelMap) {
-		
+	public String mostrarPortada(HttpSession session, HttpServletRequest request, ModelMap modelMap, Model model) {
+
 		if (request.isUserInRole("ROLE_ADMIN")) {
 			return "redirect:/admin/";
-		}
-		else if (request.isUserInRole("ROLE_USER")) {
+		} else if (request.isUserInRole("ROLE_USER")) {
+			model.addAttribute("usuario", usuarioServicio.buscarPorEmail(request.getUserPrincipal().getName()));
 			return "/usuario/portada";
+		} else if (request.isUserInRole("ROLE_PREMIUMUSER")) {
+			model.addAttribute("usuario", usuarioServicio.buscarPorEmail(request.getUserPrincipal().getName()));
+			return "/usuario/portada";
+
 		} else {
 			return "portada";
 		}

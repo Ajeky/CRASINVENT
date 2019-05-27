@@ -25,7 +25,6 @@
         nav ul {
             height: 330px;
         }
-    
     </style>
 </head>
 
@@ -51,7 +50,7 @@
                                 <a href="#">Contacta <i class="fas fa-phone"></i></a>
                             </li>
                             <li>
-                                <a href="../forms/crearInvent.html" th:href="@{/newInvent}">Crear Inventario <i class="fas fa-boxes"></i></a>
+                                <a href="../forms/crearInvent.html" th:href="@{/newInvent/{id}(id=${usuario.id})}">Crear Inventario <i class="fas fa-boxes"></i></a>
                             </li>
                             <li>
                                 <div class="btn-group">
