@@ -70,7 +70,7 @@ public class ValoresCamposController {
 		return "redirect:/detalleCampo/" + id;
 	}
 	
-	@GetMapping("/deleteValor/submit/{id}")
+	@GetMapping("/deleteValor/{id}")
 	public String borrarValor(@PathVariable("id") long id) {
 		long campoID = valorservi.findById(id).getCampo().getId();
 		

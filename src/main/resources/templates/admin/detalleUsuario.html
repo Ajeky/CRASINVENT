@@ -9,7 +9,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
-    
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,43 +20,44 @@
 
     <script src='main.js'></script>
 </head>
+
 <body class="text-center col-lg-10">
-	<div class="container">
-		<h3>Datos de <span th:text="${usuario.nickname}">nickname</span></h3>
-		
-		<section>
-			<table class="table">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">ID</th>
+    <div class="container">
+        <h3>Datos de <span th:text="${usuario.nickname}">nickname</span></h3>
+
+        <section>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Nickname</th>
                         <th scope="col">Teléfono</th>
                         <th scope="col">Opciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td th:text="${usuario.id}">ID</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${usuario.id}">ID</td>
                         <td th:text="${usuario.nombre}">Nombre</td>
                         <td th:text="${usuario.apellidos}">Apellidos</td>
                         <td th:text="${usuario.email}">Correo</td>
                         <td th:text="${usuario.nickname}">Nickname</td>
                         <td th:text="${usuario.telefono}">Telefono</td>
                         <td>
-                         	<a href="#" th:href="@{/admin/editarUsuario/{id}(id=${usuario.id})}">Editar</a>
-                           	<a href="#" th:href="@{/admin/borrarUsuario/{id}(id=${usuario.id})}">Borrar</a>
+                            <a href="#" th:href="@{/admin/editarUsuario/{id}(id=${usuario.id})}">Editar</a>
+                            <a href="#" th:href="@{/admin/borrarUsuario/{id}(id=${usuario.id})}">Borrar</a>
                         </td>
-					</tr>
-				</tbody>
-			
-			</table>
-			
-			<h4><a href="#" th:href="@{/newInvent/{id}(id = ${usuario.id})}">Crear inventario</a></h4>
-			
-			<table class="table">
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <h4><a href="#" th:href="@{/newInvent/{id}(id = ${usuario.id})}">Crear inventario</a></h4>
+
+            <table class="table">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">ID</th>
@@ -69,16 +70,22 @@
                         <td th:text="${invent.id}">ID</td>
                         <td th:text="${invent.nombre}">Nombre</td>
                         <td>
-                            <a href="#" th:href="@{/editInvent/{id}(id=${invent.id})}">Editar</a>
+                            <a href="#" th:href="@{/admin/editInvent/{id}/{idUsuario}(id=${invent.id}, idUsuario=${usuario.id})}">Editar</a>
                             <a href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}">Borrar</a>
                             <a href="#" th:href="@{/detalleInvent/{id}(id=${invent.id})}">Detalles</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-		
-		</section>
-	</div>
+
+            <form id="logoutForm" method="POST" th:action="@{/logout}"></form>
+
+
+            <a href="javascript:document.getElementById('logoutForm').submit()">Salir</a>
+
+        </section>
+    </div>
 
 </body>
+
 </html>

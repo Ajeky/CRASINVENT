@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.salesianostriana.damcrasinvent.model.HistoricoUsuarios;
 import com.salesianostriana.damcrasinvent.model.Invent;
 import com.salesianostriana.damcrasinvent.model.Usuario;
 import com.salesianostriana.damcrasinvent.servicios.CamposServicio;
@@ -86,5 +87,34 @@ public class AdminController {
 			return "redirect:/admin/";
 		}
 	}
-
+	
+	@GetMapping("/borrarUsuario/{id}")
+	public String borrarUsuario(@PathVariable("id") long id) {
+		Usuario aBorrar = userServi.findById(id);
+		HistoricoUsuarios anadir = new HistoricoUsuarios();
+		anadir.setUsuario(aBorrar);
+		userServi.delete(aBorrar);
+		return "redirect:/admin/";
+	}
+	
+	@GetMapping("/editInvent/{id}/{idUsuario}")
+	public String editarInventario(@PathVariable("id") long id, @PathVariable("idUsuario") long idUsuario, Model model) {
+		Invent aEditar = invServi.findById(id);
+		Usuario pertenece = userServi.findById(idUsuario);
+		if (aEditar != null) {
+			model.addAttribute("invent", aEditar);
+			model.addAttribute("usuario", pertenece);
+			return "admin/editarInvent";
+		} else {
+			return "redirect:/admin/detalleUsuario/" + idUsuario;
+		}
+	}
+	
+	@PostMapping("/editarInventario/submit/{id}")
+	public String procesarEdicion(@ModelAttribute("invent") Invent i, @PathVariable("id") long id) {
+		i.setUsuario(userServi.findById(id));
+		invServi.edit(i);
+		return "redirect:/admin/detalleUsuario/" + id;
+	}
+	
 }

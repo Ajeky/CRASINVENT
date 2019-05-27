@@ -98,6 +98,13 @@ public class InventController {
 		}
 	}
 
+	@PostMapping("/editInvent/submit")
+	public String procesarEdicion(@ModelAttribute("invent") Invent i, Principal principal) {
+		i.setUsuario(usuarioservicio.buscarPorEmail(principal.getName()));
+		inventservicio.edit(i);
+		return "redirect:/user/inventList";
+	}
+
 	@GetMapping("/detalleInvent/{id}")
 	public String detalleInventario(@PathVariable("id") long id, Model model) {
 		Invent i = inventservicio.findById(id);
@@ -114,16 +121,11 @@ public class InventController {
 		}
 	}
 
-	@PostMapping("/editInvent/submit")
-	public String procesarEdicion(@ModelAttribute("invent") Invent i, Principal principal) {
-		i.setUsuario(usuarioservicio.buscarPorEmail(principal.getName()));
-		inventservicio.edit(i);
-		return "redirect:/user/inventList";
-	}
-
 	@GetMapping("/deleteInvent/{id}")
-	public String borrar(@PathVariable("id") long id) {
+	public String borrar(@PathVariable("id") long id, HttpSession session, HttpServletRequest request,
+			ModelMap modelMap) {
 		Invent invent = inventservicio.findById(id);
+		long idUsuario = invent.getUsuario().getId();
 
 		for (Conceptos concepto : invent.getConceptos()) {
 			for (Campos campo : concepto.getCampos()) {
@@ -137,7 +139,11 @@ public class InventController {
 
 		inventservicio.delete(invent);
 
-		return "redirect:/user/inventList";
+		if (request.isUserInRole("ADMIN")) {
+			return "redirect:/admin/detalleUsuario/" + idUsuario;
+		} else {
+			return "redirect:/user/inventList";
+		}
 	}
 
 	@GetMapping("/user/inventList")

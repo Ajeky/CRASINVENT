@@ -27,7 +27,7 @@
             <div id="menu" class="menu">
                 <ul class="nav nav-pills botones">
                     <li class="nav-item mr-1">
-                        <a class="btn btn-secondary text-white" th:href="@{/portadaUser}" role="button">Inicio</a>
+                        <a class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
                     </li>
                     <li class="nav-item mr-1">
                         <a class="btn active botonActivo" th:href="@{/detalleConcepto/{id}(id=${campo.concepto.id})}" role="button">Lista Campos</a>
@@ -39,9 +39,9 @@
             </div>
         </header>
 
-		<h1>Valores de la columna "<span th:text="${campo.nombre}">[NOMBRE DE LA COLUMNA]</span>", perteneciente a la tabla
-		"<span th:text="${campo.concepto.nombre}">[NOMBRE DE LA BASE DE DATOS]</span>" de la base de datos 
-		"<span th:text="${campo.concepto.invent.nombre}">[NOMBRE DE LA BASE DE DATOS]</span>"</h1>
+        <h1>Valores de la columna "<span th:text="${campo.nombre}">[NOMBRE DE LA COLUMNA]</span>", perteneciente a la tabla "
+            <span th:text="${campo.concepto.nombre}">[NOMBRE DE LA BASE DE DATOS]</span>" de la base de datos "
+            <span th:text="${campo.concepto.invent.nombre}">[NOMBRE DE LA BASE DE DATOS]</span>"</h1>
 
         <section>
             <table class="table">
