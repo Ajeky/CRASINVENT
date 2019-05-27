@@ -7,8 +7,12 @@ package com.salesianostriana.damcrasinvent.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +22,7 @@ import com.salesianostriana.damcrasinvent.formbeans.SearchBean;
 import com.salesianostriana.damcrasinvent.model.Campos;
 import com.salesianostriana.damcrasinvent.model.Conceptos;
 import com.salesianostriana.damcrasinvent.model.Invent;
+import com.salesianostriana.damcrasinvent.model.Usuario;
 import com.salesianostriana.damcrasinvent.model.ValoresCampos;
 import com.salesianostriana.damcrasinvent.servicios.CamposServicio;
 import com.salesianostriana.damcrasinvent.servicios.ConceptosServicio;
@@ -42,7 +47,8 @@ public class InventController {
 	/**
 	 * @param inventservicio
 	 */
-	public InventController(InventServicio servicio, UsuarioServicio usuarioservicio, ConceptosServicio concepservi, CamposServicio campservi, ValoresCamposServicio valorservi) {
+	public InventController(InventServicio servicio, UsuarioServicio usuarioservicio, ConceptosServicio concepservi,
+			CamposServicio campservi, ValoresCamposServicio valorservi) {
 		this.inventservicio = servicio;
 		this.usuarioservicio = usuarioservicio;
 		this.concepservi = concepservi;
@@ -56,17 +62,27 @@ public class InventController {
 		return "listas/listaInvent";
 	}
 
-	@GetMapping("/newInvent")
-	public String mostrarFormulario(Model model) {
+	@GetMapping("/newInvent/{id}")
+	public String mostrarFormulario(Model model, @PathVariable("id") long id) {
+		Usuario u = usuarioservicio.findById(id);
+		model.addAttribute("usuario", u);
 		model.addAttribute("invent", new Invent());
 		return "forms/crearInvent";
 	}
 
-	@PostMapping("/newInvent/submit")
-	public String procesarFormulario(@ModelAttribute("invent") Invent i, Principal principal) {
-		i.setUsuario(usuarioservicio.buscarPorEmail(principal.getName()));
+	@PostMapping("/newInvent/submit/{id}")
+	public String procesarFormulario(@ModelAttribute("invent") Invent i, HttpSession session,
+			HttpServletRequest request, ModelMap modelMap, @PathVariable("id") long id) {
+
+		i.setUsuario(usuarioservicio.findById(id));
 		inventservicio.add(i);
-		return "redirect:/user/inventList";
+		if (request.isUserInRole("ROLE_ADMIN")) {
+			return "redirect:/admin/detalleUsuario/" + id;
+		} else if (request.isUserInRole("ROLE_USER")) {
+			return "redirect:/user/inventList";
+		} else {
+			return "redirect:/acceso-denegado";
+		}
 	}
 
 	@GetMapping("/editInvent/{id}")
@@ -81,15 +97,17 @@ public class InventController {
 			return "redirect:/user/inventList";
 		}
 	}
-	
+
 	@GetMapping("/detalleInvent/{id}")
 	public String detalleInventario(@PathVariable("id") long id, Model model) {
 		Invent i = inventservicio.findById(id);
 		List<Conceptos> c = i.getConceptos();
-		
+		Usuario u = i.getUsuario();
+
 		if (i != null) {
 			model.addAttribute("invent", i);
 			model.addAttribute("conceptos", c);
+			model.addAttribute("usuario", u);
 			return "listas/inventarioDetalle";
 		} else {
 			return "redirect:/user/inventList";
@@ -106,7 +124,7 @@ public class InventController {
 	@GetMapping("/deleteInvent/{id}")
 	public String borrar(@PathVariable("id") long id) {
 		Invent invent = inventservicio.findById(id);
-		
+
 		for (Conceptos concepto : invent.getConceptos()) {
 			for (Campos campo : concepto.getCampos()) {
 				for (ValoresCampos valor : campo.getValoresCampos()) {
@@ -116,31 +134,32 @@ public class InventController {
 			}
 			concepservi.delete(concepto);
 		}
-		
+
 		inventservicio.delete(invent);
-		
+
 		return "redirect:/user/inventList";
 	}
 
 	@GetMapping("/user/inventList")
 	public String mostrarInventsUsuario(Model model, Principal principal) {
 		model.addAttribute("searchForm", new SearchBean());
-		
-		List<Invent> inventList = inventservicio
-				.encontrarInventariosDeUnUsuario(usuarioservicio.buscarPorEmail(principal.getName()).getId());
-		
+
+		Usuario u = usuarioservicio.buscarPorEmail(principal.getName());
+
+		List<Invent> inventList = inventservicio.encontrarInventariosDeUnUsuario(u.getId());
+
+		model.addAttribute("usuario", u);
 		model.addAttribute("lista", inventList);
 		return "/listas/listaInvent";
 	}
-	
+
 	@PostMapping("/search")
-	  public String searchProducto(@ModelAttribute("searchForm") SearchBean searchBean,
-			 Model model){
-		
+	public String searchProducto(@ModelAttribute("searchForm") SearchBean searchBean, Model model) {
+
 		model.addAttribute("invent", new Invent());
-	  	model.addAttribute("lista", inventservicio.findByNombre(searchBean.getSearch()));
-	  
-	  return "/listas/listaInvent";
-	  }
+		model.addAttribute("lista", inventservicio.findByNombre(searchBean.getSearch()));
+
+		return "/listas/listaInvent";
+	}
 
 }

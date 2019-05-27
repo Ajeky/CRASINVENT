@@ -38,6 +38,7 @@ public class CrasinventApplication {
 			alvaro.setPassword("1234");
 			alvaro.setTelefono("123412341");
 			alvaro.setAdmin(true);
+			alvaro.isAdmin();
 			
 			servicio.add(diego);
 			servicio.add(alvaro);

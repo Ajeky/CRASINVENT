@@ -25,10 +25,10 @@
         <a href="../usuario/portada.html" th:href="@{/portadaUser}">Inicio</a> | <a th:href="@{/newInvent}">Nuevo inventario</a>
     </div>
     <div id="formulario">
-        <form th:action="${invent.id != 0} ? @{/editInvent/submit} : @{/newInvent/submit}" th:object="${invent}" method="post">
+        <form th:action="${invent.id != 0} ? @{/editInvent/submit} : @{/newInvent/submit/{id}(id = ${usuario.id})}" th:object="${invent}" method="post">
             <h3 class="text">Nuevo Inventario</h3>
             <input th:if="${invent.id != 0}" type="hidden" name="id" th:field="*{id}" />
-            <input type="text" name="nombre" th:field="*{nombre}" placeholder="Nombre" />
+            <input type="text" name="nombre" th:field="*{nombre}" placeholder="Nombre" autofocus />
             <input type="submit" name="enviar" value="Enviar" />
         </form>
     </div>

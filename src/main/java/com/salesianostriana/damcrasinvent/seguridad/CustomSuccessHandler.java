@@ -81,6 +81,13 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		}
 		return false;
 	}
+	
+	private boolean isPremium(List<String> roles) {
+		if (roles.contains("ROLE_PREMIUMUSER")) {
+			return true;
+		}
+		return false;
+	}
 
 	public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
 		this.redirectStrategy = redirectStrategy;

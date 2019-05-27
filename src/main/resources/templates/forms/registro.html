@@ -27,7 +27,7 @@
 
         <form method="post" th:action="@{/newUser/submit}" th:object="${usuario}">
             <h3 class="text">Registrarse</h3>
-            <input class="input" name="nombre" placeholder="Nombre" th:field="*{nombre}" type="text"/>
+            <input class="input" name="nombre" placeholder="Nombre" th:field="*{nombre}" type="text" autofocus/>
             <div class="line-box">
                 <div class="line"></div>
             </div>

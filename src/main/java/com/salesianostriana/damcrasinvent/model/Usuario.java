@@ -53,7 +53,7 @@ public class Usuario implements UserDetails {
 	private String nickname;
 	private String password;
 	private String telefono;
-	private boolean isAdmin;
+	private boolean admin;
 
 	private boolean cuentaCaducada;
 	private boolean cuentaBloqueada;
@@ -83,7 +83,7 @@ public class Usuario implements UserDetails {
 	 * @param telefono
 	 */
 	public Usuario(String nombre, String apellidos, String email, String nickname, String password, String telefono,
-			boolean isAdmin) {
+			boolean admin) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -91,7 +91,7 @@ public class Usuario implements UserDetails {
 		this.nickname = nickname;
 		this.password = password;
 		this.telefono = telefono;
-		this.isAdmin = isAdmin;
+		this.admin = admin;
 	}
 
 	public Usuario(long id, String nombre, String apellidos, String email, String nickname, String password,
@@ -109,7 +109,7 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if (isAdmin) {
+		if (admin) {
 			return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		} else {
 			return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));

@@ -53,7 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						.loginPage("/login")
 						.permitAll()
 						.successHandler(customSuccessHandler)
-						.defaultSuccessUrl("/portadaUser")
 						.and()
 				.logout()
 						.logoutUrl("/logout")

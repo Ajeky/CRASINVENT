@@ -33,7 +33,7 @@
                         <a class="btn active botonActivo" th:href="@{/user/inventList}" role="button">Lista Inventarios</a>
                     </li>
                     <li class="nav-item mr-1">
-                        <a class="btn btn-secondary text-white" th:href="@{/newInvent}" role="button">Nuevo Inventario</a>
+                        <a class="btn btn-secondary text-white" th:href="@{/newInvent/{id}(id=${usuario.id})}" role="button">Nuevo Inventario</a>
                     </li>
                 </ul>
             </div>
