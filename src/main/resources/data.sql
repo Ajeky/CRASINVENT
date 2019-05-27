@@ -2,6 +2,8 @@ insert into Usuario (id, nombre, apellidos, email, nickname, password, telefono,
 insert into Usuario (id, nombre, apellidos, email, nickname, password, telefono, cuenta_caducada, cuenta_bloqueada, credenciales_caducadas, admin) values (11112, 'Mike', 'Ronar Kelpie', 'mike@mike.com', 'RLSTheLecy', '1234', '615073398', false, false, false, false);
 insert into Usuario (id, nombre, apellidos, email, nickname, password, telefono, cuenta_caducada, cuenta_bloqueada, credenciales_caducadas, admin) values (11113, 'Guille', 'Abajo Diaz', 'guille@guille.com', 'Bisslit', '1234', '615073398', false, false, false, false);
 insert into Usuario (id, nombre, apellidos, email, nickname, password, telefono, cuenta_caducada, cuenta_bloqueada, credenciales_caducadas, admin) values (11114, 'Carlos', 'Aunion Dominguez', 'carlos@carlos.com', 'cad2298', '1234', '615073398', false, false, false, false);
+insert into Usuario (id, nombre, apellidos, email, nickname, password, telefono, cuenta_caducada, cuenta_bloqueada, credenciales_caducadas, admin) values (11115, 'Admin', 'Admin', 'admin@admin.com', 'Admin', 'admin', '000000000', false, false, false, true);
+insert into Usuario (id, nombre, apellidos, email, nickname, password, telefono, cuenta_caducada, cuenta_bloqueada, credenciales_caducadas, admin) values (11116, 'Usuario', 'Usuario', 'usuario@usuario.com', 'Usuario', '1234', '111111111', false, false, false, false);
 
 insert into Usuario_Empresa (cif, campo_empresa, direccion_facturacion, nombre_empresa, telefono_empresa, id) values ('1', 'Cabras','Isadora Duncan' , 'CabrasAGoGo', '666666666', 11112);
 

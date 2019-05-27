@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.salesianostriana.damcrasinvent.servicios.UsuarioServicio;
 
 /**
+ * Página que maneja las URLs que devuelven a la portada ya sea de usuario, de
+ * persona sin logear o de admin.
+ * 
  * @author Álvaro Márquez
  *
  */

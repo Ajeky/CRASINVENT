@@ -31,7 +31,12 @@ import com.salesianostriana.damcrasinvent.servicios.UsuarioServicio;
 import com.salesianostriana.damcrasinvent.servicios.ValoresCamposServicio;
 
 /**
- * @author amarquez
+ * Clase que controla las peticiones GET y POST que tienen que ver con objetos
+ * Invent {@link com.salesianostriana.damcrasinvent.model.Invent}. Los atributos
+ * de la clase son los servicios necesarios para gestionar las peticiones que se
+ * realizan.
+ * 
+ * @author Álvaro Márquez
  *
  */
 
@@ -44,9 +49,6 @@ public class InventController {
 	private CamposServicio campservi;
 	private ValoresCamposServicio valorservi;
 
-	/**
-	 * @param inventservicio
-	 */
 	public InventController(InventServicio servicio, UsuarioServicio usuarioservicio, ConceptosServicio concepservi,
 			CamposServicio campservi, ValoresCamposServicio valorservi) {
 		this.inventservicio = servicio;
@@ -56,12 +58,31 @@ public class InventController {
 		this.valorservi = valorservi;
 	}
 
+	/**
+	 * Método que gestiona las peticiones de recibir la lista de inventarios. Se
+	 * sustituyó a mitad de desarrollo por otro método que sólo muestra los
+	 * inventarios que pertenezcan al usuario que realiza la petición
+	 * 
+	 * @deprecated
+	 * @param model Como modelo se le pasa la lista de inventarios a mostrar
+	 * @return La plantilla de listar inventarios
+	 */
 	@GetMapping({ "/inventList" })
 	public String listarTodo(Model model) {
 		model.addAttribute("lista", inventservicio.findAll());
 		return "listas/listaInvent";
 	}
 
+	/**
+	 * Método que controla la petición GET del formulario de creación de
+	 * Inventarios.
+	 * 
+	 * @param model Se le pasan como modelos un inventario vacío al que se le
+	 *              introducirán los datos en el formulario y y el Usuario al que
+	 *              pertenece dicho Inventario
+	 * @param id    ID del usuario al que pertenece el inventario
+	 * @return La plantilla de creación de Inventario
+	 */
 	@GetMapping("/newInvent/{id}")
 	public String mostrarFormulario(Model model, @PathVariable("id") long id) {
 		Usuario u = usuarioservicio.findById(id);
@@ -70,6 +91,14 @@ public class InventController {
 		return "forms/crearInvent";
 	}
 
+	/**
+	 * Método que controla la petición POST de creación de inventarios. Dependiendo
+	 * del rol del usuario lo devuelve a una dirección u otra
+	 * 
+	 * @param i  Inventario a crear
+	 * @param id ID del usuario al que pertenece el inventario
+	 * @return Página en la que estaba el usuario al acceder al formulario
+	 */
 	@PostMapping("/newInvent/submit/{id}")
 	public String procesarFormulario(@ModelAttribute("invent") Invent i, HttpSession session,
 			HttpServletRequest request, ModelMap modelMap, @PathVariable("id") long id) {
@@ -85,6 +114,14 @@ public class InventController {
 		}
 	}
 
+	/**
+	 * Método que gestiona la petición GET del formulario de edición del Inventario.
+	 * 
+	 * @param id    ID del inventario a editar
+	 * @param model Como modelo se pasa el inventario a editar
+	 * @return Si el inventario es nulo devuelve al usuario a la lista de
+	 *         inventarios, si no, devuelve la plantilla de creación del inventario
+	 */
 	@GetMapping("/editInvent/{id}")
 	public String editarPorID(@PathVariable("id") long id, Model model) {
 
@@ -98,6 +135,13 @@ public class InventController {
 		}
 	}
 
+	/**
+	 * Método que gestiona la petición POST de la edición de inventarios
+	 * 
+	 * @param i         inventario a editar
+	 * @param principal Objeto que devuelve el usuario que ha realizado la petición
+	 * @return La lista de inventarios del usuario
+	 */
 	@PostMapping("/editInvent/submit")
 	public String procesarEdicion(@ModelAttribute("invent") Invent i, Principal principal) {
 		i.setUsuario(usuarioservicio.buscarPorEmail(principal.getName()));
@@ -105,6 +149,17 @@ public class InventController {
 		return "redirect:/user/inventList";
 	}
 
+	/**
+	 * Método que maneja la plantilla de los detalles de un inventario. En ella se
+	 * ve el nombre del inventario y los conceptos que contiene. Se pueden añadir
+	 * conceptos nuevos.
+	 * 
+	 * @param id    ID del invent a mostrar.
+	 * @param model Como modelo se pasan el invent a mostrar y una lista con los
+	 *              conceptos que contiene
+	 * @return Redirige al usuario a la página de detalles del inventario, o, en
+	 *         caso de que se pase un inventario nulo, a la lista de inventarios.
+	 */
 	@GetMapping("/detalleInvent/{id}")
 	public String detalleInventario(@PathVariable("id") long id, Model model) {
 		Invent i = inventservicio.findById(id);
@@ -121,6 +176,16 @@ public class InventController {
 		}
 	}
 
+	/**
+	 * Método que gestiona la petición de borrar un inventario. Borra todos los
+	 * conceptos, campos y valores que estuvieran relacionados con el inventario en
+	 * cuestión
+	 * 
+	 * @param id ID del inventario a borrar
+	 * @return Dependiendo del rol del usuario lo redirige a la lista de inventarios
+	 *         si es un usuario o al detalle del usuario al que pertenecía el
+	 *         inventario borrado si es un admin
+	 */
 	@GetMapping("/deleteInvent/{id}")
 	public String borrar(@PathVariable("id") long id, HttpSession session, HttpServletRequest request,
 			ModelMap modelMap) {
@@ -146,6 +211,17 @@ public class InventController {
 		}
 	}
 
+	/**
+	 * Método que gestiona la plantilla de lista de inventarios que pertenecen a un
+	 * usuario
+	 * 
+	 * @param model     como métodos se pasan un motor de búsqueda (inservible por
+	 *                  ahora), el usuario al que pertenecen los inventarios y la
+	 *                  lista de inventarios a mostrar
+	 * @param principal Objeto que devuelve los datos de login del usuario que
+	 *                  realiza la petición
+	 * @return La plantilla de la lista de inventarios
+	 */
 	@GetMapping("/user/inventList")
 	public String mostrarInventsUsuario(Model model, Principal principal) {
 		model.addAttribute("searchForm", new SearchBean());
@@ -159,6 +235,10 @@ public class InventController {
 		return "/listas/listaInvent";
 	}
 
+	/**
+	 * Método que maneja la búsqueda de inventarios. Está en desarrollo, por lo que
+	 * por ahora es inservible
+	 */
 	@PostMapping("/search")
 	public String searchProducto(@ModelAttribute("searchForm") SearchBean searchBean, Model model) {
 

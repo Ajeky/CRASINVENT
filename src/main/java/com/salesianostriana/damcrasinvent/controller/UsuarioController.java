@@ -51,7 +51,18 @@ public class UsuarioController {
 	public String borrarCuenta(Principal principal) {
 		Usuario aBorrar = usuarioServicio.buscarPorEmail(principal.getName());
 		HistoricoUsuarios anadir = new HistoricoUsuarios();
-		anadir.setUsuario(aBorrar);
+		anadir.setId(aBorrar.getId());
+		anadir.setNombre(aBorrar.getNombre());
+		anadir.setApellidos(aBorrar.getApellidos());
+		anadir.setEmail(aBorrar.getEmail());
+		anadir.setNickname(aBorrar.getNickname());
+		anadir.setPassword(aBorrar.getPassword());
+		anadir.setTelefono(aBorrar.getTelefono());
+		anadir.setAdmin(aBorrar.isAdmin());
+		anadir.setCuentaCaducada(aBorrar.isCuentaCaducada());
+		anadir.setCuentaBloqueada(aBorrar.isCuentaBloqueada());
+		anadir.setCredencialesCaducadas(aBorrar.isCredencialesCaducadas());
+		historicoServicio.add(anadir);
 		usuarioServicio.delete(aBorrar);
 		return "redirect:/logout";
 	}

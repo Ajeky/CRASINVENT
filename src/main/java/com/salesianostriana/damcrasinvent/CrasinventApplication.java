@@ -21,28 +21,6 @@ public class CrasinventApplication {
 	@Bean
 	public CommandLineRunner init(UsuarioServicio servicio, BCryptPasswordEncoder passwordEncoder) {
 		return args -> {
-			Usuario diego = new Usuario();
-			diego.setApellidos("Gonzalez Mendoza");
-			diego.setEmail("diego@diego.com");
-			diego.setNickname("SoulBeats");
-			diego.setNombre("Diego");
-			diego.setPassword("1234");
-			diego.setTelefono("666666666");
-			diego.setAdmin(false);
-			
-			Usuario alvaro = new Usuario();
-			alvaro.setApellidos("Marquez Mata");
-			alvaro.setEmail("alvaro@alvaro.com");
-			alvaro.setNickname("Ajeky");
-			alvaro.setNombre("Alvaro");
-			alvaro.setPassword("1234");
-			alvaro.setTelefono("123412341");
-			alvaro.setAdmin(true);
-			alvaro.isAdmin();
-			
-			servicio.add(diego);
-			servicio.add(alvaro);
-			
 			List<Usuario> usuarios = servicio.findAll();
 			
 			for (Usuario u : usuarios) {

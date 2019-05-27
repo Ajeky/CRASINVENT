@@ -16,33 +16,57 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author amarquez
+ * Clase pojo del objeto Campos. Cada campo será una columna de una tabla
+ * {@link com.salesianostriana.damcrasinvent.model.Conceptos} de una base de
+ * datos o inventario {@link com.salesianostriana.damcrasinvent.model.Invent}.
+ * Los valores de las columnas se especifican en la clase Valores Campos
+ * {@link com.salesianostriana.damcrasinvent.model.ValoresCampos}
+ * 
+ * @author Álvaro Márquez
  *
  */
 
-@Data @NoArgsConstructor
+@Data
+@NoArgsConstructor
 @Entity
 public class Campos {
-	
+
+	/**
+	 * ID que identifica a cada Campo en la base de datos. Se autogenera con una
+	 * secuencia.
+	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
+	/**
+	 * Nombre de la columna
+	 */
 	private String nombre;
+
+	/**
+	 * Tipo de dato que tendrán los valores de la columna
+	 */
 	private String tipo;
-	
+
+	/**
+	 * Tabla a la que pertenece la columna
+	 */
 	@ManyToOne
 	private Conceptos concepto;
-	
-	@OneToMany(mappedBy="campo")
+
+	/**
+	 * Lista de valores que contiene la columna
+	 */
+	@OneToMany(mappedBy = "campo")
 	private List<ValoresCampos> valoresCampos;
-	
-	//Métodos Helper
-	
+
+	// Métodos Helper
+
 	public void addValorCampo(ValoresCampos v) {
 		this.valoresCampos.add(v);
 	}
-	
+
 	public void removeValorCampo(ValoresCampos v) {
 		this.valoresCampos.remove(v);
 		v.setCampo(null);

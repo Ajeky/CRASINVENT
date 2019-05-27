@@ -24,61 +24,80 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @author amarquez
+ * Clase POJO del objeto UsuarioEmpresa. Extiende a la clase Usuario
+ * {@link com.salesianostriana.damcrasinvent.model.Usuario}. Está pensado para
+ * que sólo empresas puedan ser usuarios premium, pero no está implementado que
+ * tengan ninguna ventaja en el proyecto por falta de tiempo, por lo que por
+ * ahora a efectos prácticos es inservible.
+ * 
+ * @author Álvaro Márquez
  *
  */
 
-@Getter @Setter
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @NoArgsConstructor
 @Entity
 public class UsuarioEmpresa extends Usuario {
-	
+
+	/**
+	 * CIF de la empresa
+	 */
 	@Column(nullable = false)
 	private String CIF;
+
+	/**
+	 * Nombre de la empresa
+	 */
 	private String nombreEmpresa;
+
+	/**
+	 * Teléfono profesional de la empresa
+	 */
 	private String telefonoEmpresa;
+
+	/**
+	 * campo profesional al que pertenece la empresa
+	 */
 	private String campoEmpresa;
+
+	/**
+	 * Dirección de facturación de la empresa
+	 */
 	private String direccionFacturacion;
-	
+
+	/**
+	 * Lista de Métodos de
+	 * Pago{@link com.salesianostriana.damcrasinvent.model.MetodosPago} que tiene
+	 * registrados la empresa. Es una lista en lugar de un objeto individual por si
+	 * la empresa quiere tener varios registrados en caso de que uno falle. Por
+	 * ahora tampoco están implementados en el proyecto.
+	 */
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@ManyToMany
-	@JoinTable(
-			joinColumns = @JoinColumn(name="usuario_id"),
-			inverseJoinColumns = @JoinColumn(name="metPago_id")
-		)
+	@JoinTable(joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "metPago_id"))
 	private List<MetodosPago> metodosPago = new ArrayList<>();
-	
-	
-	
+
 	public void addMetodoPago(MetodosPago m) {
 		metodosPago.add(m);
 		m.getUsuarios().add(this);
 	}
-	
+
 	public void deleteMetodoPago(MetodosPago m) {
 		metodosPago.remove(m);
 		m.getUsuarios().remove(this);
 	}
 
 	/**
-	 * @param nombre
-	 * @param apellidos
-	 * @param email
-	 * @param nickname
-	 * @param password
-	 * @param telefono
-	 * @param cIF
-	 * @param nombreEmpresa
-	 * @param telefonoEmpresa
-	 * @param campoEmpresa
-	 * @param direccionFacturacion
+	 * Constructor con todos los atributos de la clase. No debería hacer falta, está
+	 * como colchón de seguridad en caso de que hiciera falta
 	 */
 	public UsuarioEmpresa(String nombre, String apellidos, String email, String nickname, String password,
-			String telefono, boolean isAdmin, String cIF, String nombreEmpresa, String telefonoEmpresa, String campoEmpresa,
-			String direccionFacturacion) {
+			String telefono, boolean isAdmin, String cIF, String nombreEmpresa, String telefonoEmpresa,
+			String campoEmpresa, String direccionFacturacion) {
 		super(nombre, apellidos, email, nickname, password, telefono, isAdmin);
 		CIF = cIF;
 		this.nombreEmpresa = nombreEmpresa;
@@ -86,10 +105,13 @@ public class UsuarioEmpresa extends Usuario {
 		this.campoEmpresa = campoEmpresa;
 		this.direccionFacturacion = direccionFacturacion;
 	}
-	
+
+	/**
+	 * Método que otorga al usuario el rol de usuario premium
+	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Arrays.asList(new SimpleGrantedAuthority("ROLE_PREMIUMUSER"));
-}
+	}
 
 }

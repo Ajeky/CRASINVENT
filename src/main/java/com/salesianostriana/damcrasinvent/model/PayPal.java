@@ -14,27 +14,32 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @author amarquez
+ * Clase pojo del objeto PayPal. Para más información visitar la clase
+ * MetodosPago {@link com.salesianostriana.damcrasinvent.model.MetodosPago}
+ * 
+ * @author Álvaro Márquez
  *
  */
 
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity
 public class PayPal extends MetodosPago {
-	
+
+	/**
+	 * Correo asociado a la cuenta de PayPal
+	 */
 	private String correo;
 
 	/**
-	 * @param usuarios
-	 * @param correo
+	 * Constructor con el único atributo de la clase. No debería hacer falta, está
+	 * como colchón de seguridad.
 	 */
 	public PayPal(String correo) {
 		this.correo = correo;
 	}
-	
-	
 
-	
 }
