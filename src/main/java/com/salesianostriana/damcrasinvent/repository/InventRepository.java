@@ -2,6 +2,8 @@ package com.salesianostriana.damcrasinvent.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.salesianostriana.damcrasinvent.model.Invent;
@@ -24,4 +26,6 @@ public interface InventRepository extends JpaRepository<Invent, Long> {
 	 */
 
 	public List<Invent> findByNombreContainingIgnoreCase(String nombre);
+	
+	public  Page<Invent> findByNombreContainingIgnoreCase(String nombre, Pageable pageable);
 }

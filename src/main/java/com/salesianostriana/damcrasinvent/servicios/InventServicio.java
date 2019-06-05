@@ -6,6 +6,8 @@ package com.salesianostriana.damcrasinvent.servicios;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.damcrasinvent.model.Invent;
@@ -38,5 +40,13 @@ public class InventServicio extends BaseService<Invent, Long, InventRepository>{
 		return repositorio.findByNombreContainingIgnoreCase(nombre);
 	}
 	
+	public Page<Invent> findAllPageable(Pageable pageable) {
+		return repositorio.findAll(pageable);
+	}
+
+	public  Page<Invent> findByNombreContainingIgnoreCasePageable(String nombre, Pageable pageable)
+	{
+		return repositorio.findByNombreContainingIgnoreCase(nombre, pageable);
+	}
 
 }
