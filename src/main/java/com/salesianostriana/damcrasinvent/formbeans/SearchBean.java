@@ -1,22 +1,17 @@
-/**
- * 
- */
 package com.salesianostriana.damcrasinvent.formbeans;
 
-/**
- * @author amarquez
- *
- */
 public class SearchBean {
 
+	
+	
 	/**
 	 * Cadena de caracteres tipo String a la que se le pasa lo que queremos buscar
 	 * en nuestro bucle para mostrarlo en nuestra plantilla
 	 */
 	private String search;
-
-	public SearchBean() {
-
+	
+	public SearchBean(){
+		
 	}
 
 	public String getSearch() {
@@ -26,5 +21,5 @@ public class SearchBean {
 	public void setSearch(String search) {
 		this.search = search;
 	}
-
+	
 }
