@@ -21,7 +21,7 @@ import com.salesianostriana.damcrasinvent.servicios.UsuarioServicio;
 
 @Controller
 public class PagerController {
-
+/*
 	private static final int BUTTONS_TO_SHOW = 5;
 	private static final int INITIAL_PAGE = 0;
 	private static final int INITIAL_PAGE_SIZE = 5;
@@ -71,10 +71,6 @@ public class PagerController {
 		// debe mostrar y cuál es el número de objetos a dibujar.
 		Pager pager = new Pager(invents.getTotalPages(), invents.getNumber(), BUTTONS_TO_SHOW);
 		
-		
-		
-		Page<Invent> userInvents = null;
-		
 		model.addAttribute("usuario", u);
 		model.addAttribute("lista", invents);
 		model.addAttribute("selectedPageSize", evalPageSize);
@@ -83,5 +79,5 @@ public class PagerController {
 
 		return "listas/listaInvent";
 	}
-
+*/
 }

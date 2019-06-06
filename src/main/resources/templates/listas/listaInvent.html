@@ -26,15 +26,12 @@
         <header>
             <div id="menu" class="menu">
                 <ul class="nav nav-pills botones">
-                    <li class="nav-item mr-1">
-                        <a class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
+                    <li class="nav-item mr-1"><a class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
                     </li>
-                    <li class="nav-item mr-1">
-                        <a class="btn active botonActivo" th:href="@{/user/inventList}" role="button">Lista Inventarios</a>
+                    <li class="nav-item mr-1"><a class="btn active botonActivo" th:href="@{/user/inventList}" role="button">Lista Inventarios</a>
                     </li>
-                    <li class="nav-item mr-1">
-                        <a class="btn btn-secondary text-white" th:href="@{/newInvent/{id}(id=${usuario.id})}" role="button">Nuevo Inventario</a>
-                    </li>
+                    <li class="nav-item mr-1"><a class="btn btn-secondary text-white" th:href="@{/newInvent/{id}(id=${usuario.id})}" role="button">Nuevo
+							Inventario</a></li>
                 </ul>
             </div>
         </header>
@@ -53,9 +50,7 @@
                     <tr th:each="invent : ${lista}">
                         <td th:text="${invent.id}">ID</td>
                         <td th:text="${invent.nombre}">Nombre</td>
-                        <td>
-                            <a href="#" th:href="@{/editInvent/{id}(id=${invent.id})}">Editar</a>
-                            <a href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}">Borrar</a>
+                        <td><a href="#" th:href="@{/editInvent/{id}(id=${invent.id})}">Editar</a> <a href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}">Borrar</a>
                             <a href="#" th:href="@{/detalleInvent/{id}(id=${invent.id})}">Detalles</a>
                         </td>
                     </tr>
@@ -65,9 +60,41 @@
             <form action="#" th:action="@{/inventsbuscados}" method="GET">
                 <input type="text" name="nombre" placeholder="Buscar Por Nombre" style="margin-left: 5%; padding: 4px;" />
                 <button class="btn- btn-danger" type="submit" style="padding: 4px;">
-			<span class="glyphicon glyphicon-search"></span>
-		</button>
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
             </form>
+
+            <div class="row">
+                <div class="form-group col-md-1">
+                    <select class="form-control pagination" id="pageSizeSelected">
+						<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
+					</select>
+                </div>
+
+                <div th:if="${lista.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+                    <ul class="pagination">
+                        <li th:class="${lista.number == 1} ? disabled">
+                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=1, nombre=${param.nombre})}">&laquo;</a>
+                        </li>
+
+                        <li th:class="${lista.number == 1} ? disabled">
+                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${lista.number}, nombre=${param.nombre})}">&larr;</a>
+                        </li>
+
+                        <li th:class="${lista.number == (page - 1)} ? 'active pointer-disabled'" th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${page}, nombre=${param.nombre})}" th:text="${page}"></a>
+                        </li>
+
+                        <li th:class="${lista.number + 1 == lista.totalPages} ? disabled">
+                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${lista.number + 2}, nombre=${param.nombre})}">&rarr;</a>
+                        </li>
+
+                        <li th:class="${lista.number + 1 == lista.totalPages} ? disabled">
+                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${lista.totalPages}, nombre=${param.nombre})}">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
     </div>
@@ -76,6 +103,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../../static/js/listas.js" th:src="@{/js/listas.js}"></script>
 
 </body>
 

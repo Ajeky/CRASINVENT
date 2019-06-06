@@ -6,10 +6,13 @@ package com.salesianostriana.damcrasinvent.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,11 +20,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.damcrasinvent.formbeans.SearchBean;
 import com.salesianostriana.damcrasinvent.model.Campos;
 import com.salesianostriana.damcrasinvent.model.Conceptos;
 import com.salesianostriana.damcrasinvent.model.Invent;
+import com.salesianostriana.damcrasinvent.model.Pager;
 import com.salesianostriana.damcrasinvent.model.Usuario;
 import com.salesianostriana.damcrasinvent.model.ValoresCampos;
 import com.salesianostriana.damcrasinvent.servicios.CamposServicio;
@@ -48,6 +53,11 @@ public class InventController {
 	private ConceptosServicio concepservi;
 	private CamposServicio campservi;
 	private ValoresCamposServicio valorservi;
+	
+	private static final int BUTTONS_TO_SHOW = 5;
+	private static final int INITIAL_PAGE = 0;
+	private static final int INITIAL_PAGE_SIZE = 5;
+	private static final int[] PAGE_SIZES = { 5, 10, 20 };
 
 	public InventController(InventServicio servicio, UsuarioServicio usuarioservicio, ConceptosServicio concepservi,
 			CamposServicio campservi, ValoresCamposServicio valorservi) {
@@ -222,7 +232,7 @@ public class InventController {
 	 *                  realiza la petición
 	 * @return La plantilla de la lista de inventarios
 	 */
-	@GetMapping("/user/inventList")
+	/*@GetMapping("/user/inventList")
 	public String mostrarInventsUsuario(Model model, Principal principal) {
 		model.addAttribute("searchForm", new SearchBean());
 
@@ -233,7 +243,7 @@ public class InventController {
 		model.addAttribute("usuario", u);
 		model.addAttribute("lista", inventList);
 		return "/listas/listaInvent";
-	}
+	}*/
 
 	/**
 	 * Método que maneja la búsqueda de inventarios. Está en desarrollo, por lo que
@@ -246,6 +256,62 @@ public class InventController {
 		model.addAttribute("lista", inventservicio.findByNombre(searchBean.getSearch()));
 
 		return "/listas/listaInvent";
+	}
+	
+	/**
+	 * 
+	 * @param pageSize
+	 * @param page
+	 * @param nombre
+	 * @param model
+	 * @param principal
+	 * @return
+	 */
+	@GetMapping({"/inventsbuscados", "/user/inventList"})
+	public String mostrarInventsUsuario(@RequestParam("pageSize") Optional<Integer> pageSize,
+			@RequestParam("page") Optional<Integer> page, @RequestParam("nombre") Optional<String> nombre,
+			Model model, Principal principal) {
+
+		// Evalúa el tamaño de página. Si el parámetro es "nulo", devuelve
+		// el tamaño de página inicial.
+		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+
+		// Calcula qué página se va a mostrar. Si el parámetro es "nulo" o menor
+		// que 0, se devuelve el valor inicial. De otro modo, se devuelve el valor
+		// del parámetro decrementado en 1.
+		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+		String evalNombre = nombre.orElse(null);
+
+		Page<Invent> invents = null;
+
+		Usuario u = usuarioservicio.buscarPorEmail(principal.getName());
+		
+		//UserDetails u = (UserDetails) principal;
+		
+		if (evalNombre == null) {
+			invents = inventservicio.findByUsuarioPageable(u, PageRequest.of(evalPage, evalPageSize));
+		} else {
+			invents = inventservicio.findByUsuarioAndNombreIgnoreCasePageable(u, evalNombre, PageRequest.of(evalPage, evalPageSize));
+		}
+
+		// Obtenemos la página definida por evalPage y evalPageSize de objetos de
+		// nuestro modelo
+		// Page<Producto> products =
+		// productService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
+		// Creamos el objeto Pager (paginador) indicando los valores correspondientes.
+		// Este sirve para que la plantilla sepa cuantas páginas hay en total, cuantos
+		// botones
+		// debe mostrar y cuál es el número de objetos a dibujar.
+		Pager pager = new Pager(invents.getTotalPages(), invents.getNumber(), BUTTONS_TO_SHOW);
+		
+		model.addAttribute("usuario", u);
+		model.addAttribute("lista", invents);
+		model.addAttribute("selectedPageSize", evalPageSize);
+		model.addAttribute("pageSizes", PAGE_SIZES);
+		model.addAttribute("pager", pager);
+
+		return "listas/listaInvent";
 	}
 
 }
