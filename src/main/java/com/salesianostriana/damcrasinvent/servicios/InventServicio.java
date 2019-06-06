@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.damcrasinvent.model.Invent;
+import com.salesianostriana.damcrasinvent.model.Usuario;
 import com.salesianostriana.damcrasinvent.repository.InventRepository;
 import com.salesianostriana.damcrasinvent.servicios.base.BaseService;
 
@@ -47,6 +48,14 @@ public class InventServicio extends BaseService<Invent, Long, InventRepository>{
 	public  Page<Invent> findByNombreContainingIgnoreCasePageable(String nombre, Pageable pageable)
 	{
 		return repositorio.findByNombreContainingIgnoreCase(nombre, pageable);
+	}
+	
+	public Page<Invent> findByUsuarioPageable(Usuario usuario, Pageable pageable) {
+		return repositorio.findByUsuario(usuario, pageable);
+	}
+	
+	public Page<Invent> findByUsuarioAndNombreIgnoreCasePageable(Usuario usuario, String nombre, Pageable pageable) {
+		return repositorio.findByUsuarioAndNombreContainingIgnoreCase(usuario, nombre, pageable);
 	}
 
 }

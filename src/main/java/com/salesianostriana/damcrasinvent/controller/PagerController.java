@@ -7,12 +7,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.damcrasinvent.model.Pager;
+import com.salesianostriana.damcrasinvent.model.Usuario;
 import com.salesianostriana.damcrasinvent.model.Invent;
 import com.salesianostriana.damcrasinvent.servicios.InventServicio;
 import com.salesianostriana.damcrasinvent.servicios.UsuarioServicio;
@@ -49,11 +51,14 @@ public class PagerController {
 
 		Page<Invent> invents = null;
 
+		Usuario u = usuarioService.buscarPorEmail(principal.getName());
+		
+		//UserDetails u = (UserDetails) principal;
+		
 		if (evalNombre == null) {
-			invents = inventService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
+			invents = inventService.findByUsuarioPageable(u, PageRequest.of(evalPage, evalPageSize));
 		} else {
-			invents = inventService.findByNombreContainingIgnoreCasePageable(evalNombre,
-					PageRequest.of(evalPage, evalPageSize));
+			invents = inventService.findByUsuarioAndNombreIgnoreCasePageable(u, evalNombre, PageRequest.of(evalPage, evalPageSize));
 		}
 
 		// Obtenemos la página definida por evalPage y evalPageSize de objetos de
@@ -68,8 +73,9 @@ public class PagerController {
 		
 		
 		
-		List<Invent> inventList =;
+		Page<Invent> userInvents = null;
 		
+		model.addAttribute("usuario", u);
 		model.addAttribute("lista", invents);
 		model.addAttribute("selectedPageSize", evalPageSize);
 		model.addAttribute("pageSizes", PAGE_SIZES);

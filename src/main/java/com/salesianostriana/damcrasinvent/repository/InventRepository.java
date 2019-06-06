@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.salesianostriana.damcrasinvent.model.Invent;
+import com.salesianostriana.damcrasinvent.model.Usuario;
 
 /**
  * Clase que gestiona las operaciones relacionadas con la clase Invent
@@ -28,4 +29,9 @@ public interface InventRepository extends JpaRepository<Invent, Long> {
 	public List<Invent> findByNombreContainingIgnoreCase(String nombre);
 	
 	public  Page<Invent> findByNombreContainingIgnoreCase(String nombre, Pageable pageable);
+	
+	public Page<Invent> findByUsuario(Usuario usuario, Pageable pageable);
+	
+	public Page<Invent> findByUsuarioAndNombreContainingIgnoreCase(Usuario usuario, String nombre, Pageable pageable);
+	
 }
