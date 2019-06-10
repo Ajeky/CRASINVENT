@@ -2,108 +2,140 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Lista Inventarios</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<title>Lista Inventarios</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan"
+	rel="stylesheet">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
 
-    <!-- CSS Propio -->
-    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/main.css' th:href='@{/css/main.css}'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/listas.css' th:href='@{/css/listas.css}'>
+<!-- CSS Propio -->
+<link rel='stylesheet' type='text/css' media='screen'
+	href='../../static/css/main.css' th:href='@{/css/main.css}'>
+<link rel='stylesheet' type='text/css' media='screen'
+	href='../../static/css/listas.css' th:href='@{/css/listas.css}'>
 
 
-    <script src='main.js'></script>
+<script src='main.js'></script>
 </head>
 
 <body class="text-center col-lg-10">
-    <div class="container">
-        <header>
-            <div id="menu" class="menu">
-                <ul class="nav nav-pills botones">
-                    <li class="nav-item mr-1"><a class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
-                    </li>
-                    <li class="nav-item mr-1"><a class="btn active botonActivo" th:href="@{/user/inventList}" role="button">Lista Inventarios</a>
-                    </li>
-                    <li class="nav-item mr-1"><a class="btn btn-secondary text-white" th:href="@{/newInvent/{id}(id=${usuario.id})}" role="button">Nuevo
+	<div class="container">
+		<header>
+			<div id="menu" class="menu">
+				<ul class="nav nav-pills botones">
+					<li class="nav-item mr-1"><a
+						class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
+					</li>
+					<li class="nav-item mr-1"><a class="btn active botonActivo"
+						th:href="@{/user/inventList}" role="button">Lista Inventarios</a>
+					</li>
+					<li class="nav-item mr-1"><a
+						class="btn btn-secondary text-white"
+						th:href="@{/newInvent/{id}(id=${usuario.id})}" role="button">Nuevo
 							Inventario</a></li>
-                </ul>
-            </div>
-        </header>
+				</ul>
+			</div>
+		</header>
 
 
-        <section>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="invent : ${lista}">
-                        <td th:text="${invent.id}">ID</td>
-                        <td th:text="${invent.nombre}">Nombre</td>
-                        <td><a href="#" th:href="@{/editInvent/{id}(id=${invent.id})}">Editar</a> <a href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}">Borrar</a>
-                            <a href="#" th:href="@{/detalleInvent/{id}(id=${invent.id})}">Detalles</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <form action="#" th:action="@{/inventsbuscados}" method="GET">
-                <input type="text" name="nombre" placeholder="Buscar Por Nombre" style="margin-left: 5%; padding: 4px;" />
-                <button class="btn- btn-danger" type="submit" style="padding: 4px;">
+		<section>
+			<form action="#" th:action="@{/inventsbuscados}" method="GET">
+				<input type="text" name="nombre" placeholder="Buscar Por Nombre"
+					style="margin-left: 5%; padding: 4px;" />
+				<button class="btn- btn-danger" type="submit" style="padding: 4px;">
 					<span class="glyphicon glyphicon-search"></span>
 				</button>
-            </form>
+			</form>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="invent : ${lista}">
+						<td th:text="${invent.id}">ID</td>
+						<td th:text="${invent.nombre}">Nombre</td>
+						<td><a href="#"
+							th:href="@{/editInvent/{id}(id=${invent.id})}">Editar</a> <a
+							href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}">Borrar</a>
+							<a href="#" th:href="@{/detalleInvent/{id}(id=${invent.id})}">Detalles</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
-            <div class="row">
-                <div class="form-group col-md-1">
-                    <select class="form-control pagination" id="pageSizeSelected">
-						<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
+			<div class="row">
+				<div class="form-group col-md-1">
+					<select class="form-control pagination" id="pageSizeSelected">
+						<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+							th:value="${pageSize}"
+							th:selected="${pageSize} == ${selectedPageSize}"></option>
 					</select>
-                </div>
+				</div>
 
-                <div th:if="${lista.totalPages != 1}" class="form-group col-md-11 pagination-centered">
-                    <ul class="pagination">
-                        <li th:class="${lista.number == 1} ? disabled">
-                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=1, nombre=${param.nombre})}">&laquo;</a>
-                        </li>
+				<div th:if="${lista.totalPages != 1}"
+					class="form-group col-md-11 pagination-centered">
+					<ul class="pagination">
+						<li th:class="${lista.number == 1} ? disabled"><a
+							class="pageLink"
+							th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=1, nombre=${param.nombre})}">&laquo;</a>
+						</li>
 
-                        <li th:class="${lista.number == 1} ? disabled">
-                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${lista.number}, nombre=${param.nombre})}">&larr;</a>
-                        </li>
+						<li th:class="${lista.number == 1} ? disabled"><a
+							class="pageLink"
+							th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${lista.number}, nombre=${param.nombre})}">&larr;</a>
+						</li>
 
-                        <li th:class="${lista.number == (page - 1)} ? 'active pointer-disabled'" th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${page}, nombre=${param.nombre})}" th:text="${page}"></a>
-                        </li>
+						<li
+							th:class="${lista.number == (page - 1)} ? 'active pointer-disabled'"
+							th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+							<a class="pageLink"
+							th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${page}, nombre=${param.nombre})}"
+							th:text="${page}"></a>
+						</li>
 
-                        <li th:class="${lista.number + 1 == lista.totalPages} ? disabled">
-                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${lista.number + 2}, nombre=${param.nombre})}">&rarr;</a>
-                        </li>
+						<li th:class="${lista.number + 1 == lista.totalPages} ? disabled">
+							<a class="pageLink"
+							th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${lista.number + 2}, nombre=${param.nombre})}">&rarr;</a>
+						</li>
 
-                        <li th:class="${lista.number + 1 == lista.totalPages} ? disabled">
-                            <a class="pageLink" th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${lista.totalPages}, nombre=${param.nombre})}">&raquo;</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+						<li th:class="${lista.number + 1 == lista.totalPages} ? disabled">
+							<a class="pageLink"
+							th:href="@{/inventsbuscados/(pageSize=${selectedPageSize}, page=${lista.totalPages}, nombre=${param.nombre})}">&raquo;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
 
-    </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="../../static/js/listas.js" th:src="@{/js/listas.js}"></script>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="../../static/js/listas.js" th:src="@{/js/listas.js}"></script>
 
 </body>
 

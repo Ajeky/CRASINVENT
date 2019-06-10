@@ -1,30 +1,85 @@
 <!doctype html>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	name="viewport">
 
-        <title>Configuración Cuenta</title>
+<title>Configuración Cuenta</title>
 
-        <!-- Google Fonts -->
-        <link
-        href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan"
+	rel="stylesheet">
 
-        <!-- Bootstrap CSS -->
-        <link
-        crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link crossorigin="anonymous"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	rel="stylesheet">
 
-        <!-- Font Awesome -->
-        <link
-        crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" rel="stylesheet">
+<!-- Font Awesome -->
+<link crossorigin="anonymous"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	rel="stylesheet">
 
-        <!-- CSS Propio -->
-        <link href='../../static/css/main.css' media='screen' rel='stylesheet' th:href='@{/css/main.css}' type='text/css'>
-        <link href='../../static/css/portada.css' media='screen' rel='stylesheet' th:href='@{/css/portada.css}' type='text/css'>
-        <link href='../../static/css/configuracionCuenta.css' media="screen" rel="stylesheet" th:href="@{/css/configuracionCuenta.css}" type="text/css">
-    </head>
+<!-- CSS Propio -->
+<link href='../../static/css/main.css' media='screen' rel='stylesheet'
+	th:href='@{/css/main.css}' type='text/css'>
+<link href='../../static/css/portada.css' media='screen'
+	rel='stylesheet' th:href='@{/css/portada.css}' type='text/css'>
+<link href='../../static/css/configuracionCuenta.css' media="screen"
+	rel="stylesheet" th:href="@{/css/configuracionCuenta.css}"
+	type="text/css">
+</head>
 
-    
-    </html>
+<body>
+	<header>
+		<div>
+			<nav>
+				<div class="menu-icon">
+					<i class="fa fa-bars fa-2x"></i>
+				</div>
+				<div class="logo">
+					<a href="#" th:href="@{/}">CRASINVENT</a>
+				</div>
+				<div class="menu">
+					<ul>
+						<li><a href="../usuario/portada.html" th:href="@{/}">Inicio<i
+								class="fas fa-home"></i></a></li>
+						<li><a href="#">Conócenos<i class="fas fa-at"></i></a></li>
+						<li><a href="#">Contacta<i class="fas fa-phone"></i></a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<div class="content col-lg-8 col-md-10 col-sm-12 text-center">
+		<h1>Modificar datos</h1>
+		<h3 sec:authentication="name">USUARIO</h3>
+		<form th:action="@{/modificarDatos/submit}" th:object="${usuario}"
+			method="post">
+			<input th:field=*{id} type="hidden" name="id" /> <br />
+			
+			<span>Nombre: <span th:text="${usuario.nombre}">Nombre</span></span>
+			<input type="text" name="nombre" th:field="*{nombre}" placeholder="Nuevo Nombre" /> <br />
+			
+			<span>Apellidos: <span th:text="${usuario.apellidos}">Apellidos</span></span>
+			<input type="text" name="apellidos" th:field="*{apellidos}" placeholder="Nuevos Apellidos" /> <br />
+			
+			<input type="submit" name="enviar" value="Enviar" />
+			
+		</form>
+
+
+	</div>
+
+</body>
+
+
+</html>
