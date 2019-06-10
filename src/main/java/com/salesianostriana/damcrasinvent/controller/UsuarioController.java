@@ -98,8 +98,12 @@ public class UsuarioController {
 
 	@PostMapping("modificarDatos/submit")
 	public String submitModificar(@ModelAttribute("usuario") Usuario u, HttpSession session, HttpServletRequest request,
-			ModelMap modelMap) {
-		
+			ModelMap modelMap, Model model) {
+		usuarioServicio.edit(u);
+		model.addAttribute("usuario", u);
+		return "redirect:/user/configuracion";
 	}
+	
+	
 
 }
