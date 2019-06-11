@@ -72,9 +72,9 @@
 						<td th:text="${invent.id}">ID</td>
 						<td th:text="${invent.nombre}">Nombre</td>
 						<td><a href="#"
-							th:href="@{/editInvent/{id}(id=${invent.id})}">Editar</a> <a
-							href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}">Borrar</a>
-							<a href="#" th:href="@{/detalleInvent/{id}(id=${invent.id})}">Detalles</a>
+							th:href="@{/editInvent/{id}(id=${invent.id})}"><i class="fas fa-edit"></i></a> <a
+							href="#" th:href="@{/deleteInvent/{id}(id=${invent.id})}"><i class="fas fa-trash"></i></a>
+							<a href="#" th:href="@{/detalleInvent/{id}(id=${invent.id})}"><i class="fas fa-info-circle"></i></a>
 						</td>
 					</tr>
 				</tbody>

@@ -5,6 +5,7 @@ package com.salesianostriana.damcrasinvent.controller;
 
 import java.security.Principal;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -34,7 +35,8 @@ public class UsuarioController {
 	HistoricoUsuariosServicio historicoServicio;
 	UsuarioEmpresaServicio empresaServicio;
 
-	public UsuarioController(UsuarioServicio servicio, HistoricoUsuariosServicio historicoServicio, UsuarioEmpresaServicio empresaServicio) {
+	public UsuarioController(UsuarioServicio servicio, HistoricoUsuariosServicio historicoServicio,
+			UsuarioEmpresaServicio empresaServicio) {
 		this.usuarioServicio = servicio;
 		this.historicoServicio = historicoServicio;
 		this.empresaServicio = empresaServicio;
@@ -98,12 +100,16 @@ public class UsuarioController {
 
 	@PostMapping("modificarDatos/submit")
 	public String submitModificar(@ModelAttribute("usuario") Usuario u, HttpSession session, HttpServletRequest request,
-			ModelMap modelMap, Model model) {
+			ModelMap modelMap, Model model) throws ServletException {
 		usuarioServicio.edit(u);
 		model.addAttribute("usuario", u);
-		return "redirect:/user/configuracion";
+
+		if (request.getUserPrincipal().getName() != u.getEmail()) {
+			request.logout();
+			return "/login";
+		} else {
+			return "/forms/configurarCuenta";
+		}
 	}
-	
-	
 
 }

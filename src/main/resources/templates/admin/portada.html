@@ -17,6 +17,9 @@
         <link
         crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
 
+		<!-- Font Awesome -->
+		<link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" rel="stylesheet">
+
         <!-- CSS Propio -->
         <link href='../../static/css/main.css' media='screen' rel='stylesheet' th:href='@{/css/main.css}' type='text/css'>
         <link href='../../static/css/listas.css' media='screen' rel='stylesheet' th:href='@{/css/listas.css}' type='text/css'>
@@ -48,9 +51,9 @@
                             <td th:text="${usuario.nickname}">Nickname</td>
                             <td th:text="${usuario.telefono}">Telefono</td>
                             <td>
-                            	<a href="#" th:href="@{/admin/detalleUsuario/{id}/(id=${usuario.id})}">Detalles</a>
-                            	<a href="#" th:href="@{/admin/editarUsuario/{id}(id=${usuario.id})}">Editar</a>
-                            	<a href="#" th:href="@{/admin/borrarUsuario/{id}(id=${usuario.id})}">Borrar</a>
+                            	<a href="#" th:href="@{/admin/detalleUsuario/{id}/(id=${usuario.id})}"><i class="fas fa-info-circle"></i></a>
+                            	<a href="#" th:href="@{/admin/editarUsuario/{id}(id=${usuario.id})}"><i class="fas fa-edit"></i></a>
+                            	<a href="#" th:href="@{/admin/borrarUsuario/{id}(id=${usuario.id})}"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     </tbody>

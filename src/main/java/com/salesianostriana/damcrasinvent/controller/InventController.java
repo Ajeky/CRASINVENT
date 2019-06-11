@@ -136,9 +136,11 @@ public class InventController {
 	public String editarPorID(@PathVariable("id") long id, Model model) {
 
 		Invent invEdit = inventservicio.findById(id);
+		Usuario usuario = invEdit.getUsuario();
 
 		if (invEdit != null) {
 			model.addAttribute("invent", invEdit);
+			model.addAttribute("usuario", usuario);
 			return "forms/crearInvent";
 		} else {
 			return "redirect:/user/inventList";
