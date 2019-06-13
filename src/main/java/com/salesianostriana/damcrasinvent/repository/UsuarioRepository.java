@@ -1,5 +1,9 @@
 package com.salesianostriana.damcrasinvent.repository;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.salesianostriana.damcrasinvent.model.Usuario;
@@ -20,5 +24,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	 * @return Usuario encontrado
 	 */
 	public Usuario findFirstByEmail(String email);
+	
+	public List<Usuario> findByEmailContainingIgnoreCase(String nombre);
+	
+	public Page<Usuario> findByEmailContainingIgnoreCase(String nombre, Pageable pageable);
 
 }

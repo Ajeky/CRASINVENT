@@ -4,7 +4,9 @@
 package com.salesianostriana.damcrasinvent.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.damcrasinvent.model.HistoricoUsuarios;
 import com.salesianostriana.damcrasinvent.model.Invent;
@@ -44,6 +47,11 @@ public class AdminController {
 	private CamposServicio campservi;
 	private ValoresCamposServicio valorservi;
 	private HistoricoUsuariosServicio histoServi;
+	
+	private static final int BUTTONS_TO_SHOW = 5;
+	private static final int INITIAL_PAGE = 0;
+	private static final int INITIAL_PAGE_SIZE = 5;
+	private static final int[] PAGE_SIZES = { 5, 10, 20 };
 
 	public AdminController(UsuarioServicio userServi, UsuarioEmpresaServicio empServi, InventServicio invServi,
 			ConceptosServicio concepservi, CamposServicio campservi, ValoresCamposServicio valorservi,
@@ -61,14 +69,32 @@ public class AdminController {
 	 * Método que maneja la portada que verán los admins al logearse o pulsar la
 	 * tecla inicio.
 	 * 
-	 * @param model Se le pasan como modelos dos listas. Una con todos los usuarios
-	 *              y otra con todas las empresas
+	 * @param model Se le pasa como modelo una lista con todos los usuarios
+	 *              existentes en la base de datos
 	 * @return La plantilla de la portada para los admins
 	 */
 	@GetMapping("/")
-	public String portada(Model model) {
-		model.addAttribute("usuarios", userServi.findAll());
-		model.addAttribute("empresas", empServi.findAll());
+	public String portada(@RequestParam("pageSize") Optional<Integer> pageSize,
+			@RequestParam("page") Optional<Integer> page, @RequestParam("nombre") Optional<String> nombre,
+			Model model) {
+
+		// Evalúa el tamaño de página. Si el parámetro es "nulo", devuelve
+				// el tamaño de página inicial.
+				int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+
+				// Calcula qué página se va a mostrar. Si el parámetro es "nulo" o menor
+				// que 0, se devuelve el valor inicial. De otro modo, se devuelve el valor
+				// del parámetro decrementado en 1.
+				int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+				String evalNombre = nombre.orElse(null);
+				
+				Page<Usuario> usuarios = null;
+				
+				if (evalNombre == null) {
+					usuarios = userServi.find
+				}
+				
 		return "admin/portada";
 	}
 
