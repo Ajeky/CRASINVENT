@@ -120,5 +120,26 @@ public class UsuarioController {
 		return "/forms/contratar";
 	}
 	
+	@PostMapping("/contratar/submit")
+	public String hacerPremiumSubmit(@ModelAttribute("usuario") UsuarioEmpresa u, Principal principal) {
+		Usuario datosBase = usuarioServicio.buscarPorEmail(principal.getName());
+		
+		u.setId(datosBase.getId());
+		u.setNombre(datosBase.getNombre());
+		u.setApellidos(datosBase.getApellidos());
+		u.setEmail(datosBase.getEmail());
+		u.setNickname(datosBase.getNickname());
+		u.setPassword(datosBase.getPassword());
+		u.setTelefono(datosBase.getTelefono());
+		u.setAdmin(datosBase.isAdmin());
+		u.setInvents(datosBase.getInvents());
+		
+		usuarioServicio.delete(datosBase);
+		usuarioServicio.add(u);
+		
+		return "/forms/metodoPago";
+		
+	}
+	
 
 }

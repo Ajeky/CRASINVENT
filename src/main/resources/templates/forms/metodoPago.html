@@ -33,38 +33,7 @@
 <!-- JavaScript propio -->
 <script src="../../static/js/registro.js" th:src="@{/js/registro.js}"></script>
 </head>
-
 <body>
-	<form method="post" th:action="@{/contratar/submit}"
-		th:object="${usuario}">
-		<h3 class="text">Datos de la empresa</h3>
-		<input class="input" name="cif" placeholder="CIF"
-			th:field="*{CIF}" type="text" autofocus />
-		<div class="line-box">
-			<div class="line"></div>
-		</div>
-		<input class="input" name="nombreEmpresa" placeholder="Nombre de la empresa"
-			th:field="*{nombreEmpresa}" type="text" />
-		<div class="line-box">
-			<div class="line"></div>
-		</div>
-		<input class="input" name="telefonoEmpresa" placeholder="Teléfono de Empresa"
-			th:field="*{telefonoEmpresa}" type="text" />
-		<div class="line-box">
-			<div class="line"></div>
-		</div>
-		<input class="input" name="campoEmpresa" placeholder="Campo profesional"
-			th:field="*{campoEmpresa}" type="text" />
-		<div class="line-box">
-			<div class="line"></div>
-		</div>
-		<input class="input" name="password"
-			placeholder="Dirección de facturación" th:field="*{direccionFacturacion}" type="text" />
-		<div class="line-box">
-			<div class="line"></div>
-		</div>
-		<input class="input button" name="enviar" type="submit" value="Enviar" />
-	</form>
-	
+
 </body>
 </html>

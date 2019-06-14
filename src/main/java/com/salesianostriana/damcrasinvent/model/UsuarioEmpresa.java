@@ -96,10 +96,18 @@ public class UsuarioEmpresa extends Usuario {
 	 * como colchón de seguridad en caso de que hiciera falta
 	 */
 	public UsuarioEmpresa(String nombre, String apellidos, String email, String nickname, String password,
-			String telefono, boolean isAdmin, String cIF, String nombreEmpresa, String telefonoEmpresa,
+			String telefono, boolean isAdmin, String cif, String nombreEmpresa, String telefonoEmpresa,
 			String campoEmpresa, String direccionFacturacion) {
 		super(nombre, apellidos, email, nickname, password, telefono, isAdmin);
-		CIF = cIF;
+		this.CIF = cif;
+		this.nombreEmpresa = nombreEmpresa;
+		this.telefonoEmpresa = telefonoEmpresa;
+		this.campoEmpresa = campoEmpresa;
+		this.direccionFacturacion = direccionFacturacion;
+	}
+	
+	public UsuarioEmpresa(String cif, String nombreEmpresa, String telefonoEmpresa, String campoEmpresa, String direccionFacturacion) {
+		this.CIF = cif;
 		this.nombreEmpresa = nombreEmpresa;
 		this.telefonoEmpresa = telefonoEmpresa;
 		this.campoEmpresa = campoEmpresa;
