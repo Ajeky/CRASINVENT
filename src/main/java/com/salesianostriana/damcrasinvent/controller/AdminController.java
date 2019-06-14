@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.salesianostriana.damcrasinvent.formbeans.SearchBean;
 import com.salesianostriana.damcrasinvent.model.HistoricoUsuarios;
 import com.salesianostriana.damcrasinvent.model.Invent;
+import com.salesianostriana.damcrasinvent.model.Pager;
 import com.salesianostriana.damcrasinvent.model.Usuario;
 import com.salesianostriana.damcrasinvent.servicios.CamposServicio;
 import com.salesianostriana.damcrasinvent.servicios.ConceptosServicio;
@@ -73,9 +76,9 @@ public class AdminController {
 	 *              existentes en la base de datos
 	 * @return La plantilla de la portada para los admins
 	 */
-	@GetMapping("/")
+	@GetMapping({"/", "/buscarUser"})
 	public String portada(@RequestParam("pageSize") Optional<Integer> pageSize,
-			@RequestParam("page") Optional<Integer> page, @RequestParam("nombre") Optional<String> nombre,
+			@RequestParam("page") Optional<Integer> page, @RequestParam("email") Optional<String> email,
 			Model model) {
 
 		// Evalúa el tamaño de página. Si el parámetro es "nulo", devuelve
@@ -87,16 +90,33 @@ public class AdminController {
 				// del parámetro decrementado en 1.
 				int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
-				String evalNombre = nombre.orElse(null);
+				String evalNombre = email.orElse(null);
 				
 				Page<Usuario> usuarios = null;
 				
 				if (evalNombre == null) {
-					usuarios = userServi.find
+					usuarios = userServi.findAllPageable(PageRequest.of(evalPage, evalPageSize));
+				} else {
+					usuarios = userServi.findByEmailPageable(evalNombre, PageRequest.of(evalPage, evalPageSize));
 				}
+				
+				Pager pager = new Pager(usuarios.getTotalPages(), usuarios.getNumber(), BUTTONS_TO_SHOW);
+				
+				model.addAttribute("usuarios", usuarios);
+				model.addAttribute("selectedPageSize", evalPageSize);
+				model.addAttribute("pageSizes", PAGE_SIZES);
+				model.addAttribute("pager", pager);
 				
 		return "admin/portada";
 	}
+	
+	@PostMapping("")
+	public String searchUsuario(@ModelAttribute("searchForm") SearchBean searchBean, Model model) {
+		model.addAttribute("usuarios", userServi.findByEmail(searchBean.getSearch()));
+		
+		return "admin/portada";
+	}
+	
 
 	/**
 	 * Método que maneja el formulario de edición de un usuario.

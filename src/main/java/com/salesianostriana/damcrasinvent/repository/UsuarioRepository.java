@@ -25,6 +25,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	 */
 	public Usuario findFirstByEmail(String email);
 	
+	
 	public List<Usuario> findByEmailContainingIgnoreCase(String nombre);
 	
 	public Page<Usuario> findByEmailContainingIgnoreCase(String nombre, Pageable pageable);

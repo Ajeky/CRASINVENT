@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.damcrasinvent.model.HistoricoUsuarios;
 import com.salesianostriana.damcrasinvent.model.Usuario;
+import com.salesianostriana.damcrasinvent.model.UsuarioEmpresa;
 import com.salesianostriana.damcrasinvent.servicios.HistoricoUsuariosServicio;
 import com.salesianostriana.damcrasinvent.servicios.UsuarioEmpresaServicio;
 import com.salesianostriana.damcrasinvent.servicios.UsuarioServicio;
@@ -98,7 +99,7 @@ public class UsuarioController {
 
 	}
 
-	@PostMapping("modificarDatos/submit")
+	@PostMapping("/modificarDatos/submit")
 	public String submitModificar(@ModelAttribute("usuario") Usuario u, HttpSession session, HttpServletRequest request,
 			ModelMap modelMap, Model model) throws ServletException {
 		usuarioServicio.edit(u);
@@ -111,5 +112,13 @@ public class UsuarioController {
 			return "/forms/configurarCuenta";
 		}
 	}
+	
+	@GetMapping("/contratar")
+	public String hacerPremium(Model model) {
+		model.addAttribute("usuario", new UsuarioEmpresa());
+		
+		return "/forms/contratar";
+	}
+	
 
 }

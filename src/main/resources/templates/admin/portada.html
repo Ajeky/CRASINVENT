@@ -1,96 +1,135 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta content='IE=edge' http-equiv='X-UA-Compatible'>
-        <title>Admin Page</title>
+<head>
+<meta charset="UTF-8">
+<meta content='IE=edge' http-equiv='X-UA-Compatible'>
+<title>Admin Page</title>
 
-        <meta
-        content='width=device-width, initial-scale=1' name='viewport'>
+<meta content='width=device-width, initial-scale=1' name='viewport'>
 
-        <!-- Google Fonts -->
-        <link
-        href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan"
+	rel="stylesheet">
 
-        <!-- Bootstrap CSS -->
-        <link
-        crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link crossorigin="anonymous"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	rel="stylesheet">
 
-		<!-- Font Awesome -->
-		<link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" rel="stylesheet">
+<!-- Font Awesome -->
+<link crossorigin="anonymous"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	rel="stylesheet">
 
-        <!-- CSS Propio -->
-        <link href='../../static/css/main.css' media='screen' rel='stylesheet' th:href='@{/css/main.css}' type='text/css'>
-        <link href='../../static/css/listas.css' media='screen' rel='stylesheet' th:href='@{/css/listas.css}' type='text/css'>
+<!-- CSS Propio -->
+<link href='../../static/css/main.css' media='screen' rel='stylesheet'
+	th:href='@{/css/main.css}' type='text/css'>
+<link href='../../static/css/listas.css' media='screen' rel='stylesheet'
+	th:href='@{/css/listas.css}' type='text/css'>
 
-    </head>
+</head>
 
-    <body class="text-center col-lg-12 col-md-12 col-sm-12">
-        <div class="container col-lg-12 col-md-12 col-sm-12">
-            <section>
-                <h1>LISTA DE USUARIOS</h1>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Nickname</th>
-                            <th scope="col">Teléfono</th>
-                            <th scope="col">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="usuario : ${usuarios}">
-                            <td th:text="${usuario.id}">ID</td>
-                            <td th:text="${usuario.nombre}">Nombre</td>
-                            <td th:text="${usuario.apellidos}">Apellidos</td>
-                            <td th:text="${usuario.email}">Correo</td>
-                            <td th:text="${usuario.nickname}">Nickname</td>
-                            <td th:text="${usuario.telefono}">Telefono</td>
-                            <td>
-                            	<a href="#" th:href="@{/admin/detalleUsuario/{id}/(id=${usuario.id})}"><i class="fas fa-info-circle"></i></a>
-                            	<a href="#" th:href="@{/admin/editarUsuario/{id}(id=${usuario.id})}"><i class="fas fa-edit"></i></a>
-                            	<a href="#" th:href="@{/admin/borrarUsuario/{id}(id=${usuario.id})}"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+<body class="text-center col-lg-12 col-md-12 col-sm-12">
+	<div class="text-left">
+		<form id="logoutForm" method="POST" th:action="@{/logout}"></form>
+		<a href="javascript:document.getElementById('logoutForm').submit()">Salir <i class="fas fa-sign-out-alt"></i></a>
+	</div>
 
-                <h1>LISTA DE EMPRESAS</h1>
-                <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">ID Usuario Asociado</th>
-                                <th scope="col">CIF</th>
-                                <th scope="col">Nombre empresa</th>
-                                <th scope="col">Telefono Empresa</th>
-                                <th scope="col">Campo Empresa</th>
-                                <th scope="col">Direccion Facturacion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="empresa : ${empresas}">
-                                <td th:text="${empresa.id}"><a href="#" th:href="@{/admin/detalleUsuario/{id}/(id=${empresa.id})}">Usuario Asociado</a></td>
-                                <td th:text="${empresa.CIF}">CIF</td>
-                                <td th:text="${empresa.nombreEmpresa}">Nombre</td>
-                                <td th:text="${empresa.telefonoEmpresa}">Telefono</td>
-                                <td th:text="${empresa.campoEmpresa}">Campo</td>
-                                <td th:text="${empresa.direccionFacturacion}">Dirección facturación</td>
-                            </tr>
-                        </tbody>
-                    </table>
-            </section>
-            
-            <form id="logoutForm" method="POST" th:action="@{/logout}"></form>
+	<div class="container col-lg-12 col-md-12 col-sm-12">
+		<section>
+			<h1>LISTA DE USUARIOS</h1>
+			<form action="#" th:action="@{/admin/buscarUser}" method="GET">
+				<input type="text" name="email" placeholder="Buscar Por Email"
+					style="margin-left: 5%; padding: 4px;" />
+				<button class="btn- btn-danger" type="submit" style="padding: 4px;">
+					<i class="fas fa-search"></i>
+				</button>
+			</form>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Apellidos</th>
+						<th scope="col">Correo</th>
+						<th scope="col">Nickname</th>
+						<th scope="col">Teléfono</th>
+						<th scope="col">Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="usuario : ${usuarios}">
+						<td th:text="${usuario.id}">ID</td>
+						<td th:text="${usuario.nombre}">Nombre</td>
+						<td th:text="${usuario.apellidos}">Apellidos</td>
+						<td th:text="${usuario.email}">Correo</td>
+						<td th:text="${usuario.nickname}">Nickname</td>
+						<td th:text="${usuario.telefono}">Telefono</td>
+						<td><a href="#"
+							th:href="@{/admin/detalleUsuario/{id}/(id=${usuario.id})}"><i
+								class="fas fa-info-circle"></i></a> <a href="#"
+							th:href="@{/admin/editarUsuario/{id}(id=${usuario.id})}"><i
+								class="fas fa-edit"></i></a> <a href="#"
+							th:href="@{/admin/borrarUsuario/{id}(id=${usuario.id})}"><i
+								class="fas fa-trash"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="row">
+				<div class="form-group col-md-1">
+					<select class="form-control pagination" id="pageSizeSelected">
+						<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+							th:value="${pageSize}"
+							th:selected="${pageSize} == ${selectedPageSize}"></option>
+					</select>
+				</div>
+
+				<div th:if="${usuarios.totalPages != 1}"
+					class="form-group col-md-11 pagination-centered">
+					<ul class="pagination">
+						<li th:class="${usuarios.number == 1} ? disabled"><a
+							class="pageLink"
+							th:href="@{/admin/buscarUser/(pageSize=${selectedPageSize}, page=1, email=${param.email})}">&laquo;</a>
+						</li>
+
+						<li th:class="${usuarios.number == 1} ? disabled"><a
+							class="pageLink"
+							th:href="@{/admin/buscarUser/(pageSize=${selectedPageSize}, page=${usuarios.number}, email=${param.email})}">&larr;</a>
+						</li>
+
+						<li
+							th:class="${usuarios.number == (page - 1)} ? 'active pointer-disabled'"
+							th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+							<a class="pageLink"
+							th:href="@{/admin/buscarUser/(pageSize=${selectedPageSize}, page=${page}, email=${param.email})}"
+							th:text="${page}"></a>
+						</li>
+
+						<li
+							th:class="${usuarios.number + 1 == usuarios.totalPages} ? disabled">
+							<a class="pageLink"
+							th:href="@{/admin/buscarUser/(pageSize=${selectedPageSize}, page=${usuarios.number + 2}, email=${param.email})}">&rarr;</a>
+						</li>
+
+						<li
+							th:class="${usuarios.number + 1 == usuarios.totalPages} ? disabled">
+							<a class="pageLink"
+							th:href="@{/admin/buscarUser/(pageSize=${selectedPageSize}, page=${usuarios.totalPages}, email=${param.email})}">&raquo;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
 
 
-            <a href="javascript:document.getElementById('logoutForm').submit()">Salir</a>
-
-        </div>
-    </body>
+	</div>
+</body>
 
 </html>
 

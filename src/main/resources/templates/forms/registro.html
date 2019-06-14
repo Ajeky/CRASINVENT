@@ -1,70 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-        <title>Registro de usuario</title>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	name="viewport">
+<title>Registro de usuario</title>
 
-        <!-- Google Fonts -->
-        <link
-        href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link crossorigin="anonymous"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link crossorigin="anonymous"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	rel="stylesheet">
+
+<!-- Bootstrap Propio -->
+<link href='../../static/css/registro.css' media='screen'
+	rel='stylesheet' th:href="@{/css/registro.css}" type='text/css'>
+<link href="../../static/css/main.css" media="screen" rel="stylesheet"
+	th:href="@{/css/main.css}" type="text/css">
+
+<!-- JavaScript propio -->
+<script src="../../static/js/registro.js" th:src="@{/js/registro.js}"></script>
+</head>
+<body>
+
+	<form method="post" th:action="@{/newUser/submit}"
+		th:object="${usuario}">
+		<h3 class="text">Registrarse</h3>
+		<input class="input" name="nombre" placeholder="Nombre"
+			th:field="*{nombre}" type="text" autofocus />
+		<div class="line-box">
+			<div class="line"></div>
+		</div>
+		<input class="input" name="apellidos" placeholder="Apellidos"
+			th:field="*{apellidos}" type="text" />
+		<div class="line-box">
+			<div class="line"></div>
+		</div>
+		<input class="input" name="email" placeholder="Correo electrónico"
+			th:field="*{email}" type="email" />
+		<div class="line-box">
+			<div class="line"></div>
+		</div>
+		<input class="input" name="nickname" placeholder="Nickname"
+			th:field="*{nickname}" type="text" />
+		<div class="line-box">
+			<div class="line"></div>
+		</div>
+		<input class="input" id="password" name="password"
+			placeholder="Contraseña" th:field="*{password}" type="password" />
+		<div class="line-box">
+			<div class="line"></div>
+		</div>
+		<input class="input" id="confirm_password" name="confirm_password"
+			placeholder="Confirmar Contraseña" type="password" />
+		<div class="line-box">
+			<div class="line"></div>
+		</div>
+
+		<input class="input" name="telefono" placeholder="Teléfono contacto"
+			th:field="*{telefono}" type="number" />
+		<div class="line-box">
+			<div class="line"></div>
+		</div>
+		<input class="input button" name="enviar" type="submit" value="Enviar" />
+	</form>
 
 
-        <!-- Bootstrap CSS -->
-        <link
-        crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-
-        <!-- Bootstrap Propio -->
-        <link href='../../static/css/registro.css' media='screen' rel='stylesheet' th:href="@{/css/registro.css}" type='text/css'>
-        <link
-        href="../../static/css/main.css" media="screen" rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
-
-        <!-- JavaScript propio -->
-        <script src="../../static/js/registro.js" th:src="@{/js/registro.js}"></script>
-    </head>
-    <body>
-
-        <form method="post" th:action="@{/newUser/submit}" th:object="${usuario}">
-            <h3 class="text">Registrarse</h3>
-            <input class="input" name="nombre" placeholder="Nombre" th:field="*{nombre}" type="text" autofocus/>
-            <div class="line-box">
-                <div class="line"></div>
-            </div>
-            <input class="input" name="apellidos" placeholder="Apellidos" th:field="*{apellidos}" type="text"/>
-            <div class="line-box">
-                <div class="line"></div>
-            </div>
-            <input class="input" name="email" placeholder="Correo electrónico" th:field="*{email}" type="email"/>
-            <div class="line-box">
-                <div class="line"></div>
-            </div>
-            <input class="input" name="nickname" placeholder="Nickname" th:field="*{nickname}" type="text"/>
-            <div class="line-box">
-                <div class="line"></div>
-            </div>
-            <input class="input" id="password" name="password" placeholder="Contraseña" th:field="*{password}" type="password"/>
-            <div class="line-box">
-                <div class="line"></div>
-            </div>
-            <input class="input" id="confirm_password" name="confirm_password" placeholder="Confirmar Contraseña" type="password"/>
-            <div class="line-box">
-                <div class="line"></div>
-            </div>
-
-            <input class="input" name="telefono" placeholder="Teléfono contacto" th:field="*{telefono}" type="number"/>
-            <div class="line-box">
-                <div class="line"></div>
-            </div>
-            <input class="input button" name="enviar" type="submit" value="Enviar"/>
-        </form>
-
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </body>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script crossorigin="anonymous"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script crossorigin="anonymous"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script crossorigin="anonymous"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
 </html>
 

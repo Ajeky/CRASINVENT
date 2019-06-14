@@ -4,7 +4,10 @@
 package com.salesianostriana.damcrasinvent.servicios;
 
 import java.security.Principal;
+import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -35,6 +38,19 @@ public class UsuarioServicio extends BaseService<Usuario, Long, UsuarioRepositor
 		else {
 			return null;
 		}
+	}
+	
+
+	public Page<Usuario> findAllPageable(Pageable pageable) {
+		return repositorio.findAll(pageable);
+	}
+	
+	public List<Usuario> findByEmail(String email) {
+		return repositorio.findByEmailContainingIgnoreCase(email);
+	}
+	
+	public Page<Usuario> findByEmailPageable(String nombre, Pageable pageable) {
+		return repositorio.findByEmailContainingIgnoreCase(nombre, pageable);
 	}
 
 }
