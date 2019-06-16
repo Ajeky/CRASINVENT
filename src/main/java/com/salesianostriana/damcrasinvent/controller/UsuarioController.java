@@ -137,7 +137,7 @@ public class UsuarioController {
 		usuarioServicio.delete(datosBase);
 		usuarioServicio.add(u);
 		
-		return "/forms/metodoPago";
+		return "/forms/elegirMetodoPago";
 		
 	}
 	

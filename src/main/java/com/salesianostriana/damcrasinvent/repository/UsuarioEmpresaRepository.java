@@ -6,4 +6,6 @@ import com.salesianostriana.damcrasinvent.model.UsuarioEmpresa;
 
 public interface UsuarioEmpresaRepository extends JpaRepository<UsuarioEmpresa, Long> {
 
+	UsuarioEmpresa findFirstByEmail(String email);
+
 }

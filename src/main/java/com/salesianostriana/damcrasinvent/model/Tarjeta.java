@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,7 +39,8 @@ public class Tarjeta extends MetodosPago {
 
 	/**
 	 * Fecha de caducidad de la tarjeta
-	 */
+	 */	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaCad;
 
 	/**

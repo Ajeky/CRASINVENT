@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	name="viewport">
+
+<title>Elegir método de pago</title>
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link crossorigin="anonymous"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link crossorigin="anonymous"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	rel="stylesheet">
+
+<!-- CSS Propio -->
+<link href='../../static/css/main.css' media='screen' rel='stylesheet'
+	th:href='@{/css/main.css}' type='text/css'>
+<link href='../../static/css/portada.css' media='screen'
+	rel='stylesheet' th:href='@{/css/portada.css}' type='text/css'>
+<link href='../../static/css/configuracionCuenta.css' media="screen"
+	rel="stylesheet" th:href="@{/css/configuracionCuenta.css}"
+	type="text/css">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="content col-lg-8 col-md-10 col-sm-12 text-center">
+			<h1>Elija un método de pago:</h1>
+
+			<span class="text-center"> <a
+				class="btn btn-primary col-sm-12 col-md-5 col-lg-5" href="#"
+				role="button" th:href="@{/tarjeta}">TARJETA DE CRÉDITO</a></span>
+				
+				<br /><br />
+				
+			<span class="text-center"> <a
+				class="btn btn-primary col-sm-12 col-md-5 col-lg-5" href="#"
+				role="button" th:href="@{/transferencia}">TRANSFERENCIA</a></span>
+				
+				<br /><br />
+				
+			<span class="text-center"> <a
+				class="btn btn-primary col-sm-12 col-md-5 col-lg-5" href="#"
+				role="button" th:href="@{/paypal}">PAYPAL</a></span>
+				<sub>Paypal 15% más caro por comisiones</sub>
+		</div>
+	</div>
+</body>
+</html>

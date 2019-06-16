@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
 	name="viewport">
-<title>Contratar plan de pago</title>
+<title>Registro de usuario</title>
 
 <!-- Google Fonts -->
 <link
@@ -33,38 +33,49 @@
 <!-- JavaScript propio -->
 <script src="../../static/js/registro.js" th:src="@{/js/registro.js}"></script>
 </head>
-
 <body>
-	<form method="post" th:action="@{/contratar/submit}"
-		th:object="${usuario}">
-		<h3 class="text">Datos de la empresa</h3>
-		<input class="input" name="cif" placeholder="CIF"
-			th:field="*{CIF}" type="text" autofocus />
+	<h3>Introduzca los datos de su tarjeta</h3>
+	<form method="POST" th:action="@{/tarjeta/submit}"
+		th:object="${tarjeta}">
+		<input class="input" name="numero" type="number" th:field="*{numero}"
+			placeholder="Número de la tarjeta" autofocus />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>
-		<input class="input" name="nombreEmpresa" placeholder="Nombre de la empresa"
-			th:field="*{nombreEmpresa}" type="text" />
+
+		<input class="input" name="fechaCaducidad"
+			placeholder="Fecha de caducidad" type="date" th:field="*{fechaCad}" />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>
-		<input class="input" name="telefonoEmpresa" placeholder="Teléfono de Empresa"
-			th:field="*{telefonoEmpresa}" type="text" />
+
+		<input class="input" name="titular" placeholder="Nombre del titular"
+			type="text" th:field="*{titular}" />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>
-		<input class="input" name="campoEmpresa" placeholder="Campo profesional"
-			th:field="*{campoEmpresa}" type="text" />
+
+		<input class="input" name="CVV" placeholder="CVV" type="number"
+			th:field="*{CVV}" />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>
-		<input class="input" name="password"
-			placeholder="Dirección de facturación" th:field="*{direccionFacturacion}" type="text" />
-		<div class="line-box">
-			<div class="line"></div>
-		</div>
+
 		<input class="input button" name="enviar" type="submit" value="Enviar" />
+
 	</form>
-	
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script crossorigin="anonymous"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script crossorigin="anonymous"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script crossorigin="anonymous"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>
