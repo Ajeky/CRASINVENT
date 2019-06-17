@@ -72,8 +72,7 @@ public class UsuarioEmpresa extends Usuario {
 	 * Lista de Métodos de
 	 * Pago{@link com.salesianostriana.damcrasinvent.model.MetodosPago} que tiene
 	 * registrados la empresa. Es una lista en lugar de un objeto individual por si
-	 * la empresa quiere tener varios registrados en caso de que uno falle. Por
-	 * ahora tampoco están implementados en el proyecto.
+	 * la empresa quiere tener varios registrados en caso de que uno falle.
 	 */
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude

@@ -53,7 +53,7 @@ public class InventController {
 	private ConceptosServicio concepservi;
 	private CamposServicio campservi;
 	private ValoresCamposServicio valorservi;
-	
+
 	private static final int BUTTONS_TO_SHOW = 5;
 	private static final int INITIAL_PAGE = 0;
 	private static final int INITIAL_PAGE_SIZE = 5;
@@ -94,11 +94,18 @@ public class InventController {
 	 * @return La plantilla de creación de Inventario
 	 */
 	@GetMapping("/newInvent/{id}")
-	public String mostrarFormulario(Model model, @PathVariable("id") long id) {
+	public String mostrarFormulario(Model model, @PathVariable("id") long id, HttpSession session,
+			HttpServletRequest request, ModelMap modelMap) {
 		Usuario u = usuarioservicio.findById(id);
-		model.addAttribute("usuario", u);
-		model.addAttribute("invent", new Invent());
-		return "forms/crearInvent";
+
+		if (request.isUserInRole("ROLE_USER") && !u.getInvents().isEmpty()) {
+			return "limiteInvents";
+		} else {
+
+			model.addAttribute("usuario", u);
+			model.addAttribute("invent", new Invent());
+			return "forms/crearInvent";
+		}
 	}
 
 	/**
@@ -117,7 +124,7 @@ public class InventController {
 		inventservicio.add(i);
 		if (request.isUserInRole("ROLE_ADMIN")) {
 			return "redirect:/admin/detalleUsuario/" + id;
-		} else if (request.isUserInRole("ROLE_USER")) {
+		} else if (request.isUserInRole("ROLE_USER") || request.isUserInRole("ROLE_PREMIUMUSER")) {
 			return "redirect:/user/inventList";
 		} else {
 			return "redirect:/acceso-denegado";
@@ -234,18 +241,19 @@ public class InventController {
 	 *                  realiza la petición
 	 * @return La plantilla de la lista de inventarios
 	 */
-	/*@GetMapping("/user/inventList")
-	public String mostrarInventsUsuario(Model model, Principal principal) {
-		model.addAttribute("searchForm", new SearchBean());
-
-		Usuario u = usuarioservicio.buscarPorEmail(principal.getName());
-
-		List<Invent> inventList = inventservicio.encontrarInventariosDeUnUsuario(u.getId());
-
-		model.addAttribute("usuario", u);
-		model.addAttribute("lista", inventList);
-		return "/listas/listaInvent";
-	}*/
+	/*
+	 * @GetMapping("/user/inventList") public String mostrarInventsUsuario(Model
+	 * model, Principal principal) { model.addAttribute("searchForm", new
+	 * SearchBean());
+	 * 
+	 * Usuario u = usuarioservicio.buscarPorEmail(principal.getName());
+	 * 
+	 * List<Invent> inventList =
+	 * inventservicio.encontrarInventariosDeUnUsuario(u.getId());
+	 * 
+	 * model.addAttribute("usuario", u); model.addAttribute("lista", inventList);
+	 * return "/listas/listaInvent"; }
+	 */
 
 	/**
 	 * Método que maneja la búsqueda de inventarios. Está en desarrollo, por lo que
@@ -259,7 +267,7 @@ public class InventController {
 
 		return "/listas/listaInvent";
 	}
-	
+
 	/**
 	 * 
 	 * @param pageSize
@@ -269,10 +277,10 @@ public class InventController {
 	 * @param principal
 	 * @return
 	 */
-	@GetMapping({"/inventsbuscados", "/user/inventList"})
+	@GetMapping({ "/inventsbuscados", "/user/inventList" })
 	public String mostrarInventsUsuario(@RequestParam("pageSize") Optional<Integer> pageSize,
-			@RequestParam("page") Optional<Integer> page, @RequestParam("nombre") Optional<String> nombre,
-			Model model, Principal principal) {
+			@RequestParam("page") Optional<Integer> page, @RequestParam("nombre") Optional<String> nombre, Model model,
+			Principal principal) {
 
 		// Evalúa el tamaño de página. Si el parámetro es "nulo", devuelve
 		// el tamaño de página inicial.
@@ -288,13 +296,14 @@ public class InventController {
 		Page<Invent> invents = null;
 
 		Usuario u = usuarioservicio.buscarPorEmail(principal.getName());
-		
-		//UserDetails u = (UserDetails) principal;
-		
+
+		// UserDetails u = (UserDetails) principal;
+
 		if (evalNombre == null) {
 			invents = inventservicio.findByUsuarioPageable(u, PageRequest.of(evalPage, evalPageSize));
 		} else {
-			invents = inventservicio.findByUsuarioAndNombreIgnoreCasePageable(u, evalNombre, PageRequest.of(evalPage, evalPageSize));
+			invents = inventservicio.findByUsuarioAndNombreIgnoreCasePageable(u, evalNombre,
+					PageRequest.of(evalPage, evalPageSize));
 		}
 
 		// Obtenemos la página definida por evalPage y evalPageSize de objetos de
@@ -306,7 +315,7 @@ public class InventController {
 		// botones
 		// debe mostrar y cuál es el número de objetos a dibujar.
 		Pager pager = new Pager(invents.getTotalPages(), invents.getNumber(), BUTTONS_TO_SHOW);
-		
+
 		model.addAttribute("usuario", u);
 		model.addAttribute("lista", invents);
 		model.addAttribute("selectedPageSize", evalPageSize);
@@ -314,6 +323,15 @@ public class InventController {
 		model.addAttribute("pager", pager);
 
 		return "listas/listaInvent";
+	}
+	
+	@GetMapping("/imprimirInvent/{id}")
+	public String imprimirInvent(@PathVariable("id") long id, Model model) {
+		Invent i = inventservicio.findById(id);
+		
+		int n = i.getConceptos().size();
+		
+		return "listas/imprimirInvent";
 	}
 
 }

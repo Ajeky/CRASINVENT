@@ -59,18 +59,20 @@
 			<div class="line"></div>
 		</div>
 		<input class="input" id="password" name="password"
-			placeholder="Contraseña" th:field="*{password}" type="password" />
+			placeholder="Contraseña" th:field="*{password}" type="password" onkeyup='check();' />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>
 		<input class="input" id="confirm_password" name="confirm_password"
-			placeholder="Confirmar Contraseña" type="password" />
+			placeholder="Confirmar Contraseña" type="password" onkeyup='check();' />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>
+		
+		<span id="message"></span>
 
 		<input class="input" name="telefono" placeholder="Teléfono contacto"
-			th:field="*{telefono}" type="number" />
+			th:field="*{telefono}" pattern="[0-9]{9}" type="text" />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>

@@ -4,6 +4,7 @@
 package com.salesianostriana.damcrasinvent.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.damcrasinvent.model.HistoricoUsuarios;
+import com.salesianostriana.damcrasinvent.model.Invent;
 import com.salesianostriana.damcrasinvent.model.Usuario;
 import com.salesianostriana.damcrasinvent.model.UsuarioEmpresa;
 import com.salesianostriana.damcrasinvent.servicios.HistoricoUsuariosServicio;
+import com.salesianostriana.damcrasinvent.servicios.InventServicio;
 import com.salesianostriana.damcrasinvent.servicios.UsuarioEmpresaServicio;
 import com.salesianostriana.damcrasinvent.servicios.UsuarioServicio;
 
@@ -35,12 +38,14 @@ public class UsuarioController {
 	UsuarioServicio usuarioServicio;
 	HistoricoUsuariosServicio historicoServicio;
 	UsuarioEmpresaServicio empresaServicio;
+	InventServicio inventServicio;
 
 	public UsuarioController(UsuarioServicio servicio, HistoricoUsuariosServicio historicoServicio,
-			UsuarioEmpresaServicio empresaServicio) {
+			UsuarioEmpresaServicio empresaServicio, InventServicio inventServicio) {
 		this.usuarioServicio = servicio;
 		this.historicoServicio = historicoServicio;
 		this.empresaServicio = empresaServicio;
+		this.inventServicio = inventServicio;
 	}
 
 	@GetMapping("/newUser")
@@ -112,19 +117,32 @@ public class UsuarioController {
 			return "/forms/configurarCuenta";
 		}
 	}
-	
+
 	@GetMapping("/contratar")
 	public String hacerPremium(Model model) {
 		model.addAttribute("usuario", new UsuarioEmpresa());
-		
+
 		return "/forms/contratar";
 	}
-	
+
 	@PostMapping("/contratar/submit")
-	public String hacerPremiumSubmit(@ModelAttribute("usuario") UsuarioEmpresa u, Principal principal) {
-		Usuario datosBase = usuarioServicio.buscarPorEmail(principal.getName());
+	public String hacerPremiumSubmit(@ModelAttribute("usuario") UsuarioEmpresa u, HttpServletRequest request)
+			throws ServletException {
+		Usuario datosBase = usuarioServicio.buscarPorEmail(request.getUserPrincipal().getName());
+		long id = datosBase.getId();
+				
+			
+		List<Invent> anadir = datosBase.getInvents();
+		List<Invent> borrar = anadir;
 		
-		u.setId(datosBase.getId());
+		try {
+		for (Invent i : borrar) {
+			inventServicio.delete(i);
+		}
+		} catch (Exception ups) {
+			System.out.println();
+		}
+		
 		u.setNombre(datosBase.getNombre());
 		u.setApellidos(datosBase.getApellidos());
 		u.setEmail(datosBase.getEmail());
@@ -132,14 +150,22 @@ public class UsuarioController {
 		u.setPassword(datosBase.getPassword());
 		u.setTelefono(datosBase.getTelefono());
 		u.setAdmin(datosBase.isAdmin());
-		u.setInvents(datosBase.getInvents());
 		
 		usuarioServicio.delete(datosBase);
+		
 		usuarioServicio.add(u);
 		
-		return "/forms/elegirMetodoPago";
+		u = empresaServicio.buscarPorEmail(request.getUserPrincipal().getName());
 		
+		for (Invent i : anadir) {
+			i.setUsuario(u);
+			inventServicio.add(i);
+		}
+		
+		
+
+		return "/forms/elegirMetodoPago";
+
 	}
-	
 
 }

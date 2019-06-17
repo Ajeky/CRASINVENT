@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -78,6 +80,7 @@ public class Usuario implements UserDetails {
 	/**
 	 * Telefono real de la persona que utiliza el usuario
 	 */
+	@NotBlank
 	private String telefono;
 
 	/**
