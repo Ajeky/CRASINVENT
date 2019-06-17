@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.damcrasinvent.formbeans.SearchBean;
+import com.salesianostriana.damcrasinvent.model.Campos;
+import com.salesianostriana.damcrasinvent.model.Conceptos;
 import com.salesianostriana.damcrasinvent.model.HistoricoUsuarios;
 import com.salesianostriana.damcrasinvent.model.Invent;
 import com.salesianostriana.damcrasinvent.model.Pager;
 import com.salesianostriana.damcrasinvent.model.Usuario;
+import com.salesianostriana.damcrasinvent.model.ValoresCampos;
 import com.salesianostriana.damcrasinvent.servicios.CamposServicio;
 import com.salesianostriana.damcrasinvent.servicios.ConceptosServicio;
 import com.salesianostriana.damcrasinvent.servicios.HistoricoUsuariosServicio;
@@ -201,6 +204,20 @@ public class AdminController {
 		anadir.setCuentaBloqueada(aBorrar.isCuentaBloqueada());
 		anadir.setCredencialesCaducadas(aBorrar.isCredencialesCaducadas());
 		histoServi.add(anadir);
+		
+		for (Invent invent : aBorrar.getInvents()) {
+			for (Conceptos concepto : invent.getConceptos()) {
+				for (Campos campo : concepto.getCampos()) {
+					for (ValoresCampos valor : campo.getValoresCampos()) {
+						valorservi.delete(valor);
+					}
+					campservi.delete(campo);
+				}
+				concepservi.delete(concepto);
+			}
+			invServi.delete(invent);
+		}
+		
 		userServi.delete(aBorrar);
 		return "redirect:/admin/";
 	}

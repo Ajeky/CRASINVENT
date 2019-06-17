@@ -73,13 +73,13 @@
 			<input type="text" name="apellidos" th:field="*{apellidos}" placeholder="Nuevos Apellidos" /> <br />
 			
 			<span>Email: <span th:text="${usuario.email}">Email</span></span>
-			<input type="email" name="email" th:field="*{email}" /> <br />
+			<input type="email" name="email" th:field="*{email}" placeholder="Nuevo Email" /> <br />
 			
 			<span>Nickname: <span th:text="${usuario.nickname}">Nickname</span></span>
-			<input type="text" name="nickname" th:field="*{nickname}" /> <br />
+			<input type="text" name="nickname" th:field="*{nickname}" placeholder="Nuevo nickname" /> <br />
 			
-			<span>Telefono: <span th:text="${usuario.telefono}">Telefono</span></span>
-			<input type="number" name="telefono" th:field="*{telefono}" /> <br />
+			<span>Teléfono: <span th:text="${usuario.telefono}">Telefono</span></span>
+			<input type="text" name="telefono" th:field="*{telefono}" pattern="[0-9]{9}" placeholder="Nuevo teléfono" /> <br />
 			
 			<input th:field="*{password}" type="hidden" name="password" /> <br />
 			

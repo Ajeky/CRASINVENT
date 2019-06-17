@@ -1,10 +1,118 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	name="viewport">
+
+<title>Configuración Cuenta</title>
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link crossorigin="anonymous"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link crossorigin="anonymous"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	rel="stylesheet">
+
+<!-- CSS Propio -->
+<link href='../../static/css/main.css' media='screen' rel='stylesheet'
+	th:href='@{/css/main.css}' type='text/css'>
+<link href='../../static/css/portada.css' media='screen'
+	rel='stylesheet' th:href='@{/css/portada.css}' type='text/css'>
+<link href='../../static/css/configuracionCuenta.css' media="screen"
+	rel="stylesheet" th:href="@{/css/configuracionCuenta.css}"
+	type="text/css">
 </head>
 <body>
+
+	<header>
+		<div>
+			<nav>
+				<div class="menu-icon">
+					<i class="fa fa-bars fa-2x"></i>
+				</div>
+				<div class="logo">
+					<a href="#" th:href="@{/}">CRASINVENT</a>
+				</div>
+				<div class="menu">
+					<ul>
+						<li><a href="../usuario/portada.html" th:href="@{/}">Inicio<i
+								class="fas fa-home"></i></a></li>
+						<li><a href="#">Conócenos<i class="fas fa-at"></i></a></li>
+						<li><a href="#">Contacta<i class="fas fa-phone"></i></a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<div class="content col-lg-8 col-md-10 col-sm-12 text-center">
+		<h1>Modificar datos</h1>
+		<h3 sec:authentication="name">USUARIO</h3>
+		<form th:action="@{/modificarDatosPremium/submit}" th:object="${usuario}"
+			method="post">
+			<input th:field="*{id}" type="hidden" name="id" /> <br />
+			
+			<span>Nombre: <span th:text="${usuario.nombre}">Nombre</span></span>
+			<input type="text" name="nombre" th:field="*{nombre}" autofocus	placeholder="Nuevo Nombre" />
+			<br />
+				
+			<span>Apellidos: <span th:text="${usuario.apellidos}">Apellidos</span></span>
+			<input type="text" name="apellidos" th:field="*{apellidos}" placeholder="Nuevos Apellidos" />
+			<br />
+				
+			<span>Email: <span th:text="${usuario.email}">Email</span></span>
+			<input type="email" name="email" th:field="*{email}" placeholder="Nuevo Email" />
+			<br />
+				
+			<span>Nickname: <span th:text="${usuario.nickname}">Nickname</span></span>
+			<input type="text" name="nickname" th:field="*{nickname}" placeholder="Nuevo Nickname "/>
+			<br />
+
+			<span>Telefono: <span th:text="${usuario.telefono}">Telefono</span></span>
+			<input type="text" name="telefono" th:field="*{telefono}" placeholder="Nuevo Teléfono" pattern="[0-9]{9}" />
+			<br />
+			
+			<span>CIF: <span th:text="${usuario.CIF}">CIF</span></span>
+			<input type="text" name="cif" th:field="*{CIF}" placeholder="Nuevo CIF" pattern="[ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J]" />
+			<br />
+			
+			<span>Nombre empresa: <span th:text="${usuario.nombreEmpresa}">Nombre empresa</span></span>
+			<input type="text" name="nombre" th:field="*{nombreEmpresa}" placeholder="Nuevo nombre" />
+			<br />
+			
+			<span>Teléfono empresa: <span th:text="${usuario.telefonoEmpresa}">Teléfono empresa</span></span>
+			<input type="text" name="telefono" th:field="*{telefonoEmpresa}" placeholder="Nuevo teléfono" pattern="[0-9]{9}" />
+			<br />
+			
+			<span>Campo empresa: <span th:text="${usuario.campoEmpresa}">Campo empresa</span></span>
+			<input type="text" name="campoEmpresa" th:field="*{campoEmpresa}" placeholder="Nuevo campo" />
+			<br />
+			
+			<span>Dirección facturación <span th:text="${usuario.direccionFacturacion}">Dirección facturación</span></span>
+			<input type="text" name="direccionFacturacion" th:field="*{direccionFacturacion}" placeholder="Nueva dirección" />
+			<br />
+
+			<input th:field="*{password}" type="hidden" name="password" />
+			<br />
+
+			<input type="submit" name="enviar" value="Enviar" />
+
+		</form>
+	</div>
 
 </body>
 </html>

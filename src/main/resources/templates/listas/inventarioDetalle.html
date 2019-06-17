@@ -56,9 +56,9 @@
                         <td th:text="${conceptos.id}">ID</td>
                         <td th:text="${conceptos.nombre}">Nombre</td>
                         <td>
-                            <a href="#" th:href="@{/editConcepto/{id}(id=${conceptos.id})}">Editar</a>
-                            <a href="#" th:href="@{/deleteConcepto/{id}(id=${conceptos.id})}">Borrar</a>
-                            <a href="#" th:href="@{/detalleConcepto/{id}(id=${conceptos.id})}">Detalles</a>
+                            <a href="#" th:href="@{/editConcepto/{id}(id=${conceptos.id})}"><i class="fas fa-edit"></i></a>
+                            <a href="#" th:href="@{/deleteConcepto/{id}(id=${conceptos.id})}"><i class="fas fa-trash"></i></a>
+                            <a href="#" th:href="@{/detalleConcepto/{id}(id=${conceptos.id})}"><i class="fas fa-info-circle"></i></a>
                         </td>
                     </tr>
                 </tbody>

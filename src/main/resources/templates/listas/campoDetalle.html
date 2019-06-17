@@ -55,8 +55,8 @@
                     <tr th:each="campos : ${campos}">
                         <td th:text="${campos.valor}">Valor</td>
                         <td>
-                            <a href="#" th:href="@{/editValor/{id}(id=${campos.id})}">Editar</a>
-                            <a href="#" th:href="@{/deleteValor/{id}(id=${campos.id})}">Borrar</a>
+                            <a href="#" th:href="@{/editValor/{id}(id=${campos.id})}"><i class="fas fa-edit"></i></a>
+                            <a href="#" th:href="@{/deleteValor/{id}(id=${campos.id})}"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 </tbody>

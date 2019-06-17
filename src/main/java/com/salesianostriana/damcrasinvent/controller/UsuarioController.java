@@ -18,14 +18,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.salesianostriana.damcrasinvent.model.Campos;
+import com.salesianostriana.damcrasinvent.model.Conceptos;
 import com.salesianostriana.damcrasinvent.model.HistoricoUsuarios;
 import com.salesianostriana.damcrasinvent.model.Invent;
 import com.salesianostriana.damcrasinvent.model.Usuario;
 import com.salesianostriana.damcrasinvent.model.UsuarioEmpresa;
+import com.salesianostriana.damcrasinvent.model.ValoresCampos;
+import com.salesianostriana.damcrasinvent.servicios.CamposServicio;
+import com.salesianostriana.damcrasinvent.servicios.ConceptosServicio;
 import com.salesianostriana.damcrasinvent.servicios.HistoricoUsuariosServicio;
 import com.salesianostriana.damcrasinvent.servicios.InventServicio;
 import com.salesianostriana.damcrasinvent.servicios.UsuarioEmpresaServicio;
 import com.salesianostriana.damcrasinvent.servicios.UsuarioServicio;
+import com.salesianostriana.damcrasinvent.servicios.ValoresCamposServicio;
 
 /**
  * @author amarquez
@@ -35,17 +41,24 @@ import com.salesianostriana.damcrasinvent.servicios.UsuarioServicio;
 @Controller
 public class UsuarioController {
 
-	UsuarioServicio usuarioServicio;
-	HistoricoUsuariosServicio historicoServicio;
-	UsuarioEmpresaServicio empresaServicio;
-	InventServicio inventServicio;
+	private UsuarioServicio usuarioServicio;
+	private HistoricoUsuariosServicio historicoServicio;
+	private UsuarioEmpresaServicio empresaServicio;
+	private InventServicio inventServicio;
+	private ConceptosServicio concepservi;
+	private CamposServicio campservi;
+	private ValoresCamposServicio valorservi;
 
 	public UsuarioController(UsuarioServicio servicio, HistoricoUsuariosServicio historicoServicio,
-			UsuarioEmpresaServicio empresaServicio, InventServicio inventServicio) {
+			UsuarioEmpresaServicio empresaServicio, InventServicio inventServicio, ConceptosServicio concepservi,
+			CamposServicio campservi, ValoresCamposServicio valorservi) {
 		this.usuarioServicio = servicio;
 		this.historicoServicio = historicoServicio;
 		this.empresaServicio = empresaServicio;
 		this.inventServicio = inventServicio;
+		this.concepservi = concepservi;
+		this.campservi = campservi;
+		this.valorservi = valorservi;
 	}
 
 	@GetMapping("/newUser")
@@ -78,7 +91,22 @@ public class UsuarioController {
 		anadir.setCuentaBloqueada(aBorrar.isCuentaBloqueada());
 		anadir.setCredencialesCaducadas(aBorrar.isCredencialesCaducadas());
 		historicoServicio.add(anadir);
+		
+		for (Invent invent : aBorrar.getInvents()) {
+			for (Conceptos concepto : invent.getConceptos()) {
+				for (Campos campo : concepto.getCampos()) {
+					for (ValoresCampos valor : campo.getValoresCampos()) {
+						valorservi.delete(valor);
+					}
+					campservi.delete(campo);
+				}
+				concepservi.delete(concepto);
+			}
+			inventServicio.delete(invent);
+		}
+
 		usuarioServicio.delete(aBorrar);
+
 		return "redirect:/logout";
 	}
 
@@ -118,8 +146,22 @@ public class UsuarioController {
 		}
 	}
 
+	@PostMapping("/modificarDatosPremium/submit")
+	public String submitModificarPremium(@ModelAttribute("usuario") UsuarioEmpresa u, HttpSession session,
+			HttpServletRequest request, ModelMap modelMap, Model model) throws ServletException {
+		empresaServicio.edit(u);
+		model.addAttribute("usuario", u);
+
+		if (request.getUserPrincipal().getName() != u.getEmail()) {
+			request.logout();
+			return "/login";
+		} else {
+			return "/forms/configurarCuenta";
+		}
+	}
+
 	@GetMapping("/contratar")
-	public String hacerPremium(Model model) {
+	public String hacerPremium(Model model, HttpServletRequest request) {
 		model.addAttribute("usuario", new UsuarioEmpresa());
 
 		return "/forms/contratar";
@@ -130,19 +172,18 @@ public class UsuarioController {
 			throws ServletException {
 		Usuario datosBase = usuarioServicio.buscarPorEmail(request.getUserPrincipal().getName());
 		long id = datosBase.getId();
-				
-			
+
 		List<Invent> anadir = datosBase.getInvents();
 		List<Invent> borrar = anadir;
-		
+
 		try {
-		for (Invent i : borrar) {
-			inventServicio.delete(i);
-		}
+			for (Invent i : borrar) {
+				inventServicio.delete(i);
+			}
 		} catch (Exception ups) {
 			System.out.println();
 		}
-		
+
 		u.setNombre(datosBase.getNombre());
 		u.setApellidos(datosBase.getApellidos());
 		u.setEmail(datosBase.getEmail());
@@ -150,19 +191,17 @@ public class UsuarioController {
 		u.setPassword(datosBase.getPassword());
 		u.setTelefono(datosBase.getTelefono());
 		u.setAdmin(datosBase.isAdmin());
-		
+
 		usuarioServicio.delete(datosBase);
-		
+
 		usuarioServicio.add(u);
-		
+
 		u = empresaServicio.buscarPorEmail(request.getUserPrincipal().getName());
-		
+
 		for (Invent i : anadir) {
 			i.setUsuario(u);
 			inventServicio.add(i);
 		}
-		
-		
 
 		return "/forms/elegirMetodoPago";
 

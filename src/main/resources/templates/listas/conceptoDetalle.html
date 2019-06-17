@@ -57,9 +57,9 @@
                         <td th:text="${campos.nombre}">Nombre</td>
                         <td th:text="${campos.tipo}">Tipo de dato</td>
                         <td>
-                            <a href="#" th:href="@{/editCampo/{id}(id=${campos.id})}">Editar</a>
-                            <a href="#" th:href="@{/deleteCampo/{id}(id=${campos.id})}">Borrar</a>
-                            <a href="#" th:href="@{/detalleCampo/{id}(id=${campos.id})}">Detalles</a>
+                            <a href="#" th:href="@{/editCampo/{id}(id=${campos.id})}"><i class="fas fa-edit"></i></a>
+                            <a href="#" th:href="@{/deleteCampo/{id}(id=${campos.id})}"><i class="fas fa-trash"></i></a>
+                            <a href="#" th:href="@{/detalleCampo/{id}(id=${campos.id})}"><i class="fas fa-info-circle"></i></a>
                         </td>
                     </tr>
                 </tbody>
