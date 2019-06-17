@@ -2,28 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Imprimir Tabla</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<title>Imprimir Tabla</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet">
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan"
+	rel="stylesheet">
 
-	<!-- Font Awesome -->
-	<link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
 
-    <!-- CSS Propio -->
-    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/main.css' th:href='@{/css/main.css}'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../../static/css/listas.css' th:href='@{/css/listas.css}'>
+<!-- Font Awesome -->
+<link crossorigin="anonymous"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	rel="stylesheet">
+
+<!-- CSS Propio -->
+<link rel='stylesheet' type='text/css' media='screen'
+	href='../../static/css/main.css' th:href='@{/css/main.css}'>
+<link rel='stylesheet' type='text/css' media='screen'
+	href='../../static/css/listas.css' th:href='@{/css/listas.css}'>
 
 
-    <script src='main.js'></script>
+<script src='main.js'></script>
 </head>
 <body class="text-center col-lg-10">
+	<div class="container">
+		<header>
+			<div id="menu" class="menu">
+				<ul class="nav nav-pills botones">
+					<li class="nav-item mr-1"><a
+						class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
+					</li>
+					<li class="nav-item mr-1"><a class="btn active botonActivo"
+						th:href="@{/detalleInvent/{id}(id=${concepto.invent.id})}"
+						role="button">Lista Conceptos</a></li>
+					<li class="nav-item mr-1"><a
+						class="btn btn-secondary text-white"
+						th:href="@{/newCampo/{id}(id=${concepto.id})}" role="button">Nueva
+							Columna</a></li>
+				</ul>
+			</div>
+		</header>
+		<h1>Tabla "<span th:text="${concepto.nombre}">NOMBRE DE LA TABLA</span>", perteneciente a la base de datos "<span th:text="${concepto.invent.nombre}">[NOMBRE DE LA BASE DE DATOS]</span>"</h1>
 
+		<section>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col" th:each="campo : ${campos}" th:text="${campo.nombre}">Nombre Columna</th>
+						
+					</tr>					
+				</thead>
+				<tbody>
+					<tr th:each=""
+				</tbody>			
+			</table>		
+		</section>
+	</div>
 </body>
 </html>

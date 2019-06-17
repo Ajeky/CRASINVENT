@@ -166,14 +166,18 @@ public class ConceptosController {
 	}
 	
 	@GetMapping("/imprimirConcepto/{id}")
-	public String imprimirConcepto(@PathVariable("id") long id) {
+	public String imprimirConcepto(@PathVariable("id") long id, Model model) {
 		Conceptos concepto = concepservi.findById(id);
 		
 		List<Campos> campos = concepto.getCampos();
-		List<List> valores = new ArrayList<List>();
+		List<List<ValoresCampos>> valores = new ArrayList<List<ValoresCampos>>();
 		for (Campos c : campos) {
 			valores.add(c.getValoresCampos());
 		}
+		
+		model.addAttribute("concepto", concepto);
+		model.addAttribute("campos", campos);
+		model.addAttribute("valores", valores);
 		
 		return "/listas/imprimirConcepto";
 		
