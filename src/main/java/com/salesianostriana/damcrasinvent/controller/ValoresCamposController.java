@@ -46,8 +46,14 @@ public class ValoresCamposController {
 	 */
 	@GetMapping("/newValor/{id}")
 	public String nuevoValor(Model model, @PathVariable("id") long id) {
+		String fecha = "Date";
+		String integer = "Integer";
+		String string ="String";
 		model.addAttribute("valorCampo", new ValoresCampos());
 		model.addAttribute("campo", campservi.findById(id));
+		model.addAttribute("fecha", fecha);
+		model.addAttribute("integer", integer);
+		model.addAttribute("string", string);
 		return "forms/crearValor";
 	}
 

@@ -3,6 +3,7 @@
  */
 package com.salesianostriana.damcrasinvent.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -80,6 +81,11 @@ public class CamposController {
 	public String nuevoCampo(Model model, @PathVariable("id") long id) {
 		model.addAttribute("campo", new Campos());
 		model.addAttribute("concepto", concepservi.findById(id));
+		List<String> datos = new ArrayList<String>();
+		datos.add("Integer");
+		datos.add("String");
+		datos.add("Date");
+		model.addAttribute("datos", datos);	
 		return "forms/crearCampo";
 
 	}
