@@ -34,11 +34,11 @@
 <script src="../../static/js/registro.js" th:src="@{/js/registro.js}"></script>
 </head>
 <body>
-	<h3>Introduzca los datos de su tarjeta</h3>
 	<form method="POST" th:action="@{/tarjeta/submit}"
 		th:object="${tarjeta}">
+	<h3>Introduzca los datos de su tarjeta</h3>
 		<input class="input" name="numero" type="number" th:field="*{numero}"
-			placeholder="Número de la tarjeta"
+			placeholder="Número de la tarjeta" title="Cuatro cuartetos de números sin separación entre ellos"
 			pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$"
 			autofocus />
 		<div class="line-box">
@@ -58,7 +58,7 @@
 		</div>
 
 		<input class="input" name="CVV" placeholder="CVV" type="number"
-			th:field="*{CVV}" pattern="^[0-9]{3,4}$" />
+			th:field="*{CVV}" title="Tres números del 0 al 9" pattern="^[0-9]{3,4}$" />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>

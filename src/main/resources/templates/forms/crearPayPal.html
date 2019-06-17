@@ -35,9 +35,9 @@
 </head>
 <body>
 
-	<h3>Introduzca los datos de su cuenta</h3>
 	<form method="POST" th:action="@{/paypal/submit}"
 		th:object="${paypal}">
+	<h3>Introduzca los datos de su cuenta</h3>
 		<input class="input" name="correo" type="email" th:field="*{correo}"
 			placeholder="Correo asociado a PayPal" autofocus />
 		<div class="line-box">

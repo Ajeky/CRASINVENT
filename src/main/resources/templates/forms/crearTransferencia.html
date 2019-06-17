@@ -35,11 +35,11 @@
 </head>
 <body>
 
-	<h3>Introduzca los datos de su cuenta</h3>
 	<form method="POST" th:action="@{/transferencia/submit}"
 		th:object="${transferencia}">
+	<h3>Introduzca los datos de su cuenta</h3>
 		<input class="input" name="iban" type="text" th:field="*{IBAN}"
-			placeholder="IBAN de la cuenta" autofocus />
+			placeholder="IBAN de la cuenta" title="2 letras mayúsculas seguidas de 24 números sin separación entre caracteres" pattern="([a-zA-Z]{2})\s*\t*(\d{2})\s*\t*(\d{4})\s*\t*(\d{4})\s*\t*(\d{2})\s*\t*(\d{10})" autofocus />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>

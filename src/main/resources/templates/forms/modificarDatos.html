@@ -79,7 +79,7 @@
 			<input type="text" name="nickname" th:field="*{nickname}" placeholder="Nuevo nickname" /> <br />
 			
 			<span>Teléfono: <span th:text="${usuario.telefono}">Telefono</span></span>
-			<input type="text" name="telefono" th:field="*{telefono}" pattern="[0-9]{9}" placeholder="Nuevo teléfono" /> <br />
+			<input type="text" name="telefono" th:field="*{telefono}" title="9 números del 0 al 9 sin espacios" pattern="[0-9]{9}" placeholder="Nuevo teléfono" /> <br />
 			
 			<input th:field="*{password}" type="hidden" name="password" /> <br />
 			
