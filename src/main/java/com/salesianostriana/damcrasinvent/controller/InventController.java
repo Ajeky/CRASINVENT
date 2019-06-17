@@ -324,14 +324,5 @@ public class InventController {
 
 		return "listas/listaInvent";
 	}
-	
-	@GetMapping("/imprimirInvent/{id}")
-	public String imprimirInvent(@PathVariable("id") long id, Model model) {
-		Invent i = inventservicio.findById(id);
-		
-		int n = i.getConceptos().size();
-		
-		return "listas/imprimirInvent";
-	}
 
 }

@@ -4,6 +4,7 @@
 package com.salesianostriana.damcrasinvent.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -162,6 +163,20 @@ public class ConceptosController {
 		concepservi.delete(concepto);
 
 		return "redirect:/detalleInvent/" + inventID;
+	}
+	
+	@GetMapping("/imprimirConcepto/{id}")
+	public String imprimirConcepto(@PathVariable("id") long id) {
+		Conceptos concepto = concepservi.findById(id);
+		
+		List<Campos> campos = concepto.getCampos();
+		List<List> valores = new ArrayList<List>();
+		for (Campos c : campos) {
+			valores.add(c.getValoresCampos());
+		}
+		
+		return "/listas/imprimirConcepto";
+		
 	}
 
 }
