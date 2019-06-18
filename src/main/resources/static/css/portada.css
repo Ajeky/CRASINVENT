@@ -108,6 +108,9 @@ nav ul li a {
     border-color: #ccc;
 }
 
+.enlace {
+	color: blue;
+}
 
 /*
 .card-pricing.popular {

@@ -109,4 +109,8 @@ public class MetodosPagoController {
 		}
 	}
 
+	@GetMapping("/elegirMetodoPago")
+	public String elegirMetodo() {
+		return "/forms/elegirMetodoPago";
+	}
 }

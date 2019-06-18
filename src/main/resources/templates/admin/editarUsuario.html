@@ -1,39 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-    <meta charset="UTF-8" />
-        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
-        <title>Editar Usuario</title>
+<meta charset="UTF-8" />
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	name="viewport" />
+<title>Editar Usuario</title>
 
-        <!-- Google Fonts -->
-        <link
-        href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan" rel="stylesheet" />
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan"
+	rel="stylesheet" />
 
 
-        <!-- Bootstrap CSS -->
-        <link
-        crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet" />
+<!-- Bootstrap CSS -->
+<link crossorigin="anonymous"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	rel="stylesheet" />
 
-        <!-- Bootstrap Propio -->
-        <link href='../../static/css/registro.css' media='screen' rel='stylesheet' th:href="@{/css/registro.css}" type='text/css' />
-        <link href="../../static/css/main.css" media="screen" rel="stylesheet" th:href="@{/css/main.css}" type="text/css" />
+<!-- Bootstrap Propio -->
+<link href='../../static/css/registro.css' media='screen'
+	rel='stylesheet' th:href="@{/css/registro.css}" type='text/css' />
+<link href="../../static/css/main.css" media="screen" rel="stylesheet"
+	th:href="@{/css/main.css}" type="text/css" />
 </head>
 
 <body>
-	<div id="formulario">
-		<form th:action="@{/admin/editarUsuario/submit}" th:object="${usuario}" method="post">
-			<h3 class="text">Editar usuario: <span th:text="${usuario.nickname}">Nickname</span></h3>
-			<input type="hidden" name="id" th:field="*{id}" th:value="${usuario.id}" />
-			<input type="text" name="nombre" th:field="*{nombre}" th:value="${usuario.nombre}" autofocus />
-			<input type="text" name="apellidos" th:field="*{apellidos}" th:value="${usuario.apellidos}" />
-			<input type="text" name="email" th:field="*{email}" th:value="${usuario.email}" />
-			<input type="text" name="nickname" th:field="*{nickname}" th:value="${usuario.nickname}" />
-			<input type="hidden" name="password" th:field="*{password}" th:value="${usuario.password}" />
-			<input type="text" name="telefono" th:field="*{telefono}" th:value="${usuario.telefono}" />
-			<input type="submit" name="enviar" value="Enviar" />
-		</form>
+	<div class="text-left">
+		<form id="logoutForm" method="POST" th:action="@{/logout}"></form>
+		<a href="javascript:document.getElementById('logoutForm').submit()">LogOut
+			<i class="fas fa-sign-out-alt"></i>
+		</a>
+	</div>
 	
+	<div id="formulario">
+		<form th:action="@{/admin/editarUsuario/submit}"
+			th:object="${usuario}" method="post">
+			<h3 class="text">
+				Editar usuario: <span th:text="${usuario.nickname}">Nickname</span>
+			</h3>
+			<input type="hidden" name="id" th:field="*{id}"
+				th:value="${usuario.id}" /> <input type="text" name="nombre"
+				th:field="*{nombre}" th:value="${usuario.nombre}" autofocus /> <input
+				type="text" name="apellidos" th:field="*{apellidos}"
+				th:value="${usuario.apellidos}" /> <input type="text" name="email"
+				th:field="*{email}" th:value="${usuario.email}" /> <input
+				type="text" name="nickname" th:field="*{nickname}"
+				th:value="${usuario.nickname}" /> <input type="hidden"
+				name="password" th:field="*{password}"
+				th:value="${usuario.password}" /> <input type="text"
+				name="telefono" th:field="*{telefono}"
+				th:value="${usuario.telefono}" /> <input type="submit"
+				name="enviar" value="Enviar" />
+		</form>
+
 	</div>
 </body>
 

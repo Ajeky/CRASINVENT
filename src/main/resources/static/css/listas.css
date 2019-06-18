@@ -24,3 +24,12 @@ header {
 td {
     background-color: rgb(214, 238, 177);
 }
+
+.columna {
+	display: block;
+	float: left;
+}
+
+.elementoColumna {
+	display: block;
+}

@@ -51,4 +51,9 @@ public class PortadaController {
 	public String mostrarPortadaUsuario() {
 		return "/usuario/portada";
 	}
+	
+	@GetMapping("/atras")
+	public String volverAtras(HttpServletRequest request) {
+		return request.getHeader("referer");
+	}
 }

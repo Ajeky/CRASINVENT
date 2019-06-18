@@ -35,9 +35,17 @@
 </head>
 
 <body class="text-center col-lg-12 col-md-12 col-sm-12">
-	<div class="text-left">
-		<form id="logoutForm" method="POST" th:action="@{/logout}"></form>
-		<a href="javascript:document.getElementById('logoutForm').submit()">Salir <i class="fas fa-sign-out-alt"></i></a>
+	<div id="menu" class="menu">
+		<ul class="nav nav-pills botones">
+			<li class="nav-item mr-1"><a
+				class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
+			</li>
+			<form id="logoutForm" method="POST" th:action="@{/logout}"></form>
+			<li class="nav-item mr-1"><a
+				href="javascript:document.getElementById('logoutForm').submit()">LogOut
+					<i class="fas fa-sign-out-alt"></i>
+			</a></li>
+		</ul>
 	</div>
 
 	<div class="container col-lg-12 col-md-12 col-sm-12">

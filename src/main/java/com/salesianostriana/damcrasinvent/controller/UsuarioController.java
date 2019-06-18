@@ -91,7 +91,7 @@ public class UsuarioController {
 		anadir.setCuentaBloqueada(aBorrar.isCuentaBloqueada());
 		anadir.setCredencialesCaducadas(aBorrar.isCredencialesCaducadas());
 		historicoServicio.add(anadir);
-		
+
 		for (Invent invent : aBorrar.getInvents()) {
 			for (Conceptos concepto : invent.getConceptos()) {
 				for (Campos campo : concepto.getCampos()) {
@@ -162,9 +162,14 @@ public class UsuarioController {
 
 	@GetMapping("/contratar")
 	public String hacerPremium(Model model, HttpServletRequest request) {
-		model.addAttribute("usuario", new UsuarioEmpresa());
 
-		return "/forms/contratar";
+		if (request.isUserInRole("ROLE_PREMIUMUSER")) {
+			return "/yaContratado";
+		} else {
+			model.addAttribute("usuario", new UsuarioEmpresa());
+
+			return "/forms/contratar";
+		}
 	}
 
 	@PostMapping("/contratar/submit")
@@ -175,13 +180,9 @@ public class UsuarioController {
 
 		List<Invent> anadir = datosBase.getInvents();
 		List<Invent> borrar = anadir;
-
-		try {
-			for (Invent i : borrar) {
-				inventServicio.delete(i);
-			}
-		} catch (Exception ups) {
-			System.out.println();
+		
+		for (Invent i : borrar) {
+			inventServicio.delete(i);
 		}
 
 		u.setNombre(datosBase.getNombre());

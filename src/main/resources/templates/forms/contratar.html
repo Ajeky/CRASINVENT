@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+x	<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -39,7 +39,7 @@
 		th:object="${usuario}">
 		<h3 class="text">Datos de la empresa</h3>
 		<input class="input" name="cif" placeholder="CIF"
-			th:field="*{CIF}" type="text" title="Una letra mayúscula seguida de 7 números y otra letra mayúscula sin espacios" pattern="[ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J]" autofocus />
+			th:field="*{CIF}" type="text" title="Una letra mayúscula seguida de 7 números y otra letra mayúscula sin espacios" pattern="([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])" autofocus />
 		<div class="line-box">
 			<div class="line"></div>
 		</div>
