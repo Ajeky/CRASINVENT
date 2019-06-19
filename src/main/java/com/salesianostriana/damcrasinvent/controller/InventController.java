@@ -281,6 +281,10 @@ public class InventController {
 	public String mostrarInventsUsuario(@RequestParam("pageSize") Optional<Integer> pageSize,
 			@RequestParam("page") Optional<Integer> page, @RequestParam("nombre") Optional<String> nombre, Model model,
 			Principal principal) {
+		Usuario u = usuarioservicio.buscarPorEmail(principal.getName());
+		if (u.isAdmin()) {
+			return "redirect:/";
+		}
 
 		// Evalúa el tamaño de página. Si el parámetro es "nulo", devuelve
 		// el tamaño de página inicial.
@@ -295,8 +299,7 @@ public class InventController {
 
 		Page<Invent> invents = null;
 
-		Usuario u = usuarioservicio.buscarPorEmail(principal.getName());
-
+		
 		// UserDetails u = (UserDetails) principal;
 
 		if (evalNombre == null) {

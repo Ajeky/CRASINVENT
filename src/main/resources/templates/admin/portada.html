@@ -40,17 +40,23 @@
 			<li class="nav-item mr-1"><a
 				class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
 			</li>
-			<form id="logoutForm" method="POST" th:action="@{/logout}"></form>
-			<li class="nav-item mr-1"><a
+			<li class="nav-item mr-1"><a th:href="@{/newUser}"
+				class="btn btn-secondary text-white" role="button">Crear usuario</a>
+			</li>
+			<li class="nav-item mr-1">
+				<form id="logoutForm" method="POST" th:action="@{/logout}"></form> <a
+				class="btn btn-secondary text-white" role="button"
 				href="javascript:document.getElementById('logoutForm').submit()">LogOut
 					<i class="fas fa-sign-out-alt"></i>
-			</a></li>
+			</a>
+			</li>
 		</ul>
 	</div>
 
 	<div class="container col-lg-12 col-md-12 col-sm-12">
 		<section>
 			<h1>LISTA DE USUARIOS</h1>
+
 			<form action="#" th:action="@{/admin/buscarUser}" method="GET">
 				<input type="text" name="email" placeholder="Buscar Por Email"
 					style="margin-left: 5%; padding: 4px;" />

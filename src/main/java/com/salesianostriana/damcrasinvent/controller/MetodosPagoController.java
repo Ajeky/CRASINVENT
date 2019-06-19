@@ -4,6 +4,7 @@
 package com.salesianostriana.damcrasinvent.controller;
 
 import java.security.Principal;
+import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.salesianostriana.damcrasinvent.excepciones.ExcepcionCaducidad;
 import com.salesianostriana.damcrasinvent.model.PayPal;
 import com.salesianostriana.damcrasinvent.model.Tarjeta;
 import com.salesianostriana.damcrasinvent.model.Transferencia;
@@ -46,18 +48,23 @@ public class MetodosPagoController {
 
 	@PostMapping("/tarjeta/submit")
 	public String submitTarjeta(@ModelAttribute("tarjeta") Tarjeta t, HttpSession session, HttpServletRequest request,
-			ModelMap modelMap) {
+			ModelMap modelMap) throws ExcepcionCaducidad {
 		UsuarioEmpresa u = empresaservi.buscarPorEmail(request.getUserPrincipal().getName());
+		LocalDate hoy = LocalDate.now();
 
-		t.getUsuarios().add(u);
-		u.getMetodosPago().add(t);
-
-		metodosservicio.add(t);
-
-		if (request.isUserInRole("ROLE_PREMIUMUSER")) {
-			return "redirect:/";
+		if (t.getFechaCad().isBefore(hoy)) {
+			throw new ExcepcionCaducidad("Fecha anterior a la actual");
 		} else {
-			return "redirect:/logout";
+			t.getUsuarios().add(u);
+			u.getMetodosPago().add(t);
+
+			metodosservicio.add(t);
+
+			if (request.isUserInRole("ROLE_PREMIUMUSER")) {
+				return "redirect:/";
+			} else {
+				return "redirect:/logout";
+			}
 		}
 	}
 

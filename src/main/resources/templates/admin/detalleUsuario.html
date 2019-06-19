@@ -4,7 +4,7 @@
 <head>
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<title>Detalle Inventario</title>
+<title>Detalle Usuario</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 
 <!-- Google Fonts -->
@@ -29,14 +29,20 @@
 </head>
 
 <body class="text-center col-lg-10">
-	<div class="text-left">
-		<form id="logoutForm" method="POST" th:action="@{/logout}"></form>
-		<a href="javascript:document.getElementById('logoutForm').submit()">LogOut
-			<i class="fas fa-sign-out-alt"></i>
-		</a>
-	</div>
-
 	<div class="container">
+		<div id="menu" class="menu">
+			<ul class="nav nav-pills botones">
+				<li class="nav-item mr-1"><a
+					class="btn btn-secondary text-white" th:href="@{/}" role="button">Volver atrás</a>
+				</li>
+				<li class="nav-item mr-1">
+					<form id="logoutForm" method="POST" th:action="@{/logout}"></form>
+					<a href="javascript:document.getElementById('logoutForm').submit()">LogOut
+						<i class="fas fa-sign-out-alt"></i>
+				</a>
+				</li>
+			</ul>
+		</div>
 		<h3>
 			Datos de <span th:text="${usuario.nickname}">nickname</span>
 		</h3>

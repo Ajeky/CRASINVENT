@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	name="viewport">
+
+<title>Bienvenido</title>
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Kodchasan"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link crossorigin="anonymous"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link crossorigin="anonymous"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	rel="stylesheet">
+
+<!-- CSS Propio -->
+<!-- CSS Propio -->
+<link href='../../static/css/main.css' media='screen' rel='stylesheet'
+	th:href='@{/css/main.css}' type='text/css'>
+<link href='../../static/css/listas.css' media='screen' rel='stylesheet'
+	th:href='@{/css/listas.css}' type='text/css'>
+
+</head>
+<body class="text-center col-lg-12 col-md-12 col-sm-12">
+	<div id="menu" class="menu">
+		<ul class="nav nav-pills botones">
+			<li class="nav-item mr-1"><a
+				class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
+			</li>
+			<li class="nav-item mr-1"><a
+				class="btn btn-secondary text-white" th:href="@{/tarjeta}"
+				role="button">Atrás</a></li>
+		</ul>
+	</div>
+	<div class="container col-lg-12 col-md-12 col-sm-12">
+		<section>
+			<h1>Ha introducido una fecha no válida. Vuelva a intentarlo, por
+				favor.</h1>
+		</section>
+	</div>
+</body>
+</html>

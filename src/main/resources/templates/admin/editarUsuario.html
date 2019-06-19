@@ -28,13 +28,21 @@
 </head>
 
 <body>
-	<div class="text-left">
-		<form id="logoutForm" method="POST" th:action="@{/logout}"></form>
-		<a href="javascript:document.getElementById('logoutForm').submit()">LogOut
-			<i class="fas fa-sign-out-alt"></i>
-		</a>
-	</div>
-	
+	<header>
+		<div id="menu" class="menu">
+			<ul class="nav nav-pills botones">
+				<li class="nav-item mr-1"><a
+					class="btn btn-secondary text-white" th:href="@{/}" role="button">Inicio</a>
+				</li>
+				<li class="nav-item mr-1">
+					<form hidden id="logoutForm" method="POST" th:action="@{/logout}"></form>
+					<a href="javascript:document.getElementById('logoutForm').submit()">LogOut
+						<i class="fas fa-sign-out-alt"></i>
+				</a>
+				</li>
+			</ul>
+		</div>
+	</header>
 	<div id="formulario">
 		<form th:action="@{/admin/editarUsuario/submit}"
 			th:object="${usuario}" method="post">
@@ -45,13 +53,13 @@
 				th:value="${usuario.id}" /> <input type="text" name="nombre"
 				th:field="*{nombre}" th:value="${usuario.nombre}" autofocus /> <input
 				type="text" name="apellidos" th:field="*{apellidos}"
-				th:value="${usuario.apellidos}" /> <input type="text" name="email"
+				th:value="${usuario.apellidos}" /> <input type="email" name="email"
 				th:field="*{email}" th:value="${usuario.email}" /> <input
 				type="text" name="nickname" th:field="*{nickname}"
 				th:value="${usuario.nickname}" /> <input type="hidden"
 				name="password" th:field="*{password}"
 				th:value="${usuario.password}" /> <input type="text"
-				name="telefono" th:field="*{telefono}"
+				name="telefono" th:field="*{telefono}" 
 				th:value="${usuario.telefono}" /> <input type="submit"
 				name="enviar" value="Enviar" />
 		</form>
