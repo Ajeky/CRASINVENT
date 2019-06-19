@@ -269,13 +269,9 @@ public class InventController {
 	}
 
 	/**
-	 * 
-	 * @param pageSize
-	 * @param page
-	 * @param nombre
-	 * @param model
-	 * @param principal
-	 * @return
+	 * Método que se encarga de la paginación de inventarios. Es muy parecido al de
+	 * ejemplo excepto porque busca por usuario además de por nombre ya que solo
+	 * enseña los inventarios que pertenecen al usuario logeado en el momento
 	 */
 	@GetMapping({ "/inventsbuscados", "/user/inventList" })
 	public String mostrarInventsUsuario(@RequestParam("pageSize") Optional<Integer> pageSize,
@@ -299,7 +295,6 @@ public class InventController {
 
 		Page<Invent> invents = null;
 
-		
 		// UserDetails u = (UserDetails) principal;
 
 		if (evalNombre == null) {

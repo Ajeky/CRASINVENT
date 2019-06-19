@@ -164,23 +164,29 @@ public class ConceptosController {
 
 		return "redirect:/detalleInvent/" + inventID;
 	}
-	
+
+	/**
+	 * Método que imprime una tabla tal cual se vería en una base de datos. No he
+	 * podido terminal de hacerlo porque habría que relacionar los valores entre si
+	 * para saber qué valores pertenecen a cada campo, y eso habría conllevado una
+	 * reconstrucción integral del proyecto.
+	 */
 	@GetMapping("/imprimirConcepto/{id}")
 	public String imprimirConcepto(@PathVariable("id") long id, Model model) {
 		Conceptos concepto = concepservi.findById(id);
-		
+
 		List<Campos> campos = concepto.getCampos();
 		List<List<ValoresCampos>> valores = new ArrayList<List<ValoresCampos>>();
 		for (Campos c : campos) {
 			valores.add(c.getValoresCampos());
 		}
-		
+
 		model.addAttribute("concepto", concepto);
 		model.addAttribute("campos", campos);
 		model.addAttribute("valores", valores);
-		
+
 		return "/listas/imprimirConcepto";
-		
+
 	}
 
 }

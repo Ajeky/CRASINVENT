@@ -172,6 +172,13 @@ public class UsuarioController {
 		}
 	}
 
+	/**
+	 * Método que transforma un usuario base a un usuario premium (o una empresa).
+	 * Crea un nuevo UsuarioEmpresa, setea los datos del usuario base, borra la
+	 * relación inventario-Usuario del usuario base al nuevo usuario premium recién
+	 * creado, elimina al usuario base de la base de datos y guarda al nuevo usuario
+	 * premium.
+	 */
 	@PostMapping("/contratar/submit")
 	public String hacerPremiumSubmit(@ModelAttribute("usuario") UsuarioEmpresa u, HttpServletRequest request)
 			throws ServletException {
@@ -180,7 +187,7 @@ public class UsuarioController {
 
 		List<Invent> anadir = datosBase.getInvents();
 		List<Invent> borrar = anadir;
-		
+
 		for (Invent i : borrar) {
 			inventServicio.delete(i);
 		}
